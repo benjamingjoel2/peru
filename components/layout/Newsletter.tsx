@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Emph } from "@/components/ui/Heading";
 
 export function Newsletter() {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -23,9 +22,9 @@ export function Newsletter() {
       <div className="container-x grid items-center gap-6 py-14 md:grid-cols-[1fr_1.1fr] md:py-16">
         <div>
           <h2 id="newsletter-heading" className="text-3xl text-indigo sm:text-4xl">
-            <Emph text="Peru in your *inbox*" />
+            Peru in your <em className="font-medium text-cochineal-dark">inbox</em>
           </h2>
-          <p className="mt-2 max-w-md text-indigo/80">
+          <p className="mt-2 max-w-md text-indigo">
             One letter a month: permit dates, the best months to go, and what we&apos;re eating. No spam, unsubscribe any time.
           </p>
         </div>

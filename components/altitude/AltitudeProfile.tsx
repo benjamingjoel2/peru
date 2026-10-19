@@ -113,7 +113,6 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
           onKeyDown={onKey}
           onPointerMove={onPointer}
           onPointerLeave={() => setActive(null)}
-          onBlur={() => setActive(null)}
           viewBox={`0 0 ${W} ${H}`}
           className="block h-auto touch-pan-x outline-offset-4"
           style={{ width: "100%", minWidth: Math.max(points.length * 52 + 140, 320) }}
@@ -182,7 +181,7 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
       </div>
 
       {/* Detail / tooltip panel (also the live region) */}
-      <div aria-live="polite" className="mt-3 min-h-[4.5rem] rounded-sm bg-cream-deep/60 px-4 py-3 text-sm">
+      <div aria-live="polite" className="mt-3 min-h-[6.5rem] rounded-sm bg-cream-deep/60 px-4 py-3 text-sm">
         {a ? (
           <div>
             <p className="font-bold text-indigo">

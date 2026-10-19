@@ -65,7 +65,7 @@ export function Hero() {
           </div>
           <div className="mt-8 flex items-center justify-between gap-4">
             <p className="text-sm font-semibold text-stone-dark" aria-live="polite">{slides[i].caption} <span className="text-xs font-normal">(verify)</span></p>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               {slides.map((s, n) => (
                 <button
                   key={s.src}
@@ -73,8 +73,10 @@ export function Hero() {
                   onClick={() => setI(n)}
                   aria-label={`Show slide ${n + 1}: ${s.caption}`}
                   aria-current={i === n}
-                  className={`h-2.5 rounded-full transition-all ${i === n ? "w-8 bg-cochineal" : "w-2.5 bg-stone"}`}
-                />
+                  className="grid h-6 min-w-6 place-items-center"
+                >
+                  <span aria-hidden className={`block h-2.5 rounded-full transition-all ${i === n ? "w-8 bg-cochineal" : "w-2.5 bg-stone"}`} />
+                </button>
               ))}
               {!reduce && (
                 <button type="button" onClick={() => setPaused((p) => !p)} className="ml-2 rounded-sm px-2 py-1 text-xs font-bold uppercase tracking-wider text-indigo underline" aria-pressed={paused}>

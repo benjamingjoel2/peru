@@ -194,7 +194,7 @@ export function PressStrip() {
           {press.items.map((p, i) => (
             <li
               key={p.name}
-              className={`grid h-20 place-items-center border-2 border-dashed border-stone-light px-3 text-center text-xs font-bold uppercase tracking-wider text-stone ${i % 2 ? "rotate-1" : "-rotate-1"}`}
+              className={`grid h-20 place-items-center border-2 border-dashed border-stone-light px-3 text-center text-xs font-bold uppercase tracking-wider text-stone-dark ${i % 2 ? "rotate-1" : "-rotate-1"}`}
             >
               {p.name}
             </li>

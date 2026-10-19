@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useId, useState } from "react";
 import { MONTHS, type Month } from "@/data/types";
 import { monthNames, seasonByMonth } from "@/data/seasons";
@@ -286,7 +287,7 @@ export function EnquiryForm({ journey, onDone, budgetConfirmed = false }: { jour
 
       <div className="flex flex-wrap items-center justify-between gap-4">
         <p className="max-w-md text-xs text-stone-dark">
-          We use your details only to plan your trip. See our <a href="/legal/privacy" className="underline">privacy policy</a>.
+          We use your details only to plan your trip. See our <Link href="/legal/privacy" className="underline">privacy policy</Link>.
         </p>
         <button type="submit" disabled={state === "sending"} className="min-h-12 rounded-[3px] bg-cochineal px-8 text-sm font-bold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark disabled:opacity-60">
           {state === "sending" ? "Sending…" : "Send my enquiry"}

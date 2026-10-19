@@ -75,7 +75,7 @@ export function LandscapesFilm() {
                     aria-current={!media.filmSrc && i === n}
                     className={`rounded-sm px-3 py-1.5 text-xs font-bold uppercase tracking-wider ${!media.filmSrc && i === n ? "bg-mustard text-indigo" : "bg-cream/15 text-cream hover:bg-cream/25"}`}
                   >
-                    {f.label} <span className="font-normal normal-case opacity-80">{f.note}</span>
+                    {f.label} <span className="font-normal normal-case">{f.note}</span>
                   </button>
                 </li>
               ))}

@@ -50,10 +50,12 @@ export function routeWarnings(points: ProfilePoint[]): string[] {
     const hadMid = before.some((p) => p.sleepM >= 2000);
     if (!hadMid) warnings.push(`Night ${firstHigh + 1} jumps straight to ${formatM(points[firstHigh].sleepM)}. Sleep lower first, e.g. in the Sacred Valley or Arequipa.`);
   }
+  // A big jump only matters if you haven't already slept near that height
   for (let i = 1; i < points.length; i++) {
-    const rise = points[i].sleepM - points[i - 1].sleepM;
-    if (points[i].sleepM >= 3000 && rise > 600 && points[i - 1].sleepM >= 2000)
-      warnings.push(`Night ${i + 1} climbs about ${formatM(rise)} in one go. Consider an extra night in between.`);
+    const highestSoFar = Math.max(...points.slice(0, i).map((p) => p.sleepM));
+    const rise = points[i].sleepM - highestSoFar;
+    if (points[i].sleepM >= 3000 && rise > 600 && highestSoFar >= 2000)
+      warnings.push(`Night ${i + 1} climbs about ${formatM(rise)} above your highest night so far. Consider an extra night in between.`);
   }
   points.forEach((p, i) => {
     if ((p.maxM ?? p.sleepM) >= 4500) {

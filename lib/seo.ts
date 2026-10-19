@@ -9,8 +9,13 @@ export function pageMeta({ title, description, path, image }: { title: string; d
     title,
     description,
     alternates: { canonical: path },
-    // SVG placeholders are not valid social images; the root opengraph-image is used instead
-    openGraph: { title, description, url: path, ...(image && !image.endsWith(".svg") ? { images: [{ url: image }] } : {}) },
+    openGraph: {
+      title,
+      description,
+      url: path,
+      // SVG placeholders are not valid social images, so fall back to the generated site image
+      images: [image && !image.endsWith(".svg") ? { url: image } : { url: "/opengraph-image", width: 1200, height: 630, alt: site.name }],
+    },
   };
 }
 

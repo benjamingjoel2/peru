@@ -3,7 +3,10 @@ export const site = {
   name: "Discover Peru Travel",
   shortName: "Discover Peru",
   promise: "Peru, done right.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://discoverperutravel.example",
+  // Set NEXT_PUBLIC_SITE_URL once the real domain is live; Vercel's production URL is used until then
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
   description:
     "Private, well-paced Peru journeys planned around altitude, distance and permits. Machu Picchu, the Andes, the Amazon and the coast, done right.",
   contact: {

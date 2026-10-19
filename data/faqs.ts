@@ -108,6 +108,7 @@ export const faqs: Faq[] = [
   },
   {
     id: "children",
+    onHome: true,
     q: "Is Peru good for children?",
     category: "planning",
     a: [
@@ -117,6 +118,7 @@ export const faqs: Faq[] = [
   },
   {
     id: "cost",
+    onHome: true,
     q: "How much does a private trip to Peru cost per day?",
     category: "booking",
     a: [

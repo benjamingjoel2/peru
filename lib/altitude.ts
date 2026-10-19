@@ -11,9 +11,9 @@ export const altitudeBands: { id: BandId; label: string; min: number; max: numbe
 
 /** Hex equivalents for contexts without CSS variables (PDF). */
 export const bandHex: Record<BandId, string> = {
-  low: "#1f6e8c",
-  mid: "#2f6b45",
-  high: "#c58a12",
+  low: "#3a8fb7",
+  mid: "#1f7d45",
+  high: "#e0a526",
   veryhigh: "#b3283c",
 };
 

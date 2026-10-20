@@ -18,32 +18,45 @@ async function check(name, fn, viewport = { width: 1440, height: 900 }) {
   }
 }
 
-await check("Mega-menu opens by keyboard and closes with Esc", async (page) => {
+await check("Full-screen menu: three levels on desktop, closes with Esc", async (page) => {
   await page.goto(base + "/", { waitUntil: "networkidle" });
-  const btn = page.locator('[data-menu="Destinations"]');
-  await btn.focus();
+  const toggle = page.locator('button[aria-controls="site-menu"]');
+  await toggle.focus();
   await page.keyboard.press("Enter");
-  await page.locator("#menu-Destinations").waitFor();
-  assert.equal(await btn.getAttribute("aria-expanded"), "true");
-  await page.locator("#menu-Destinations a", { hasText: "The Southern Andes" }).hover();
-  await page.locator("#menu-Destinations a", { hasText: "Lake Titicaca" }).waitFor();
+  const menu = page.locator("dialog#site-menu[open]");
+  await menu.waitFor();
+  await menu.getByRole("button", { name: "Destinations" }).first().hover();
+  await menu.getByRole("button", { name: "The Southern Andes" }).first().hover();
+  await menu.getByRole("link", { name: "Lake Titicaca & Puno (Uros, Taquile)" }).first().waitFor();
   await page.keyboard.press("Escape");
-  await page.locator("#menu-Destinations").waitFor({ state: "detached" });
-  assert.equal(await page.evaluate(() => document.activeElement?.getAttribute("data-menu")), "Destinations");
+  await page.locator("dialog#site-menu[open]").waitFor({ state: "detached" });
 });
 
-await check("Mobile drawer: three levels with Back", async (page) => {
+await check("Mobile menu: three levels with Back", async (page) => {
   await page.goto(base + "/", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: "Open menu" }).click();
-  const dlg = page.locator("dialog[open]");
-  await dlg.getByRole("button", { name: "Destinations" }).click();
-  await dlg.getByRole("button", { name: "Cusco & the Sacred Valley" }).click();
-  await dlg.getByRole("link", { name: "Machu Picchu" }).waitFor();
+  const dlg = page.locator("dialog#site-menu[open]");
+  await dlg.getByRole("button", { name: "Destinations" }).filter({ visible: true }).click();
+  await dlg.getByRole("button", { name: "Cusco & the Sacred Valley" }).filter({ visible: true }).click();
+  await dlg.getByRole("link", { name: "Machu Picchu" }).filter({ visible: true }).first().waitFor();
   await dlg.getByRole("button", { name: "Back" }).click();
-  await dlg.getByRole("button", { name: "The Amazon" }).waitFor();
+  await dlg.getByRole("button", { name: "The Amazon" }).filter({ visible: true }).waitFor();
   await page.keyboard.press("Escape");
-  await page.locator("dialog[open]").waitFor({ state: "detached" });
+  await page.locator("dialog#site-menu[open]").waitFor({ state: "detached" });
 }, { width: 390, height: 844 });
+
+await check("Inline homepage enquiry form submits", async (page) => {
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const f = page.locator("#enquire");
+  await f.scrollIntoViewIfNeeded();
+  await f.getByLabel("This fits what I have in mind").check();
+  await f.getByLabel("When (month)").selectOption("Jun");
+  await f.getByLabel("Country of residence").selectOption("Canada");
+  await f.locator('input[name="name"]').fill("Inline Test");
+  await f.locator('input[name="email"]').fill("inline@example.com");
+  await f.getByRole("button", { name: "Send my enquiry" }).click();
+  await f.getByText("Your Peru Specialist will be in touch soon.").waitFor();
+});
 
 await check("Enquire modal: budget step gates the form, submit shows Gracias", async (page) => {
   await page.goto(base + "/journeys/first-peru-done-right", { waitUntil: "networkidle" });
@@ -117,7 +130,7 @@ await check("Food map: keyboard moves between altitude zones", async (page) => {
 await check("Destination tabs: arrow keys switch panels", async (page) => {
   await page.goto(base + "/", { waitUntil: "networkidle" });
   await page.locator("#tab-coast").focus();
-  await page.keyboard.press("ArrowRight");
+  await page.keyboard.press("ArrowDown");
   assert.equal(await page.locator("#tab-cusco-sacred-valley").getAttribute("aria-selected"), "true");
   await page.locator("#panel-cusco-sacred-valley").getByRole("link", { name: "Machu Picchu" }).first().waitFor();
 });

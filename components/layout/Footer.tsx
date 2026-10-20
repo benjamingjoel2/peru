@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/config/site";
 import { Logo } from "./Logo";
 import { StoneDivider } from "@/components/ui/Stone";
+import { Newsletter } from "./Newsletter";
 
 const columns = [
   {
@@ -42,38 +43,40 @@ export function Footer() {
   return (
     <footer className="on-dark relative bg-indigo-deep text-cream/85">
       <StoneDivider color="var(--color-indigo-deep)" className="absolute -top-6 left-0 sm:-top-10" />
-      <div className="container-x grid gap-12 pb-10 pt-16 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
-        <div>
-          <Logo light />
-          <p className="mt-5 max-w-sm">Private, well-paced journeys through Peru: planned around altitude, distance and permits. {site.promise}</p>
-          <ul className="mt-6 space-y-1.5 text-sm">
-            <li><a href={c.phoneHref} className="hover:text-mustard">{c.phone}</a></li>
-            <li><a href={`mailto:${c.email}`} className="hover:text-mustard">{c.email}</a></li>
-            <li><a href={c.whatsappHref} className="hover:text-mustard" target="_blank" rel="noopener">WhatsApp {c.whatsapp}</a></li>
-            <li>{c.hours} ({c.timezoneLabel})</li>
-          </ul>
-          <ul className="mt-6 flex flex-wrap gap-3">
-            {site.socials.map((s) => (
-              <li key={s.label}>
-                <a href={s.href} target="_blank" rel="noopener" className="inline-block rounded-full border border-cream/30 px-3 py-1 text-xs font-semibold hover:border-mustard hover:text-mustard">
-                  {s.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        {columns.map((col) => (
-          <nav key={col.title} aria-label={col.title}>
-            <h2 className="eyebrow mb-4 text-mustard">{col.title}</h2>
-            <ul className="space-y-2">
-              {col.links.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="hover:text-mustard">{l.label}</Link>
+      <div className="container-x grid gap-14 pb-12 pt-20 lg:grid-cols-[1.2fr_2fr]">
+        <Newsletter />
+        <div className="grid gap-10 sm:grid-cols-3">
+          {columns.map((col) => (
+            <nav key={col.title} aria-label={col.title}>
+              <h2 className="eyebrow mb-4 text-mustard">{col.title}</h2>
+              <ul className="space-y-2">
+                {col.links.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href} className="hover:text-mustard">{l.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+          <div className="sm:col-span-3 flex flex-wrap items-end justify-between gap-6 border-t border-cream/15 pt-8">
+            <div>
+              <Logo light />
+              <ul className="mt-4 space-y-1 text-sm">
+                <li><a href={c.phoneHref} className="hover:text-mustard">{c.phone}</a> · <a href={`mailto:${c.email}`} className="hover:text-mustard">{c.email}</a></li>
+                <li><a href={c.whatsappHref} className="hover:text-mustard" target="_blank" rel="noopener">WhatsApp {c.whatsapp}</a> · {c.hours} ({c.timezoneLabel})</li>
+              </ul>
+            </div>
+            <ul className="flex flex-wrap gap-3">
+              {site.socials.map((s) => (
+                <li key={s.label}>
+                  <a href={s.href} target="_blank" rel="noopener" className="inline-block rounded-full border border-cream/30 px-3 py-1 text-xs font-semibold hover:border-mustard hover:text-mustard">
+                    {s.label}
+                  </a>
                 </li>
               ))}
             </ul>
-          </nav>
-        ))}
+          </div>
+        </div>
       </div>
       <div className="container-x border-t border-cream/15 py-6 text-xs leading-relaxed text-cream/65">
         <p>{site.company.legalName} · {site.company.address}</p>

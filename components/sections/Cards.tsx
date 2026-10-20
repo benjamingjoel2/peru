@@ -37,6 +37,34 @@ export function JourneyCard({ j, dark = false, priority }: { j: Journey; dark?: 
   );
 }
 
+/** Full-bleed image card with the text laid over it, used in the dark journey carousel. */
+export function JourneyOverlayCard({ j, priority }: { j: Journey; priority?: boolean }) {
+  return (
+    <article className="group relative aspect-[3/4] overflow-hidden bg-indigo-deep" style={{ clipPath: stoneShapes[j.days % stoneShapes.length] }}>
+      <Image src={j.image.src} alt={j.image.alt} fill sizes="(min-width:1024px) 30vw, 80vw" priority={priority} className="object-cover transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-105" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-indigo-deep via-indigo-deep/40 to-transparent" />
+      <div className="on-dark absolute inset-x-0 bottom-0 p-6">
+        <p className="eyebrow text-mustard-soft">{j.days} days</p>
+        <h3 className="mt-2 font-display text-2xl leading-tight text-cream sm:text-3xl">
+          <Link href={`/journeys/${j.slug}`} className="after:absolute after:inset-0">
+            <Emph text={j.title} />
+          </Link>
+        </h3>
+        <div className="mt-4 flex items-end justify-between gap-4 text-cream">
+          <p className="text-sm">
+            <span className="text-cream/75">From </span>
+            <Price usd={j.fromPriceUSD} className="font-bold" />
+          </p>
+          <AltitudeSparkline days={j.itinerary} className="h-8 w-24 text-mustard-soft" />
+        </div>
+        <p className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-mustard">
+          Explore more <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+        </p>
+      </div>
+    </article>
+  );
+}
+
 export function DestinationCard({ d, shape = 0 }: { d: Destination; shape?: number }) {
   return (
     <article className="group relative">

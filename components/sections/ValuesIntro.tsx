@@ -1,8 +1,7 @@
-import { Heading } from "@/components/ui/Heading";
+import { Emph } from "@/components/ui/Heading";
 import { StoneMask } from "@/components/ui/StoneMask";
 import { photo } from "@/data/photos";
 import { ArrowLink } from "@/components/ui/Button";
-import { PlaceholderBadge } from "@/components/ui/Badges";
 
 const values = [
   {
@@ -12,44 +11,47 @@ const values = [
   },
   {
     name: "Ayni",
-    color: "bg-amazon",
-    body: "In the Andes, ayni means reciprocity: what you receive, you give back. We travel that way, with weaving cooperatives and community homestays paid fairly and directly, and trek teams whose porters are paid, equipped and loaded properly.",
+    color: "bg-mustard",
+    body: "In the Andes, ayni means reciprocity: what you receive, you give back. Weaving cooperatives and community homestays are paid fairly and directly, and our trek teams' porters are paid, equipped and loaded properly.",
   },
 ];
 
+/** Centred section on deep green: the dedicated planner, and two values joined by a woven thread. */
 export function ValuesIntro() {
+  const img = photo("family");
   return (
-    <section aria-labelledby="values-title" className="bg-cream-deep py-20 lg:py-28">
-      <div className="container-x grid items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
-        <div>
-          <Heading id="values-title" eyebrow="Why travel with us" text="Your own *Peru Specialist*" />
-          <p className="mt-5 max-w-2xl text-lg text-stone-dark">
-            One person plans your trip from first call to flight home. They know which nights to spend lower down, which train to catch, when Inca Trail permits open and where to eat in every town. Two values shape everything they do.
-          </p>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2">
-            {values.map((v, i) => (
-              <div key={v.name}>
-                <div className="flex items-center gap-3">
-                  <span aria-hidden className={`inline-block h-10 w-12 ${v.color}`} style={{ clipPath: i ? "polygon(8% 0,100% 6%,94% 100%,0 92%)" : "polygon(0 8%,92% 0,100% 90%,6% 100%)" }} />
-                  <h3 className="font-display text-3xl italic text-indigo">{v.name}</h3>
-                </div>
-                <p className="mt-3 text-stone-dark">{v.body}</p>
-              </div>
-            ))}
+    <section aria-labelledby="values-title" className="on-dark relative overflow-hidden bg-amazon-deep py-20 text-cream lg:py-28">
+      <div className="container-x text-center">
+        <p className="eyebrow text-mustard-soft">Why travel with us</p>
+        <h2 id="values-title" className="mt-4 text-4xl text-cream sm:text-5xl">
+          <Emph text="Your own *Peru Specialist*" />
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-cream/85">
+          One person plans your trip from first call to flight home. They know which nights to spend lower down, which train to catch, when Inca Trail permits open and where to eat in every town.
+        </p>
+      </div>
+
+      <div className="container-x relative mt-14 grid items-center gap-10 lg:grid-cols-[1fr_auto_1fr]">
+        {/* The thread: a woven line looping through both values and the image */}
+        <svg aria-hidden viewBox="0 0 1200 300" preserveAspectRatio="none" className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-48 w-full -translate-y-1/2 lg:block">
+          <path d="M0 150 C 150 40, 300 260, 450 150 S 750 40, 900 150 S 1100 260, 1200 140" fill="none" stroke="var(--color-mustard)" strokeWidth="3" strokeDasharray="14 8" opacity=".7" />
+          <path d="M0 160 C 150 50, 300 270, 450 160 S 750 50, 900 160 S 1100 270, 1200 150" fill="none" stroke="var(--color-cochineal)" strokeWidth="2" strokeDasharray="4 10" opacity=".8" />
+        </svg>
+        {values.map((v, i) => (
+          <div key={v.name} className={`relative z-10 max-w-md bg-amazon-deep/90 p-2 text-center lg:text-left ${i === 0 ? "lg:order-1 lg:justify-self-end" : "lg:order-3"}`}>
+            <div className={`flex items-center justify-center gap-3 ${i === 0 ? "lg:justify-end lg:text-right" : "lg:justify-start"}`}>
+              <span aria-hidden className={`inline-block h-10 w-12 ${v.color}`} style={{ clipPath: i ? "polygon(8% 0,100% 6%,94% 100%,0 92%)" : "polygon(0 8%,92% 0,100% 90%,6% 100%)" }} />
+              <h3 className="font-display text-4xl italic text-cream">{v.name}</h3>
+            </div>
+            <p className={`mt-4 text-cream/85 ${i === 0 ? "lg:text-right" : ""}`}>{v.body}</p>
           </div>
-          <div className="mt-10 flex flex-wrap gap-6">
-            <ArrowLink href="/about/our-team">Meet your specialists</ArrowLink>
-            <ArrowLink href="/travel-that-gives-back">Travel that gives back</ArrowLink>
-          </div>
-        </div>
-        <div className="relative">
-          <StoneMask src={photo("family").src} alt={photo("family").alt} shape={4} className="aspect-[4/5] w-full max-w-md lg:ml-auto" />
-          <div className="absolute bottom-6 left-0 max-w-[16rem] bg-indigo p-5 text-cream shadow-xl lg:left-6">
-            <p className="font-display text-lg italic">&ldquo;Start lower, finish higher. Your lungs will thank you.&rdquo;</p>
-            <p className="mt-2 text-xs uppercase tracking-wider text-mustard-soft">Peru Specialist</p>
-            <PlaceholderBadge className="mt-2 border-mustard text-mustard" />
-          </div>
-        </div>
+        ))}
+        <StoneMask src={img.src} alt={img.alt} shape={4} className="relative z-10 mx-auto aspect-[4/5] w-64 lg:order-2 lg:w-72" sizes="300px" />
+      </div>
+
+      <div className="container-x mt-14 flex flex-wrap justify-center gap-8">
+        <ArrowLink href="/about/our-team">Meet your specialists</ArrowLink>
+        <ArrowLink href="/travel-that-gives-back">Travel that gives back</ArrowLink>
       </div>
     </section>
   );

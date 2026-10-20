@@ -5,7 +5,6 @@ import { site } from "@/config/site";
 import { TopBar } from "@/components/layout/TopBar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Newsletter } from "@/components/layout/Newsletter";
 import { CurrencyProvider } from "@/lib/currency";
 import { EnquireProvider } from "@/components/enquire/EnquireProvider";
 import { JsonLd, organizationLd } from "@/lib/seo";
@@ -37,7 +36,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <TopBar />
             <Header />
             <main id="main">{children}</main>
-            <Newsletter />
             <Footer />
           </EnquireProvider>
         </CurrencyProvider>

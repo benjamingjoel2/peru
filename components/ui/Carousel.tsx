@@ -9,10 +9,12 @@ type Props = {
   itemClassName?: string;
   className?: string;
   dark?: boolean;
+  /** "top": arrows above the track (default). "sides": arrows either side of the track. */
+  arrows?: "top" | "sides";
 };
 
 /** Scroll-snap carousel: swipe or drag on touch, arrow buttons, and ←/→ keys when focused. */
-export function Carousel({ label, children, itemClassName = "w-[82%] sm:w-[46%] lg:w-[31%]", className = "", dark }: Props) {
+export function Carousel({ label, children, itemClassName = "w-[82%] sm:w-[46%] lg:w-[31%]", className = "", dark, arrows = "top" }: Props) {
   const track = useRef<HTMLUListElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -51,14 +53,27 @@ export function Carousel({ label, children, itemClassName = "w-[82%] sm:w-[46%] 
 
   return (
     <section aria-roledescription="carousel" aria-label={label} className={className}>
-      <div className="mb-5 flex justify-end gap-3">
-        <button type="button" className={btn} onClick={() => scroll(-1)} disabled={atStart} aria-label={`Previous: ${label}`}>
-          <span aria-hidden>←</span>
-        </button>
-        <button type="button" className={btn} onClick={() => scroll(1)} disabled={atEnd} aria-label={`Next: ${label}`}>
-          <span aria-hidden>→</span>
-        </button>
-      </div>
+      {arrows === "top" && (
+        <div className="mb-5 flex justify-end gap-3">
+          <button type="button" className={btn} onClick={() => scroll(-1)} disabled={atStart} aria-label={`Previous: ${label}`}>
+            <span aria-hidden>←</span>
+          </button>
+          <button type="button" className={btn} onClick={() => scroll(1)} disabled={atEnd} aria-label={`Next: ${label}`}>
+            <span aria-hidden>→</span>
+          </button>
+        </div>
+      )}
+      <div className={arrows === "sides" ? "relative md:px-16" : ""}>
+      {arrows === "sides" && (
+        <>
+          <button type="button" className={`${btn} absolute left-0 top-1/3 z-10 hidden md:grid`} onClick={() => scroll(-1)} disabled={atStart} aria-label={`Previous: ${label}`}>
+            <span aria-hidden>←</span>
+          </button>
+          <button type="button" className={`${btn} absolute right-0 top-1/3 z-10 hidden md:grid`} onClick={() => scroll(1)} disabled={atEnd} aria-label={`Next: ${label}`}>
+            <span aria-hidden>→</span>
+          </button>
+        </>
+      )}
       <ul
         ref={track}
         tabIndex={0}
@@ -75,6 +90,7 @@ export function Carousel({ label, children, itemClassName = "w-[82%] sm:w-[46%] 
           </li>
         ))}
       </ul>
+      </div>
     </section>
   );
 }

@@ -32,7 +32,8 @@ const input = "min-h-11 w-full rounded-[3px] border-2 border-stone-light bg-crea
 const pill =
   "cursor-pointer select-none rounded-full border-2 border-stone-light bg-cream px-3.5 py-1.5 text-sm font-semibold text-indigo has-[:checked]:border-indigo has-[:checked]:bg-indigo has-[:checked]:text-cream has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-mustard";
 
-export function EnquiryForm({ journey, onDone, budgetConfirmed = false }: { journey?: string; onDone?: () => void; budgetConfirmed?: boolean }) {
+/** Full enquiry form. `compact` drops the interests step for inline use on the homepage. */
+export function EnquiryForm({ journey, onDone, budgetConfirmed = false, compact = false }: { journey?: string; onDone?: () => void; budgetConfirmed?: boolean; compact?: boolean }) {
   const id = useId();
   const [month, setMonth] = useState<Month | "">("");
   const [children, setChildren] = useState(0);
@@ -53,10 +54,10 @@ export function EnquiryForm({ journey, onDone, budgetConfirmed = false }: { jour
       month: fd.get("month"),
       year: fd.get("year"),
       days: Number(fd.get("days")),
-      experience: fd.get("experience"),
+      experience: fd.get("experience") ?? undefined,
       mustSees: fd.getAll("mustSees"),
-      hiking: fd.get("hiking"),
-      machuPicchuRoute: fd.get("mpRoute"),
+      hiking: fd.get("hiking") ?? undefined,
+      machuPicchuRoute: fd.get("mpRoute") ?? undefined,
       interests: fd.getAll("interests"),
       adults: Number(fd.get("adults")),
       childrenAges: fd.getAll("childAge").map(Number),
@@ -167,6 +168,7 @@ export function EnquiryForm({ journey, onDone, budgetConfirmed = false }: { jour
         </div>
       </fieldset>
 
+      {!compact && (
       <fieldset className={fieldset}>
         <legend className={legend}>What you&apos;d love to see</legend>
         <p className={label}>Must-sees</p>
@@ -209,6 +211,7 @@ export function EnquiryForm({ journey, onDone, budgetConfirmed = false }: { jour
           ))}
         </div>
       </fieldset>
+      )}
 
       <fieldset className={fieldset}>
         <legend className={legend}>Who&apos;s travelling</legend>

@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { IntroSection } from "@/components/sections/IntroSection";
 import { ValuesIntro } from "@/components/sections/ValuesIntro";
 import { LandscapesFilm } from "@/components/sections/LandscapesFilm";
 import {
@@ -22,19 +23,20 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <ValuesIntro />
+      <IntroSection />
       <LandscapesFilm />
+      <ValuesIntro />
       <JourneyCarouselSection />
       <ExperienceGroups />
       <DestinationTabs />
-      <AltitudeTeaser />
-      <MachuPicchuTeaser />
       <Testimonials />
       <TeamCarousel />
       <EnquireBand />
       <StoriesSection stories={stories} />
       <PressStrip />
       <FaqSection limit={6} />
+      <AltitudeTeaser />
+      <MachuPicchuTeaser />
       <JsonLd data={faqLd(faqs.filter((f) => f.onHome))} />
     </>
   );

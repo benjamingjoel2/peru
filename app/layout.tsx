@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Source_Sans_3, Zilla_Slab } from "next/font/google";
+import { Crimson_Pro, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { site } from "@/config/site";
 import { TopBar } from "@/components/layout/TopBar";
@@ -9,8 +9,8 @@ import { CurrencyProvider } from "@/lib/currency";
 import { EnquireProvider } from "@/components/enquire/EnquireProvider";
 import { JsonLd, organizationLd } from "@/lib/seo";
 
-const zilla = Zilla_Slab({ subsets: ["latin"], weight: ["500", "600", "700"], style: ["normal", "italic"], variable: "--font-zilla", display: "swap" });
-const source = Source_Sans_3({ subsets: ["latin"], weight: ["400", "600", "700"], style: ["normal", "italic"], variable: "--font-source", display: "swap" });
+const serif = Crimson_Pro({ subsets: ["latin"], weight: ["300", "400", "500"], style: ["normal", "italic"], variable: "--font-serif", display: "swap" });
+const grotesk = Hanken_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-grotesk", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -22,11 +22,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export const viewport: Viewport = { themeColor: "#23285a", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#3e2a2e", width: "device-width", initialScale: 1 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" data-scroll-behavior="smooth" className={`${zilla.variable} ${source.variable}`}>
+    <html lang="en-GB" data-scroll-behavior="smooth" className={`${serif.variable} ${grotesk.variable}`}>
       <body className="min-h-dvh antialiased">
         <a href="#main" className="sr-only-focusable fixed left-3 top-3 z-[60] rounded-sm bg-indigo px-4 py-2 font-bold text-cream">
           Skip to content

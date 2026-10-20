@@ -1,18 +1,7 @@
-/** Section divider: a course of fitted stones along the top edge of a section. */
-export function StoneDivider({ color = "var(--color-cream)", flip = false, className = "" }: { color?: string; flip?: boolean; className?: string }) {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 1440 48"
-      preserveAspectRatio="none"
-      className={`block h-6 w-full sm:h-10 ${flip ? "rotate-180" : ""} ${className}`}
-    >
-      <path
-        fill={color}
-        d="M0 48V22l64-6 58 9 41-14 77 4 34 12 66-8 52 4 39-13 88 2 31 14 57-7 72 3 44-12 63 6 29 10 81-9 47 3 36-11 70 6 40 12 54-8 79 2 33-10 62 8 42 9 58-11 54 4V48Z"
-      />
-    </svg>
-  );
+/** Section divider: not used in this look. Kept so existing sections compile. */
+export function StoneDivider(props: { color?: string; flip?: boolean; className?: string }) {
+  void props;
+  return null;
 }
 
 /** Three fitted stones: the brand mark. */

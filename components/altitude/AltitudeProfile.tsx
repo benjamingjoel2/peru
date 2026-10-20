@@ -84,7 +84,7 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
   return (
     <figure className={`min-w-0 rounded-sm bg-cream p-4 ring-1 ring-stone-light sm:p-6 ${className}`}>
       <figcaption className="mb-3">
-        <span className="block font-display text-xl font-semibold text-indigo">{title}</span>
+        <span className="block font-display text-xl font-light text-indigo">{title}</span>
         <span id={`${id}-sum`} className="mt-1 block text-sm text-stone-dark">{summary}</span>
       </figcaption>
 

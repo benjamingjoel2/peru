@@ -25,12 +25,12 @@ export function Accordion({ items, defaultOpen }: { items: AccordionItem[]; defa
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => setOpen(isOpen ? null : item.id)}
-                className="flex w-full items-center justify-between gap-6 py-5 text-left font-display text-lg font-semibold text-indigo sm:text-xl"
+                className="flex w-full items-center justify-between gap-6 py-5 text-left font-display text-lg font-light text-indigo sm:text-xl"
               >
                 <span>{item.title}</span>
                 <span
                   aria-hidden
-                  className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border-2 border-cochineal text-cochineal transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
+                  className={`grid h-8 w-8 shrink-0 place-items-center rounded-full border border-indigo text-indigo transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
                 >
                   +
                 </span>

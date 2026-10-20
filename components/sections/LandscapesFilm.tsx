@@ -80,7 +80,7 @@ export function LandscapesFilm() {
     <div className="on-dark container-x absolute inset-x-0 bottom-0 pb-8 sm:pb-10">
       <p className="eyebrow text-mustard-soft">Three countries in one</p>
       <p className="mt-2 max-w-3xl font-display text-3xl text-cream sm:text-5xl">
-        From the Pacific to the peaks <em className="text-mustard">to the jungle</em>.
+        From the Pacific to the peaks <em>to the jungle</em>.
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-3">
         <ol className="flex flex-wrap gap-2" aria-label="Film chapters">

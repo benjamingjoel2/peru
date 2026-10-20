@@ -51,7 +51,7 @@ export function BookingHelper({ dark = false }: { dark?: boolean }) {
         </div>
       </div>
       <div aria-live="polite" className={`mt-4 rounded-sm border-l-4 p-4 text-ink ${statusStyles[advice.status]} ${dark ? "bg-cream!" : ""}`}>
-        <p className="font-display text-xl font-semibold text-indigo">{advice.headline}</p>
+        <p className="font-display text-xl font-light text-indigo">{advice.headline}</p>
         <p className="mt-1 text-sm text-stone-dark">{advice.detail}</p>
         <p className="mt-2 text-xs text-stone-dark">
           {monthNames[month]} in the Andes: {seasonByMonth[month].note} (verify)

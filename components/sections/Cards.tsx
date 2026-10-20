@@ -14,7 +14,7 @@ export function JourneyCard({ j, dark = false, priority }: { j: Journey; dark?: 
     <article className={`group relative flex h-full flex-col ${dark ? "text-cream" : "text-ink"}`}>
       <div className="relative aspect-[4/5] overflow-hidden" style={{ clipPath: stoneShapes[j.days % stoneShapes.length] }}>
         <Image src={j.image.src} alt={j.image.alt} fill sizes="(min-width:1024px) 30vw, 80vw" priority={priority} className="object-cover transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-105" />
-        <span className="absolute left-4 top-4 rounded-sm bg-cochineal px-2.5 py-1 font-display text-lg font-bold text-cream">
+        <span className="absolute left-4 top-4 rounded-sm bg-cochineal px-2.5 py-1 font-display text-lg font-light text-cream">
           {j.days} <span className="text-xs font-sans uppercase tracking-wider">days</span>
         </span>
       </div>

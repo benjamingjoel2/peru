@@ -22,7 +22,7 @@ export function Newsletter() {
     <section aria-labelledby="newsletter-heading">
       <p className="eyebrow text-mustard">Newsletter</p>
       <h2 id="newsletter-heading" className="mt-3 font-display text-3xl text-cream sm:text-4xl">
-        Peru in your <em className="font-medium text-mustard">inbox</em>
+        Peru in your <em>inbox</em>
       </h2>
       <p className="mt-3 max-w-md text-cream/80">
         One letter a month: permit dates, the best months to go, and what we&apos;re eating. No spam, unsubscribe any time.
@@ -50,7 +50,7 @@ export function Newsletter() {
           <button
             type="submit"
             disabled={state === "sending"}
-            className="min-h-12 rounded-[3px] bg-mustard px-6 text-sm font-bold uppercase tracking-[0.14em] text-indigo-deep hover:bg-mustard-soft disabled:opacity-60"
+            className="min-h-12 rounded-full bg-mustard px-6 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-indigo-deep hover:bg-mustard-soft disabled:opacity-60"
           >
             {state === "sending" ? "Sending…" : "Subscribe"}
           </button>

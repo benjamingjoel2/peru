@@ -102,7 +102,7 @@ export function RouteBuilder() {
             const place = sleepable.find((p) => p.slug === s.slug)!;
             return (
               <li key={s.key} className="flex flex-wrap items-center gap-2 rounded-sm bg-cream p-2 ring-1 ring-stone-light">
-                <span className="w-6 text-center font-display font-bold text-cochineal">{i + 1}</span>
+                <span className="w-6 text-center font-display font-light text-cochineal">{i + 1}</span>
                 <label className="sr-only" htmlFor={`${id}-p-${s.key}`}>Stop {i + 1} place</label>
                 <select id={`${id}-p-${s.key}`} className={`${input} min-w-0 flex-1`} value={s.slug} onChange={(e) => update(s.key, { slug: e.target.value })}>
                   {zones.map((z) => (
@@ -132,7 +132,7 @@ export function RouteBuilder() {
               </optgroup>
             ))}
           </select>
-          <button type="button" onClick={() => { setStops((ss) => [...ss, { key: keySeq++, slug: adding, nights: 1 }]); setAnnounce(`${sleepable.find((p) => p.slug === adding)?.name} added.`); }} className="rounded-[3px] bg-indigo px-4 text-sm font-bold uppercase tracking-wider text-cream hover:bg-indigo-deep">
+          <button type="button" onClick={() => { setStops((ss) => [...ss, { key: keySeq++, slug: adding, nights: 1 }]); setAnnounce(`${sleepable.find((p) => p.slug === adding)?.name} added.`); }} className="rounded-full bg-indigo px-4 text-[0.72rem] font-semibold uppercase tracking-wider text-cream hover:bg-indigo-deep">
             Add stop
           </button>
         </div>
@@ -157,7 +157,7 @@ export function RouteBuilder() {
           <p className="mt-3 text-xs text-stone-dark">
             The builder shows sleeping altitudes only, not passes or day trips. General guidance, not medical advice: talk to your doctor before travel.
           </p>
-          <button type="button" onClick={() => openEnquire()} className="mt-4 min-h-11 rounded-[3px] bg-cochineal px-6 text-sm font-bold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">
+          <button type="button" onClick={() => openEnquire()} className="mt-4 min-h-11 rounded-full bg-cochineal px-6 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">
             Ask a Specialist to check my route
           </button>
         </div>

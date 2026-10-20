@@ -72,7 +72,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => openEnquire()}
-            className="rounded-[3px] bg-cochineal px-4 py-2.5 text-xs font-bold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark sm:px-5"
+            className="rounded-full bg-cochineal px-4 py-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark sm:px-5"
           >
             Enquire
           </button>

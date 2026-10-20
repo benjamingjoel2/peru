@@ -46,7 +46,7 @@ export default function AltitudePage() {
 
       <section className="container-x py-10">
         <div role="note" className="flex gap-4 rounded-sm border-2 border-cochineal bg-cochineal/5 p-5">
-          <span aria-hidden className="font-display text-3xl font-bold text-cochineal">!</span>
+          <span aria-hidden className="font-display text-3xl font-light text-cochineal">!</span>
           <div>
             <p className="font-bold text-indigo">General guidance, not medical advice.</p>
             <p className="mt-1 text-stone-dark">
@@ -91,7 +91,7 @@ export default function AltitudePage() {
           <ol className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {steps.map((s, i) => (
               <li key={s.title} className="bg-cream p-5">
-                <span className="font-display text-4xl font-bold text-mustard">{i + 1}</span>
+                <span className="font-display text-4xl font-light text-mustard">{i + 1}</span>
                 <h3 className="mt-2 font-display text-xl text-indigo">{s.title}</h3>
                 <p className="mt-2 text-sm text-stone-dark">{s.body}</p>
               </li>

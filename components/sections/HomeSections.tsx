@@ -198,12 +198,12 @@ export function EnquireBand() {
             <li><span className="eyebrow block text-mustard-soft">Hours</span>{c.hours} ({c.timezoneLabel})</li>
           </ul>
           <div className="mt-10 bg-cream p-6 text-ink">
-            <p className="font-display text-xl text-indigo">Peru, planned <em className="text-cochineal">around you</em></p>
+            <p className="font-display text-xl text-indigo">Peru, planned <em>around you</em></p>
             <div className="mt-4 text-stone-dark"><BudgetPoints /></div>
           </div>
         </div>
         <div>
-          <h3 className="font-display text-3xl text-cream">Enquire <em className="text-mustard">now</em></h3>
+          <h3 className="font-display text-3xl text-cream">Enquire <em>now</em></h3>
           <p className="mb-6 mt-2 text-cream/80">A few details help your Peru Specialist come back with ideas that fit.</p>
           <div className="rounded-sm bg-cream p-5 text-ink sm:p-6">
             <EnquiryForm compact />
@@ -240,7 +240,7 @@ export function PressStrip() {
         <div>
           <p className="eyebrow text-stone-dark">Press &amp; recognition</p>
           <h2 id="press-title" className="mt-3 font-display text-3xl text-indigo sm:text-4xl">
-            <em className="text-cochineal">Don&apos;t just</em> take our word for it
+            <em>Don&apos;t just</em> take our word for it
           </h2>
           {press.isPlaceholder && <PlaceholderBadge label="Placeholder press & awards, add real coverage before launch" className="mt-4" />}
         </div>
@@ -285,7 +285,7 @@ export function CtaBand({ title = "Ready when *you* are", text = "Tell us when y
           <p className="mt-3 text-cream/90">{text}</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <EnquireButton journey={journey} className="min-h-12 rounded-[3px] bg-cream px-8 text-sm font-bold uppercase tracking-[0.14em] text-cochineal hover:bg-mustard hover:text-indigo">
+          <EnquireButton journey={journey} className="min-h-12 rounded-full bg-cream px-8 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cochineal hover:bg-mustard hover:text-indigo">
             Enquire now
           </EnquireButton>
           <LinkButton href="/start-planning" variant="light">Start planning</LinkButton>

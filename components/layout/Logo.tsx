@@ -7,8 +7,8 @@ export function Logo({ light = false }: { light?: boolean }) {
       <StoneMark className="h-9 w-9 shrink-0" />
       <span className={`font-display leading-none ${light ? "text-cream" : "text-indigo"}`}>
         <span className="block text-[0.7rem] font-semibold uppercase tracking-[0.28em] opacity-80">Discover</span>
-        <span className="block text-xl font-bold tracking-tight">
-          Peru <em className="font-medium text-cochineal [.on-dark_&]:text-mustard">Travel</em>
+        <span className="block text-2xl font-normal tracking-tight">
+          Peru <em>Travel</em>
         </span>
       </span>
     </Link>

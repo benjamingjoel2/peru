@@ -33,7 +33,7 @@ export default function ContactPage() {
           </div>
         </aside>
         <div>
-          <h2 className="font-display text-3xl text-indigo">Send an <em className="text-cochineal">enquiry</em></h2>
+          <h2 className="font-display text-3xl text-indigo">Send an <em>enquiry</em></h2>
           <p className="mb-6 mt-2 text-stone-dark">A few details help your Peru Specialist come back with ideas that fit.</p>
           <EnquiryForm />
         </div>

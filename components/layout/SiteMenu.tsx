@@ -68,7 +68,7 @@ export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: (
               <span aria-hidden className="text-base text-cochineal transition-transform group-hover:translate-x-1">→</span>
             </button>
           ) : (
-            <Link href={n.href} onClick={onClose} className={`${itemCls(false)} ${level === 1 ? "font-display text-3xl" : level === 2 ? "font-display text-xl" : "text-[1.05rem] font-semibold"}`}>
+            <Link href={n.href} onClick={onClose} className={`${itemCls(false)} ${level === 1 ? "font-display text-3xl" : level === 2 ? "font-display text-xl" : "text-[1.05rem] font-light"}`}>
               <span>
                 {n.note && <span className="mr-3 text-xs font-bold uppercase tracking-wider text-stone">{n.note}</span>}
                 {n.label}

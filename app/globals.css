@@ -2,21 +2,21 @@
 
 @theme {
   /* Brand palette */
-  --color-cream: #f6f1e7;
-  --color-cream-deep: #ece4d3;
-  --color-cochineal: #b3283c;
-  --color-cochineal-dark: #8e1e2f;
-  --color-indigo: #23285a;
-  --color-indigo-deep: #181c42;
-  --color-mustard: #e0a526;
-  --color-mustard-soft: #f2d58f;
-  --color-stone: #8a857c;
-  --color-stone-dark: #4a4741;
-  --color-stone-light: #d8d2c6;
+  --color-cream: #fcfcfb;
+  --color-cream-deep: #f1eee9;
+  --color-cochineal: #ad4626;
+  --color-cochineal-dark: #8f3a1f;
+  --color-indigo: #3e2a2e;
+  --color-indigo-deep: #2c1d20;
+  --color-mustard: #f2a184;
+  --color-mustard-soft: #eceaea;
+  --color-stone: #857779;
+  --color-stone-dark: #6e5f62;
+  --color-stone-light: #e3ded4;
   --color-amazon: #2f6b45;
-  --color-amazon-deep: #1d3a28;
+  --color-amazon-deep: #374834;
   --color-pacific: #1f6e8c;
-  --color-ink: #1d1b19;
+  --color-ink: #313131;
 
   /* Altitude bands (sequential, low → very high) */
   --color-band-low: #3a8fb7;
@@ -24,8 +24,8 @@
   --color-band-high: #e0a526;
   --color-band-veryhigh: #b3283c;
 
-  --font-display: var(--font-zilla), "Rockwell", Georgia, serif;
-  --font-sans: var(--font-source), "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-serif), "Plantin", Georgia, serif;
+  --font-sans: var(--font-grotesk), "Helvetica Neue", Arial, sans-serif;
 
   --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -40,14 +40,14 @@
     background: var(--color-cream);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    font-size: 1.0625rem;
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.7;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 600;
-    line-height: 1.12;
-    letter-spacing: -0.01em;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.005em;
     text-wrap: balance;
   }
   :focus-visible {
@@ -80,13 +80,14 @@
   }
   .eyebrow {
     font-family: var(--font-sans);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
   }
   /* Woven stripe: generic repeating geometric bands, not a specific textile design */
-  .woven-stripe {
+  .woven-stripe, .woven-stripe-thin, .woven-zigzag { display: none !important; }
+  .woven-stripe-legacy {
     height: 10px;
     background:
       repeating-linear-gradient(90deg,

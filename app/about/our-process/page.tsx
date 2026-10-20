@@ -34,7 +34,7 @@ export default function ProcessPage() {
             <li key={s.t} className="relative flex gap-6">
               <span
                 aria-hidden
-                className={`relative z-10 grid h-14 w-14 shrink-0 place-items-center font-display text-2xl font-bold text-cream sm:h-[4.5rem] sm:w-[4.5rem] ${["bg-cochineal", "bg-indigo", "bg-amazon", "bg-pacific", "bg-mustard", "bg-stone-dark", "bg-cochineal"][i]}`}
+                className={`relative z-10 grid h-14 w-14 shrink-0 place-items-center font-display text-2xl font-light text-cream sm:h-[4.5rem] sm:w-[4.5rem] ${["bg-cochineal", "bg-indigo", "bg-amazon", "bg-pacific", "bg-mustard", "bg-stone-dark", "bg-cochineal"][i]}`}
                 style={{ clipPath: stoneShapes[i % stoneShapes.length] }}
               >
                 {i + 1}

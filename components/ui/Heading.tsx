@@ -7,7 +7,7 @@ export function Emph({ text }: { text: string }) {
     <>
       {parts.map((p, i) =>
         p.startsWith("*") && p.endsWith("*") ? (
-          <em key={i} className="font-display font-medium italic text-cochineal [.on-dark_&]:text-mustard">
+          <em key={i} className="font-display italic">
             {p.slice(1, -1)}
           </em>
         ) : (
@@ -42,7 +42,6 @@ export function Heading({ as: Tag = "h2", text, eyebrow, className = "", align =
     <div className={`${align === "center" ? "text-center mx-auto" : ""} ${className}`}>
       {eyebrow && (
         <p className={`eyebrow mb-3 text-stone-dark [.on-dark_&]:text-mustard-soft flex items-center gap-3 ${align === "center" ? "justify-center" : ""}`}>
-          <span aria-hidden className="inline-block h-[3px] w-8 woven-stripe-thin" />
           {eyebrow}
         </p>
       )}

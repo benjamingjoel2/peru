@@ -79,7 +79,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
       <JourneyGrid list={related} title="Journeys for this *story*" />
       <section className="border-t border-stone-light py-16">
         <div className="container-x">
-          <h2 className="text-3xl text-indigo">More <em className="text-cochineal">stories</em></h2>
+          <h2 className="text-3xl text-indigo">More <em>stories</em></h2>
           <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">{more.map((s) => <StoryCard key={s.slug} s={s} />)}</div>
         </div>
       </section>

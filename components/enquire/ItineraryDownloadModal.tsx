@@ -86,7 +86,7 @@ export function ItineraryDownloadModal({ open, journey, onClose }: { open: boole
               Send me the monthly Peru letter too (optional)
             </label>
             {state === "error" && <p role="alert" className="text-sm font-semibold text-cochineal">Something went wrong. Please try again.</p>}
-            <button type="submit" disabled={state === "sending"} className="min-h-12 w-full rounded-[3px] bg-cochineal px-8 text-sm font-bold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark disabled:opacity-60">
+            <button type="submit" disabled={state === "sending"} className="min-h-12 w-full rounded-full bg-cochineal px-8 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark disabled:opacity-60">
               {state === "sending" ? "Preparing…" : "Download PDF"}
             </button>
           </form>

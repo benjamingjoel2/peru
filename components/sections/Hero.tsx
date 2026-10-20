@@ -46,19 +46,19 @@ export function Hero() {
       <div className="container-x absolute inset-x-0 bottom-0 pb-8 sm:pb-12">
         <div aria-hidden className="woven-stripe-thin mb-5 w-1/2 opacity-90 sm:mb-8" />
         <div className="grid grid-cols-1 items-end gap-4 md:grid-cols-[auto_1fr_auto]">
-          <p className="font-display text-[clamp(3rem,11vw,9.5rem)] font-bold leading-[0.85] text-cream">Peru,</p>
+          <p className="font-display text-[clamp(3rem,11vw,9.5rem)] font-light leading-[0.85] text-cream">Peru,</p>
           <div className="hidden flex-col items-center gap-2 pb-4 text-center md:flex">
             <StoneMark className="h-10 w-10" />
             <p className="eyebrow max-w-[14rem] text-cream/90">Private journeys, paced for altitude</p>
           </div>
-          <p className="font-display text-[clamp(3rem,11vw,9.5rem)] font-medium italic leading-[0.85] text-mustard md:text-right">done right.</p>
+          <p className="font-display text-[clamp(3rem,11vw,9.5rem)] font-light italic leading-[0.85] text-cream md:text-right">done right.</p>
         </div>
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-sm text-cream/85">
           <p aria-live="polite">{slides[i].caption} <span className="text-xs">(verify)</span></p>
           <div className="flex items-center gap-1">
             {slides.map((s, n) => (
               <button key={s.src} type="button" onClick={() => setI(n)} aria-label={`Show slide ${n + 1}: ${s.caption}`} aria-current={i === n} className="grid h-6 min-w-6 place-items-center">
-                <span aria-hidden className={`block h-1 rounded-full transition-all ${i === n ? "w-10 bg-mustard" : "w-5 bg-cream/60"}`} />
+                <span aria-hidden className={`block h-0.5 transition-all ${i === n ? "w-10 bg-cream" : "w-5 bg-cream/50"}`} />
               </button>
             ))}
             {!reduce && (

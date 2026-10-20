@@ -29,7 +29,7 @@ export default function GivesBackPage() {
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {ayniPrinciples.map((p, i) => (
             <div key={p.title} className="bg-cream-deep/60 p-6">
-              <span className="font-display text-4xl font-bold text-mustard">{i + 1}</span>
+              <span className="font-display text-4xl font-light text-mustard">{i + 1}</span>
               <h3 className="mt-2 font-display text-xl text-indigo">{p.title}</h3>
               <p className="mt-2 text-sm text-stone-dark">{p.body}</p>
             </div>

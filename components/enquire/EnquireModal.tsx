@@ -41,7 +41,7 @@ export function EnquireModal({ open, journey, onClose }: { open: boolean; journe
                 type="button"
                 disabled={!fits}
                 onClick={() => setStep(2)}
-                className="min-h-12 rounded-[3px] bg-cochineal px-8 text-sm font-bold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark disabled:cursor-not-allowed disabled:opacity-40"
+                className="min-h-12 rounded-full bg-cochineal px-8 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Continue
               </button>

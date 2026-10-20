@@ -208,10 +208,10 @@ const scenes = {
     `<circle cx="1080" cy="420" r="60" fill="${C.mustard}"/><circle cx="560" cy="660" r="56" fill="${C.terracotta}"/>` +
     `<path d="M520 360 q30 -60 70 -40 q-10 50 -70 40Z" fill="${C.amazonLight}"/>`,
   portrait: (r) => {
-    const bg = [C.mustard, C.pacific, C.amazon, C.cochineal, C.stone][Math.floor(r() * 5)];
+    const bg = ["#d6cbc7", "#cfcacb", "#e3ded4", "#9e9496", "#b8aaa5"][Math.floor(r() * 5)];
     return `<rect width="${W}" height="${H}" fill="${bg}"/>` + `<g opacity=".25">${stonesWall(r, 0, 14, bg, C.cream)}</g>` +
-      `<circle cx="800" cy="420" r="170" fill="${C.creamDeep}"/><path d="M460 ${H} q30 -380 340 -380 q310 0 340 380 Z" fill="${C.indigo}"/>` +
-      `<path d="M560 ${H - 40} h480" stroke="${C.mustard}" stroke-width="18"/><path d="M600 ${H - 80} h400" stroke="${C.cochineal}" stroke-width="12"/>`;
+      `<circle cx="800" cy="420" r="170" fill="#f1eee9"/><path d="M460 ${H} q30 -380 340 -380 q310 0 340 380 Z" fill="#3e2a2e"/>` +
+      ``;
   },
 };
 

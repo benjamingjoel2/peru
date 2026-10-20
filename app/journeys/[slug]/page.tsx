@@ -57,17 +57,17 @@ export default async function JourneyPage({ params }: { params: Promise<{ slug: 
                 <li aria-current="page" className="font-semibold text-indigo">{plain(j.title)}</li>
               </ol>
             </nav>
-            <p className="inline-flex items-baseline gap-1 rounded-sm bg-cochineal px-3 py-1 font-display text-2xl font-bold text-cream">
+            <p className="inline-flex items-baseline gap-1 rounded-sm bg-cochineal px-3 py-1 font-display text-2xl font-light text-cream">
               {j.days} <span className="font-sans text-xs uppercase tracking-wider">days</span>
             </p>
             <h1 className="mt-4 text-4xl text-indigo sm:text-5xl lg:text-6xl"><Emph text={j.title} /></h1>
             <p className="mt-5 max-w-2xl text-lg text-stone-dark">{j.summary}</p>
             <p className="mt-5 text-lg">
-              From <Price usd={j.fromPriceUSD} className="font-display text-2xl font-bold text-indigo" /> <span className="text-sm text-stone-dark">per person, excluding international flights (placeholder price)</span>
+              From <Price usd={j.fromPriceUSD} className="font-display text-2xl font-light text-indigo" /> <span className="text-sm text-stone-dark">per person, excluding international flights (placeholder price)</span>
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <EnquireButton journey={j.slug} className="min-h-12 rounded-[3px] bg-cochineal px-7 text-sm font-bold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">Enquire about this journey</EnquireButton>
-              <DownloadButton journey={j.slug} className="min-h-12 rounded-[3px] border-2 border-indigo px-7 text-sm font-bold uppercase tracking-[0.14em] text-indigo hover:bg-indigo hover:text-cream">Download itinerary</DownloadButton>
+              <EnquireButton journey={j.slug} className="min-h-12 rounded-full bg-cochineal px-7 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">Enquire about this journey</EnquireButton>
+              <DownloadButton journey={j.slug} className="min-h-12 rounded-full border-2 border-indigo px-7 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-indigo hover:bg-indigo hover:text-cream">Download itinerary</DownloadButton>
             </div>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden" style={{ clipPath: stoneShapes[j.days % stoneShapes.length] }}>
@@ -186,12 +186,12 @@ export default async function JourneyPage({ params }: { params: Promise<{ slug: 
       <section aria-labelledby="dl-title" className="container-x py-14">
         <div className="grid items-center gap-8 bg-cream-deep p-8 sm:p-10 lg:grid-cols-[1.5fr_1fr]">
           <div>
-            <h2 id="dl-title" className="font-display text-3xl text-indigo">Take it <em className="text-cochineal">with you</em></h2>
+            <h2 id="dl-title" className="font-display text-3xl text-indigo">Take it <em>with you</em></h2>
             <p className="mt-2 text-stone-dark">Download the full itinerary as a PDF, with the day-by-day plan and the altitude profile for every night.</p>
           </div>
           <div className="flex flex-wrap gap-3 lg:justify-end">
-            <DownloadButton journey={j.slug} className="min-h-12 rounded-[3px] bg-indigo px-7 text-sm font-bold uppercase tracking-[0.14em] text-cream hover:bg-indigo-deep">Download PDF</DownloadButton>
-            <EnquireButton journey={j.slug} className="min-h-12 rounded-[3px] bg-cochineal px-7 text-sm font-bold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">Enquire</EnquireButton>
+            <DownloadButton journey={j.slug} className="min-h-12 rounded-full bg-indigo px-7 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-indigo-deep">Download PDF</DownloadButton>
+            <EnquireButton journey={j.slug} className="min-h-12 rounded-full bg-cochineal px-7 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">Enquire</EnquireButton>
           </div>
         </div>
       </section>

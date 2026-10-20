@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { CtaBand } from "@/components/sections/HomeSections";
 import { stoneShapes } from "@/components/ui/StoneMask";
 import { pageMeta } from "@/lib/seo";
@@ -23,6 +24,7 @@ export default function ProcessPage() {
   return (
     <>
       <PageHero
+        image={photo("pisac")}
         crumbs={[{ name: "About", path: "/about" }, { name: "Our process", path: "/about/our-process" }]}
         eyebrow="Our process"
         title="How we *plan* it"

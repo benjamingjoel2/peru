@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { StoryCard } from "@/components/sections/Cards";
 import { CtaBand } from "@/components/sections/HomeSections";
 import { getStories } from "@/lib/stories";
@@ -15,6 +16,7 @@ export default function StoriesPage() {
   return (
     <>
       <PageHero
+        image={photo("corn")}
         crumbs={[{ name: "Stories", path: "/stories" }]}
         eyebrow="Stories"
         title="Stories from *the trail*"

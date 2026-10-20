@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { JourneyFilter } from "@/components/sections/JourneyFilter";
 import { journeys } from "@/data/journeys";
 import { pageMeta } from "@/lib/seo";
@@ -15,6 +16,7 @@ export default function JourneysPage() {
   return (
     <>
       <PageHero
+        image={photo("machu-picchu-sunrise")}
         crumbs={[{ name: "Journeys", path: "/journeys" }]}
         eyebrow="Journeys"
         title="Journeys, *paced right*"

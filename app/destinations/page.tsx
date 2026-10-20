@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { zones } from "@/data/zones";
 import { destinations, destinationsByZone } from "@/data/destinations";
 import { Emph, Heading } from "@/components/ui/Heading";
@@ -20,6 +21,7 @@ export default function DestinationsPage() {
   return (
     <>
       <PageHero
+        image={photo("laguna-69")}
         crumbs={[{ name: "Destinations", path: "/destinations" }]}
         eyebrow="Where we go"
         title="Peru is three countries *in one*"

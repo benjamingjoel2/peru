@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { RouteBuilder } from "@/components/altitude/RouteBuilder";
 import { AltitudeProfile } from "@/components/altitude/AltitudeProfile";
 import { Heading } from "@/components/ui/Heading";
@@ -38,6 +39,7 @@ export default function AltitudePage() {
   return (
     <>
       <PageHero
+        image={photo("rainbow-mountain-wide")}
         crumbs={[{ name: "Altitude", path: "/altitude" }]}
         eyebrow="Plan it right"
         title="Altitude, *explained*"

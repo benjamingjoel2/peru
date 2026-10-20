@@ -9,7 +9,6 @@ import { mpRoutes, mpRulesNote } from "@/config/machuPicchu";
 import { Emph, Heading, plain } from "@/components/ui/Heading";
 import { Price } from "@/components/ui/Price";
 import { Accordion } from "@/components/ui/Accordion";
-import { stoneShapes } from "@/components/ui/StoneMask";
 import { AltitudeProfile } from "@/components/altitude/AltitudeProfile";
 import { DownloadButton, EnquireButton } from "@/components/enquire/EnquireProvider";
 import { JourneyGrid, StayGrid } from "@/components/sections/Blocks";
@@ -47,31 +46,30 @@ export default async function JourneyPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-stone-light">
-        <div className="container-x grid items-center gap-10 py-12 lg:grid-cols-[1.1fr_1fr] lg:py-16">
-          <div>
-            <nav aria-label="Breadcrumb" className="mb-5 text-sm text-stone-dark">
-              <ol className="flex flex-wrap gap-1.5">
-                <li><Link href="/" className="hover:text-cochineal">Home</Link> /</li>
-                <li><Link href="/journeys" className="hover:text-cochineal">Journeys</Link> /</li>
-                <li aria-current="page" className="font-semibold text-indigo">{plain(j.title)}</li>
-              </ol>
-            </nav>
-            <p className="inline-flex items-baseline gap-1 rounded-sm bg-cochineal px-3 py-1 font-display text-2xl font-light text-cream">
-              {j.days} <span className="font-sans text-xs uppercase tracking-wider">days</span>
-            </p>
-            <h1 className="mt-4 text-4xl text-indigo sm:text-5xl lg:text-6xl"><Emph text={j.title} /></h1>
-            <p className="mt-5 max-w-2xl text-lg text-stone-dark">{j.summary}</p>
-            <p className="mt-5 text-lg">
-              From <Price usd={j.fromPriceUSD} className="font-display text-2xl font-light text-indigo" /> <span className="text-sm text-stone-dark">per person, excluding international flights (placeholder price)</span>
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <EnquireButton journey={j.slug} className="min-h-12 rounded-full bg-cochineal px-7 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">Enquire about this journey</EnquireButton>
-              <DownloadButton journey={j.slug} className="min-h-12 rounded-full border-2 border-indigo px-7 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-indigo hover:bg-indigo hover:text-cream">Download itinerary</DownloadButton>
-            </div>
-          </div>
-          <div className="relative aspect-[4/3] overflow-hidden" style={{ clipPath: stoneShapes[j.days % stoneShapes.length] }}>
-            <Image src={j.image.src} alt={j.image.alt} fill priority sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
+      <section className="on-dark relative h-[72vh] min-h-[460px] overflow-hidden bg-indigo-deep">
+        <Image src={j.image.src} alt={j.image.alt} fill priority sizes="100vw" className="object-cover" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-indigo-deep/90 via-indigo-deep/20 to-indigo-deep/10" />
+        <div className="container-x absolute inset-x-0 bottom-0 pb-10 sm:pb-14">
+          <nav aria-label="Breadcrumb" className="mb-5 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-cream/80">
+            <ol className="flex flex-wrap gap-2">
+              <li><Link href="/" className="hover:text-cream">Home</Link> /</li>
+              <li><Link href="/journeys" className="hover:text-cream">Journeys</Link> /</li>
+              <li aria-current="page" className="text-cream">{plain(j.title)}</li>
+            </ol>
+          </nav>
+          <p className="eyebrow text-cream/85">{j.days} days · {j.zones.map((z) => zoneById(z).name).join(" · ")}</p>
+          <h1 className="mt-3 max-w-5xl text-5xl text-cream sm:text-6xl lg:text-7xl"><Emph text={j.title} /></h1>
+        </div>
+      </section>
+      <section className="border-b border-stone-light">
+        <div className="container-x py-14 text-center lg:py-20">
+          <p className="mx-auto max-w-3xl font-display text-2xl font-light leading-snug text-indigo sm:text-3xl">{j.summary}</p>
+          <p className="mt-6 text-lg">
+            From <Price usd={j.fromPriceUSD} className="font-display text-2xl text-indigo" /> <span className="text-sm text-stone-dark">per person, excluding international flights (placeholder price)</span>
+          </p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <EnquireButton journey={j.slug} className="min-h-11 rounded-full bg-cochineal px-7 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">Enquire about this journey</EnquireButton>
+            <DownloadButton journey={j.slug} className="min-h-11 rounded-full border border-indigo px-7 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-indigo hover:bg-indigo hover:text-cream">Download itinerary</DownloadButton>
           </div>
         </div>
       </section>

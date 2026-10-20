@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { ValuesIntro } from "@/components/sections/ValuesIntro";
 import { PressStrip, TeamCarousel, Testimonials, CtaBand } from "@/components/sections/HomeSections";
 import { Heading } from "@/components/ui/Heading";
@@ -23,6 +24,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+        image={photo("cusco")}
         crumbs={[{ name: "About", path: "/about" }]}
         eyebrow="About us"
         title="Peru, *done right*"

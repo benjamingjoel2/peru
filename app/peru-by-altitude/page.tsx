@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { FoodMap } from "@/components/food/FoodMap";
 import { Heading, plain } from "@/components/ui/Heading";
 import { foodBands, foods } from "@/data/foods";
@@ -19,6 +20,7 @@ export default function FoodMapPage() {
   return (
     <>
       <PageHero
+        image={photo("market")}
         crumbs={[{ name: "Peru by altitude", path: "/peru-by-altitude" }]}
         eyebrow="A food map"
         title="Peru by *altitude*"

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { experienceGroups, experiencesByGroup } from "@/data/experiences";
 import { Emph } from "@/components/ui/Heading";
 import { stoneShapes } from "@/components/ui/StoneMask";
@@ -19,6 +20,7 @@ export default function ExperiencesPage() {
   return (
     <>
       <PageHero
+        image={photo("humantay-shore")}
         crumbs={[{ name: "Experiences", path: "/experiences" }]}
         eyebrow="Experiences"
         title="What do you want to *feel* in Peru?"

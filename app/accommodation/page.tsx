@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { stays } from "@/data/stays";
 import { zones } from "@/data/zones";
 import { destinationBySlug } from "@/data/destinations";
@@ -18,6 +19,7 @@ export default function AccommodationPage() {
   return (
     <>
       <PageHero
+        image={photo("stay-hacienda")}
         crumbs={[{ name: "Accommodation", path: "/accommodation" }]}
         eyebrow="Accommodation"
         title="Places to *rest* well"

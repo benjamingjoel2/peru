@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { EnquiryForm } from "@/components/enquire/EnquiryForm";
 import { BudgetPoints } from "@/components/enquire/BudgetPanel";
 import { RouteBuilder } from "@/components/altitude/RouteBuilder";
@@ -15,6 +16,7 @@ export default function StartPlanningPage() {
   return (
     <>
       <PageHero
+        image={photo("amazon-river")}
         crumbs={[{ name: "Start planning", path: "/start-planning" }]}
         eyebrow="Start planning"
         title="Your Peru, *designed*"

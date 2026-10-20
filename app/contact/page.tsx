@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { EnquiryForm } from "@/components/enquire/EnquiryForm";
 import { BudgetPoints } from "@/components/enquire/BudgetPanel";
 import { site } from "@/config/site";
@@ -14,7 +15,8 @@ export default function ContactPage() {
   const c = site.contact;
   return (
     <>
-      <PageHero crumbs={[{ name: "Contact", path: "/contact" }]} eyebrow="Contact us" title="Let's *talk* Peru" intro="Call, write or WhatsApp. We're in Lima, so we answer in Lima time." />
+      <PageHero
+        image={photo("sacsayhuaman")} crumbs={[{ name: "Contact", path: "/contact" }]} eyebrow="Contact us" title="Let's *talk* Peru" intro="Call, write or WhatsApp. We're in Lima, so we answer in Lima time." />
       <section className="container-x grid gap-12 py-14 lg:grid-cols-[1fr_1.6fr]">
         <aside className="space-y-8">
           <div>

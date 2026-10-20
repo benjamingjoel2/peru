@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { CtaBand } from "@/components/sections/HomeSections";
 import { PlaceholderBadge } from "@/components/ui/Badges";
 import { testimonials } from "@/data/people";
@@ -17,6 +18,7 @@ export default function TestimonialsPage() {
   return (
     <>
       <PageHero
+        image={photo("uros-islands")}
         crumbs={[{ name: "About", path: "/about" }, { name: "Testimonials", path: "/about/testimonials" }]}
         eyebrow="Testimonials"
         title="In *their* words"

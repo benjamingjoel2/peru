@@ -32,7 +32,8 @@ npm run test:e2e     # mega-menu, mobile drawer, enquire modal, gated PDF, altit
 | Zones, destinations (elevations), journeys (daily altitude), experiences, stays, foods, team, testimonials, FAQs | `data/*.ts` (typed in `data/types.ts`) |
 | Stories | `content/stories/*.mdx` |
 | Altitude bands, tips and route warnings | `lib/altitude.ts` |
-| Placeholder artwork generator | `scripts/gen-placeholders.mjs` (`npm run placeholders`) |
+| Photos (free Unsplash License; credited on `/credits`) | `data/photo-sources.json` → `public/photos/*.jpg` via `node scripts/fetch-photos.mjs`; use them in data with `photo("slot")` from `data/photos.ts` |
+| Team placeholder portraits | `scripts/gen-placeholders.mjs` (`npm run placeholders`) |
 
 ## Environment variables
 
@@ -56,7 +57,7 @@ Everything below is visibly flagged on the site:
 - Stays: every hotel name (`data/stays.ts`)
 - Team, testimonials, press and awards, and Travel that gives back partners
 - Legal pages (`app/legal/[slug]/page.tsx`), including deposit and cancellation terms
-- All imagery: generated placeholder SVGs in `public/images/**`. Swap the `image.src` paths for real photos; jpg/webp are optimised automatically.
+- Team portraits: illustrated placeholders in `public/images/team` until real team photos exist
 - Landscapes film: set `media.filmSrc`
 - **Verify** every elevation, season, Machu Picchu rule (update `verifiedAsOf`), entry requirement and health note against official sources.
 

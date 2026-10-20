@@ -14,7 +14,7 @@ let failed = 0;
 for (const s of sources) {
   const file = join(outDir, `${s.slot}.jpg`);
   if (existsSync(file) && !force) continue;
-  const url = `${s.image}?w=2000&q=72&fm=jpg&fit=max`;
+  const url = `${s.image}?w=1600&q=75&fm=jpg&fit=max`;
   const res = await fetch(url);
   if (!res.ok) {
     console.error(`✗ ${s.slot}: HTTP ${res.status}`);

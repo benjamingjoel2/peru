@@ -1,5 +1,6 @@
 import { Heading } from "@/components/ui/Heading";
 import { StoneMask } from "@/components/ui/StoneMask";
+import { photo } from "@/data/photos";
 import { ArrowLink } from "@/components/ui/Button";
 import { PlaceholderBadge } from "@/components/ui/Badges";
 
@@ -42,7 +43,7 @@ export function ValuesIntro() {
           </div>
         </div>
         <div className="relative">
-          <StoneMask src="/images/team/values-specialist.svg" alt="Placeholder portrait of a Peru Specialist" shape={4} className="aspect-[4/5] w-full max-w-md lg:ml-auto" />
+          <StoneMask src={photo("family").src} alt={photo("family").alt} shape={4} className="aspect-[4/5] w-full max-w-md lg:ml-auto" />
           <div className="absolute bottom-6 left-0 max-w-[16rem] bg-indigo p-5 text-cream shadow-xl lg:left-6">
             <p className="font-display text-lg italic">&ldquo;Start lower, finish higher. Your lungs will thank you.&rdquo;</p>
             <p className="mt-2 text-xs uppercase tracking-wider text-mustard-soft">Peru Specialist</p>

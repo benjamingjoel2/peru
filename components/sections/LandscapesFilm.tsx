@@ -8,9 +8,9 @@ import { PlaceholderBadge } from "@/components/ui/Badges";
 import { StoneDivider } from "@/components/ui/Stone";
 
 const frames = [
-  { src: "/images/placeholders/film-coast.svg", label: "The Coast", note: "Sea level" },
-  { src: "/images/placeholders/film-andes.svg", label: "The Andes", note: "Up to ~5,000 m" },
-  { src: "/images/placeholders/film-amazon.svg", label: "The Amazon", note: "~200 m" },
+  { src: "/photos/coast-cliffs.jpg", label: "The Coast", note: "Sea level" },
+  { src: "/photos/rainbow-mountain-wide.jpg", label: "The Andes", note: "Up to ~5,000 m" },
+  { src: "/photos/amazon-river.jpg", label: "The Amazon", note: "~200 m" },
 ];
 
 /** Full-width landscapes film. Uses config.media.filmSrc when set; otherwise animated placeholder stills. */

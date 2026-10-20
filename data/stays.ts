@@ -1,6 +1,6 @@
+import { photo } from "./photos";
 import type { Stay } from "./types";
 
-const img = (slug: string, alt: string) => ({ src: `/images/stays/${slug}.svg`, alt });
 
 // All stay names are PLACEHOLDERS. Replace them with real partner properties.
 export const stays: Stay[] = [
@@ -14,7 +14,7 @@ export const stays: Stay[] = [
     features: ["Walk to the Malecón clifftops", "Garden courtyard", "Pisco bar", "Airport transfer about 45–60 minutes"],
     rooms: "About 20 rooms",
     isPlaceholder: true,
-    image: img("casa-brisa-miraflores", "Illustration: a colonial courtyard house with a garden"),
+    image: photo("stay-lima"),
   },
   {
     slug: "dunas-paracas",
@@ -26,7 +26,7 @@ export const stays: Stay[] = [
     features: ["Private jetty for Ballestas departures", "Pool facing the bay", "Family rooms"],
     rooms: "About 60 rooms",
     isPlaceholder: true,
-    image: img("dunas-paracas", "Illustration: a low hotel on a desert bay"),
+    image: photo("stay-paracas"),
   },
   {
     slug: "hacienda-tres-piedras",
@@ -38,7 +38,7 @@ export const stays: Stay[] = [
     features: ["Sleeps lower than Cusco", "Farm-to-table kitchen", "Gardens and orchard", "Easy access to Ollantaytambo station"],
     rooms: "About 30 rooms",
     isPlaceholder: true,
-    image: img("hacienda-tres-piedras", "Illustration: an adobe hacienda in a green valley"),
+    image: photo("stay-hacienda"),
   },
   {
     slug: "casa-muro-inca",
@@ -50,7 +50,7 @@ export const stays: Stay[] = [
     features: ["Oxygen-enriched rooms available", "Original Inca stonework", "Five minutes' walk to the Plaza de Armas"],
     rooms: "About 25 rooms",
     isPlaceholder: true,
-    image: img("casa-muro-inca", "Illustration: a stone-walled courtyard in Cusco"),
+    image: photo("stay-cusco"),
   },
   {
     slug: "posada-del-rio",
@@ -62,7 +62,7 @@ export const stays: Stay[] = [
     features: ["Close to the bus to Machu Picchu", "Riverside gardens", "Early breakfast for first-slot tickets"],
     rooms: "About 40 rooms",
     isPlaceholder: true,
-    image: img("posada-del-rio", "Illustration: a lodge beside a mountain river"),
+    image: photo("stay-aguas"),
   },
   {
     slug: "patio-sillar",
@@ -74,7 +74,7 @@ export const stays: Stay[] = [
     features: ["Volcano views from the roof terrace", "Historic centre", "A good first step up in altitude"],
     rooms: "About 18 rooms",
     isPlaceholder: true,
-    image: img("patio-sillar", "Illustration: white stone arches with a volcano behind"),
+    image: photo("stay-arequipa"),
   },
   {
     slug: "mirador-del-condor",
@@ -86,7 +86,7 @@ export const stays: Stay[] = [
     features: ["Thermal pools", "Terrace walks", "Early starts for Cruz del Cóndor"],
     rooms: "About 35 cottages",
     isPlaceholder: true,
-    image: img("mirador-del-condor", "Illustration: stone cottages above canyon terraces"),
+    image: photo("stay-colca"),
   },
   {
     slug: "totora-lodge",
@@ -98,7 +98,7 @@ export const stays: Stay[] = [
     features: ["Heated rooms", "Oxygen available", "Private lakeshore", "Boat departures from the hotel"],
     rooms: "About 30 rooms",
     isPlaceholder: true,
-    image: img("totora-lodge", "Illustration: a lodge on the shore of a high lake"),
+    image: photo("stay-titicaca"),
   },
   {
     slug: "rio-madre-ecolodge",
@@ -110,7 +110,7 @@ export const stays: Stay[] = [
     features: ["Canopy tower", "Naturalist guides", "Community partnership", "Family cabins"],
     rooms: "About 25 cabins",
     isPlaceholder: true,
-    image: img("rio-madre-ecolodge", "Illustration: thatched cabins on a jungle riverbank"),
+    image: photo("stay-amazon"),
   },
   {
     slug: "refugio-huascaran",
@@ -122,7 +122,7 @@ export const stays: Stay[] = [
     features: ["Mountain views", "Trail lunches", "Drying room for boots"],
     rooms: "About 15 rooms",
     isPlaceholder: true,
-    image: img("refugio-huascaran", "Illustration: a stone lodge beneath snowy peaks"),
+    image: photo("stay-huaraz"),
   },
   {
     slug: "casa-nube",
@@ -134,7 +134,7 @@ export const stays: Stay[] = [
     features: ["Waterfall view", "Hummingbird garden", "Guided cloud-forest walks"],
     rooms: "About 12 cabins",
     isPlaceholder: true,
-    image: img("casa-nube", "Illustration: round cabins in misty cloud forest"),
+    image: photo("stay-cloudforest"),
   },
   {
     slug: "casa-adobe-trujillo",
@@ -146,7 +146,7 @@ export const stays: Stay[] = [
     features: ["Historic centre", "Courtyard pool", "Close to Chan Chan and Huanchaco"],
     rooms: "About 22 rooms",
     isPlaceholder: true,
-    image: img("casa-adobe-trujillo", "Illustration: a painted colonial courtyard"),
+    image: photo("stay-trujillo"),
   },
 ];
 

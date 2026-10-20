@@ -1,6 +1,6 @@
+import { photo } from "./photos";
 import type { Destination, ZoneId } from "./types";
 
-const img = (slug: string, alt: string) => ({ src: `/images/places/${slug}.svg`, alt });
 
 // All elevations are approximate and marked "verify" in the UI.
 export const destinations: Destination[] = [
@@ -20,7 +20,7 @@ export const destinations: Destination[] = [
     gettingThere: ["International flights arrive at Jorge Chávez airport", "Domestic flights connect Lima to almost every region"],
     highlights: ["Miraflores and Barranco clifftops", "The historic centre and its balconies", "Surquillo market", "Pre-Inca huacas in the middle of the city"],
     timeNeeded: "1–3 nights",
-    image: img("lima", "Illustration: Lima's clifftops above the Pacific at sunset"),
+    image: photo("lima"),
   },
   {
     slug: "paracas",
@@ -36,7 +36,7 @@ export const destinations: Destination[] = [
     gettingThere: ["About 3.5 hours by road from Lima on the Pan-American Highway", "Light aircraft over the Nazca Lines can depart from Pisco"],
     highlights: ["Ballestas Islands boat trip", "Paracas National Reserve", "Pisco vineyards near Ica"],
     timeNeeded: "1–2 nights",
-    image: img("paracas", "Illustration: rocky islands with seabirds in a blue sea"),
+    image: photo("paracas"),
   },
   {
     slug: "huacachina",
@@ -52,7 +52,7 @@ export const destinations: Destination[] = [
     gettingThere: ["About 1 hour by road from Paracas", "About 4.5 hours from Lima"],
     highlights: ["Dune buggies and sandboarding at sunset", "Pisco bodegas around Ica"],
     timeNeeded: "1 night",
-    image: img("huacachina", "Illustration: an oasis lagoon below tall sand dunes"),
+    image: photo("huacachina"),
   },
   {
     slug: "nazca-lines",
@@ -68,7 +68,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Overflights from Nazca, Ica or Pisco airfields", "About 2 hours by road from Huacachina"],
     highlights: ["Overflight of the lines", "The Chauchilla cemetery", "Cantalloc aqueducts"],
     timeNeeded: "Day trip or 1 night",
-    image: img("nazca-lines", "Illustration: a hummingbird figure drawn on a desert plain"),
+    image: photo("nazca-lines"),
   },
 
   // ── Cusco & the Sacred Valley ───────────────────────────────
@@ -86,7 +86,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Flights of about 1h15 from Lima", "Train or road from the Sacred Valley (about 1.5 hours by road)", "Train or road from Puno"],
     highlights: ["Qorikancha and the Twelve-Angled Stone", "Sacsayhuamán", "San Pedro market", "The San Blas neighbourhood"],
     timeNeeded: "2–3 nights",
-    image: img("cusco", "Illustration: red-tiled roofs and a cathedral below Andean hills"),
+    image: photo("cusco"),
   },
   {
     slug: "sacred-valley",
@@ -103,7 +103,7 @@ export const destinations: Destination[] = [
     gettingThere: ["About 1.5 hours by road from Cusco airport", "Trains to Machu Picchu leave from Ollantaytambo"],
     highlights: ["Pisac ruins and market", "Ollantaytambo's terraces", "Moray's circular terraces", "Maras salt pans", "Weaving cooperatives in Chinchero"],
     timeNeeded: "2–3 nights",
-    image: img("sacred-valley", "Illustration: Inca terraces in a green river valley"),
+    image: photo("ollantaytambo"),
   },
   {
     slug: "machu-picchu",
@@ -120,7 +120,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Train from Ollantaytambo or Cusco (Poroy) to Aguas Calientes", "Bus up from Aguas Calientes", "On foot via the Inca Trail or Salkantay"],
     highlights: ["Ticket circuits and time slots", "Huayna Picchu or Machu Picchu Mountain (separate tickets)", "The Sun Gate", "Aguas Calientes hot springs"],
     timeNeeded: "1 night in Aguas Calientes, or a long day trip",
-    image: img("machu-picchu", "Illustration: mountain ruins on a ridge between green peaks"),
+    image: photo("machu-picchu"),
   },
   {
     slug: "inca-trail-salkantay",
@@ -137,7 +137,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Classic Inca Trail starts at Km 82, about 2 hours from Cusco", "Salkantay treks usually start near Mollepata/Soraypampa, about 3–4 hours from Cusco"],
     highlights: ["Dead Woman's Pass", "Wiñay Wayna", "Arriving at the Sun Gate", "Humantay Lake", "Salkantay Pass"],
     timeNeeded: "4–5 days trekking",
-    image: img("inca-trail-salkantay", "Illustration: a stone trail climbing toward a snowy pass"),
+    image: photo("winay-wayna"),
   },
   {
     slug: "rainbow-mountain",
@@ -154,7 +154,7 @@ export const destinations: Destination[] = [
     gettingThere: ["A very early start: about 3 hours by road from Cusco, then a walk or horse ride"],
     highlights: ["Vinicunca viewpoint", "Red Valley", "Palccoyo, the quieter alternative"],
     timeNeeded: "Full day from Cusco",
-    image: img("rainbow-mountain", "Illustration: striped red and ochre mountain slopes"),
+    image: photo("rainbow-mountain"),
   },
 
   // ── The Southern Andes ─────────────────────────────────────
@@ -173,7 +173,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Flights of about 1.5 hours from Lima", "About 3–4 hours by road from Arequipa to Colca", "About 6 hours by road from Colca to Puno"],
     highlights: ["Santa Catalina Monastery", "Picanterías (traditional lunch houses)", "Cruz del Cóndor", "Colca's pre-Inca terraces"],
     timeNeeded: "2 nights Arequipa, 1–2 nights Colca",
-    image: img("arequipa-colca", "Illustration: a volcano behind a white-stone city"),
+    image: photo("arequipa"),
   },
   {
     slug: "lake-titicaca",
@@ -190,7 +190,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Flights to Juliaca (about 45 minutes by road from Puno)", "A scenic full-day train or road trip from Cusco", "About 6 hours by road from Colca"],
     highlights: ["The Uros reed islands", "Taquile Island", "Community homestays on Amantaní", "Sillustani burial towers"],
     timeNeeded: "2 nights",
-    image: img("lake-titicaca", "Illustration: reed boats on a deep blue high-altitude lake"),
+    image: photo("uros-islands"),
   },
 
   // ── The Amazon ─────────────────────────────────────────────
@@ -208,7 +208,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Flights from Cusco or Lima to Puerto Maldonado", "Then a boat of 30 minutes to several hours, depending on the lodge"],
     highlights: ["Macaw clay licks", "Canopy towers", "Oxbow lakes with giant otters", "Night walks"],
     timeNeeded: "3–4 nights",
-    image: img("tambopata", "Illustration: macaws over a rainforest river"),
+    image: photo("macaws"),
   },
   {
     slug: "iquitos",
@@ -224,7 +224,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Flights of about 1h45 from Lima"],
     highlights: ["Belén market", "Pink river dolphins", "Pacaya-Samiria reserve", "Amazon river cruises"],
     timeNeeded: "3–5 nights",
-    image: img("iquitos", "Illustration: a riverboat on a wide brown river"),
+    image: photo("belen-iquitos"),
   },
   {
     slug: "manu",
@@ -241,7 +241,7 @@ export const destinations: Destination[] = [
     gettingThere: ["A full-day scenic drive from Cusco through cloud forest", "Light aircraft to Boca Manu on some itineraries"],
     highlights: ["Cloud forest birding", "Cock-of-the-rock leks", "Macaw and tapir clay licks", "Remote river lodges"],
     timeNeeded: "5–7 nights",
-    image: img("manu", "Illustration: cloud forest falling into lowland jungle"),
+    image: photo("cloud-forest"),
   },
 
   // ── The North ──────────────────────────────────────────────
@@ -259,7 +259,7 @@ export const destinations: Destination[] = [
     gettingThere: ["About 7–8 hours by road from Lima", "Limited flights to Anta airport (check schedules)"],
     highlights: ["Laguna 69", "Llanganuco lakes", "Chavín de Huántar", "Pastoruri glacier"],
     timeNeeded: "4–5 nights",
-    image: img("huaraz", "Illustration: a turquoise glacier lake under white peaks"),
+    image: photo("llanganuco"),
   },
   {
     slug: "chachapoyas-kuelap",
@@ -276,7 +276,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Flights to Jaén or Chachapoyas (check current schedules), then road", "Long scenic drives from Chiclayo"],
     highlights: ["Kuélap fortress", "Gocta waterfall", "Karajía sarcophagi", "Revash cliff tombs"],
     timeNeeded: "3 nights",
-    image: img("chachapoyas-kuelap", "Illustration: a stone fortress on a misty forest ridge"),
+    image: photo("kuelap"),
   },
   {
     slug: "trujillo",
@@ -292,7 +292,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Flights of about 1 hour from Lima", "About 8–9 hours by road from Huaraz"],
     highlights: ["Chan Chan", "Huacas del Sol y de la Luna", "Huanchaco and the reed boats", "El Brujo and the Lady of Cao"],
     timeNeeded: "2 nights",
-    image: img("trujillo", "Illustration: adobe walls with carved fish patterns"),
+    image: photo("trujillo"),
   },
   {
     slug: "mancora",
@@ -308,7 +308,7 @@ export const destinations: Destination[] = [
     gettingThere: ["Flights to Talara or Tumbes (about 1h45 from Lima), then about 1 hour by road"],
     highlights: ["Surfing", "Whale watching (seasonal)", "Swimming with sea turtles at El Ñuro"],
     timeNeeded: "3–4 nights",
-    image: img("mancora", "Illustration: palms on a warm beach with surf"),
+    image: photo("mancora"),
   },
 ];
 

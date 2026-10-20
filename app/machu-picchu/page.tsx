@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { BookingHelper } from "@/components/machu-picchu/BookingHelper";
 import { Heading } from "@/components/ui/Heading";
 import { mpRoutes, mpRules, mpRulesNote, officialSources, mpPeakMonths } from "@/config/machuPicchu";
@@ -28,7 +29,7 @@ export default function MachuPicchuPage() {
         eyebrow="The hardest part, made simple"
         title="The Machu Picchu *planner*"
         intro="Machu Picchu tickets come in time slots and sell out. Book the trip, then breathe. Here's how to get there, how tickets and permits work, and when to book."
-        image={{ src: "/images/places/machu-picchu.svg", alt: "Illustration: Machu Picchu's terraces on a green ridge" }}
+        image={photo("machu-picchu-ruins")}
       >
         <nav aria-label="On this page" className="mt-6 flex flex-wrap gap-2 text-sm">
           {[["#routes", "Ways to get there"], ["#tickets", "Tickets & circuits"], ["#permits", "Inca Trail permits"], ["#when", "Best time"], ["#book", "When to book"]].map(([h, l]) => (

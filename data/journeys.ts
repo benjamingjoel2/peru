@@ -1,6 +1,6 @@
+import { photo } from "./photos";
 import type { Journey, JourneyDay } from "./types";
 
-const img = (slug: string, alt: string) => ({ src: `/images/journeys/${slug}.svg`, alt });
 
 /** Shorthand for a day. Altitudes are approximate (verify). */
 const d = (
@@ -43,7 +43,7 @@ export const journeys: Journey[] = [
     machuPicchu: { route: "train", note: "Morning entry on the classic circuit, secured when you book. Huayna Picchu can be added if tickets are available." },
     experiences: ["lima-food-scene", "sacred-valley", "weaving-cooperatives", "machu-picchu", "markets"],
     bestMonths: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"],
-    image: img("first-peru-done-right", "Illustration: Machu Picchu in morning light"),
+    image: photo("machu-picchu-llamas"),
     itinerary: [
       d(1, "Arrive in Lima", "A private transfer to your hotel near the clifftops. Walk the Malecón at sunset and sleep off the flight.", LIMA, { transport: ["flight", "road"], stay: "casa-brisa-miraflores" }),
       d(2, "Lima, on a plate", "Market morning, a ceviche lunch and an afternoon in Barranco. Dinner at a table we booked weeks ago.", LIMA, { transport: ["road"], stay: "casa-brisa-miraflores" }),
@@ -73,7 +73,7 @@ export const journeys: Journey[] = [
     machuPicchu: { route: "classic-inca-trail", note: "Entry through the Sun Gate on day 7, on your Inca Trail permit. Permits are named and can't be changed after booking." },
     experiences: ["inca-trail", "machu-picchu", "sacred-valley"],
     bestMonths: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
-    image: img("the-classic-inca-trail", "Illustration: stone steps on a cloud-forest trail"),
+    image: photo("inca-trail-llamas"),
     itinerary: [
       d(1, "Arrive in Lima", "Arrive, transfer, rest. Sea-level sleep before the climb.", LIMA, { transport: ["flight", "road"], stay: "casa-brisa-miraflores" }),
       d(2, "Fly to Cusco, sleep in the valley", "Straight down to the Sacred Valley to sleep about 500 metres lower than Cusco.", VALLEY, { transport: ["flight", "road"], maxAltitudeM: 3700, tip: "sleep-lower", stay: "hacienda-tres-piedras" }),
@@ -101,7 +101,7 @@ export const journeys: Journey[] = [
     machuPicchu: { route: "salkantay", note: "A regular timed entry ticket on day 9, secured when you book." },
     experiences: ["salkantay", "machu-picchu", "sacred-valley"],
     bestMonths: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
-    image: img("salkantay-to-machu-picchu", "Illustration: a glacier peak above a high trail"),
+    image: photo("humantay"),
     itinerary: [
       d(1, "Arrive in Cusco, sleep in the valley", "Fly in via Lima and drive straight down to the Sacred Valley.", VALLEY, { transport: ["flight", "road"], maxAltitudeM: 3700, tip: "sleep-lower", stay: "hacienda-tres-piedras" }),
       d(2, "Sacred Valley", "A gentle day at Pisac and a short terrace walk to get the legs going.", VALLEY, { transport: ["road"], maxAltitudeM: 3300, tip: "take-it-easy", stay: "hacienda-tres-piedras" }),
@@ -130,7 +130,7 @@ export const journeys: Journey[] = [
     machuPicchu: { route: "train", note: "Timed entry on day 6, with the option to add Machu Picchu Mountain." },
     experiences: ["sacred-valley", "machu-picchu", "markets", "amazon-lodges", "lima-food-scene"],
     bestMonths: ["May", "Jun", "Jul", "Aug", "Sep", "Oct"],
-    image: img("andes-and-amazon", "Illustration: mountains falling into rainforest"),
+    image: photo("amazon-river"),
     itinerary: [
       d(1, "Arrive in Lima", "Transfer to Miraflores and an easy evening.", LIMA, { transport: ["flight", "road"], stay: "casa-brisa-miraflores" }),
       d(2, "Lima", "The historic centre, a ceviche lunch and Barranco at dusk.", LIMA, { transport: ["road"], stay: "casa-brisa-miraflores" }),
@@ -163,7 +163,7 @@ export const journeys: Journey[] = [
     howYouTravel: ["Flight: Lima → Arequipa", "Private road: Arequipa → Colca → Puno", "Boats on Lake Titicaca", "Flight: Juliaca → Lima (or continue to Cusco by train or road)"],
     experiences: ["colca-canyon", "lake-titicaca", "homestays", "weaving-cooperatives"],
     bestMonths: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"],
-    image: img("titicaca-and-the-high-plains", "Illustration: a reed boat on Lake Titicaca"),
+    image: photo("amantani"),
     itinerary: [
       d(1, "Arrive in Arequipa", "Fly from Lima and settle into the white city. A good first step up.", ["arequipa-colca", "Arequipa", 2335], { transport: ["flight", "road"], tip: "take-it-easy", stay: "patio-sillar" }),
       d(2, "Arequipa", "Santa Catalina Monastery and a long picantería lunch.", ["arequipa-colca", "Arequipa", 2335], { transport: [], stay: "patio-sillar" }),
@@ -190,7 +190,7 @@ export const journeys: Journey[] = [
     machuPicchu: { route: "train", note: "Timed entry on day 7." },
     experiences: ["lima-food-scene", "markets", "sacred-valley", "machu-picchu"],
     bestMonths: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"],
-    image: img("peru-for-food-lovers", "Illustration: a table of Peruvian dishes"),
+    image: photo("ceviche"),
     itinerary: [
       d(1, "Arrive in Lima", "A welcome pisco sour and an early night.", LIMA, { transport: ["flight", "road"], stay: "casa-brisa-miraflores" }),
       d(2, "Market & ceviche", "Surquillo market with a chef, a ceviche class and a cevichería lunch.", LIMA, { transport: ["road"], stay: "casa-brisa-miraflores" }),
@@ -219,7 +219,7 @@ export const journeys: Journey[] = [
     howYouTravel: ["Private road: Lima → Huaraz → Trujillo → Chiclayo → Chachapoyas", "Flight: Jaén → Lima (check current schedules)", "Some long road days: we split them with good stops"],
     experiences: ["cordillera-blanca"],
     bestMonths: ["May", "Jun", "Jul", "Aug", "Sep"],
-    image: img("the-wild-north", "Illustration: a turquoise lake below glaciers"),
+    image: photo("laguna-paron"),
     itinerary: [
       d(1, "Arrive in Lima", "Transfer to your hotel and rest.", LIMA, { transport: ["flight", "road"], stay: "casa-brisa-miraflores" }),
       d(2, "Drive to Huaraz", "Up the coast, then into the mountains over a pass near 4,100 metres.", ["huaraz", "Huaraz", 3050], { transport: ["road"], maxAltitudeM: 4100, maxLabel: "Conococha pass", tip: "take-it-easy", stay: "refugio-huascaran" }),
@@ -251,7 +251,7 @@ export const journeys: Journey[] = [
     machuPicchu: { route: "train", note: "Timed entry on day 7. Children need their own tickets and ID or passports." },
     experiences: ["sacred-valley", "machu-picchu", "amazon-lodges", "weaving-cooperatives"],
     bestMonths: ["Jun", "Jul", "Aug"],
-    image: img("peru-with-kids", "Illustration: a family watching sea lions from a boat"),
+    image: photo("llamas"),
     itinerary: [
       d(1, "Arrive in Lima", "A short transfer and an early night.", LIMA, { transport: ["flight", "road"], stay: "casa-brisa-miraflores" }),
       d(2, "Drive to Paracas", "Down the desert coast to the bay, with a pool waiting.", ["paracas", "Paracas", 5], { transport: ["road"], stay: "dunas-paracas" }),

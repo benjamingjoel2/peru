@@ -1,6 +1,6 @@
+import { photo } from "./photos";
 import type { Experience, ExperienceGroup, ExperienceGroupId } from "./types";
 
-const img = (slug: string, alt: string) => ({ src: `/images/experiences/${slug}.svg`, alt });
 
 export const experienceGroups: ExperienceGroup[] = [
   {
@@ -9,7 +9,7 @@ export const experienceGroups: ExperienceGroup[] = [
     title: "Icons of *Peru*",
     intro:
       "The places that made you want to come. We get you there at the right hour, in the right order and at the right altitude, so you can stand in front of them and simply look.",
-    image: { src: "/images/experiences/group-icons.svg", alt: "Illustration: Machu Picchu's ridge in morning cloud" },
+    image: photo("machu-picchu-sunrise"),
   },
   {
     id: "living-culture",
@@ -17,7 +17,7 @@ export const experienceGroups: ExperienceGroup[] = [
     title: "Living *Culture*",
     intro:
       "Peru isn't a museum. It's weavers who still dye with cochineal, farmers who grow potatoes their grandparents grew, and cooks who've made Lima a place people fly to for dinner. Spend time with them, on their terms.",
-    image: { src: "/images/experiences/group-culture.svg", alt: "Illustration: woven textiles drying in a courtyard" },
+    image: photo("weaving"),
   },
   {
     id: "peru-unplugged",
@@ -25,7 +25,7 @@ export const experienceGroups: ExperienceGroup[] = [
     title: "Peru *Unplugged*",
     intro:
       "Trails, passes, glaciers and rivers. These are the days you'll talk about most, and the ones where good pacing matters most. We'll make sure you're ready before the trail starts climbing.",
-    image: { src: "/images/experiences/group-unplugged.svg", alt: "Illustration: a trekker on a high Andean pass" },
+    image: photo("trekker"),
   },
 ];
 
@@ -44,7 +44,7 @@ export const experiences: Experience[] = [
     effort: "moderate",
     altitudeM: 2430,
     destinations: ["machu-picchu"],
-    image: img("machu-picchu", "Illustration: terraces and temples on a green ridge"),
+    image: photo("machu-picchu-window"),
   },
   {
     slug: "sacred-valley",
@@ -59,7 +59,7 @@ export const experiences: Experience[] = [
     effort: "gentle",
     altitudeM: 2870,
     destinations: ["sacred-valley"],
-    image: img("sacred-valley", "Illustration: circular Inca terraces at Moray"),
+    image: photo("moray"),
   },
   {
     slug: "lake-titicaca",
@@ -74,7 +74,7 @@ export const experiences: Experience[] = [
     effort: "gentle",
     altitudeM: 3830,
     destinations: ["lake-titicaca"],
-    image: img("lake-titicaca", "Illustration: a reed boat on a blue lake"),
+    image: photo("uros-boat"),
   },
   {
     slug: "colca-canyon",
@@ -89,7 +89,7 @@ export const experiences: Experience[] = [
     effort: "moderate",
     altitudeM: 3450,
     destinations: ["arequipa-colca"],
-    image: img("colca-canyon", "Illustration: a condor over a deep canyon"),
+    image: photo("colca"),
   },
   {
     slug: "nazca-lines",
@@ -104,7 +104,7 @@ export const experiences: Experience[] = [
     effort: "gentle",
     altitudeM: 520,
     destinations: ["nazca-lines"],
-    image: img("nazca-lines", "Illustration: a small plane above desert lines"),
+    image: photo("nazca-desert"),
   },
 
   // Living Culture
@@ -121,7 +121,7 @@ export const experiences: Experience[] = [
     effort: "gentle",
     altitudeM: 3700,
     destinations: ["sacred-valley", "lake-titicaca"],
-    image: img("weaving-cooperatives", "Illustration: a backstrap loom with striped cloth"),
+    image: photo("weaving-hands"),
   },
   {
     slug: "homestays",
@@ -136,7 +136,7 @@ export const experiences: Experience[] = [
     effort: "gentle",
     altitudeM: 3850,
     destinations: ["lake-titicaca", "sacred-valley"],
-    image: img("homestays", "Illustration: an adobe house at dusk with smoke from the chimney"),
+    image: photo("amantani"),
   },
   {
     slug: "markets",
@@ -150,7 +150,7 @@ export const experiences: Experience[] = [
     whoFor: "Food lovers and families.",
     effort: "gentle",
     destinations: ["cusco", "sacred-valley", "iquitos", "lima"],
-    image: img("markets", "Illustration: market stalls piled with potatoes and fruit"),
+    image: photo("market"),
   },
   {
     slug: "lima-food-scene",
@@ -165,7 +165,7 @@ export const experiences: Experience[] = [
     effort: "gentle",
     altitudeM: 150,
     destinations: ["lima"],
-    image: img("lima-food-scene", "Illustration: a plate of ceviche with corn and sweet potato"),
+    image: photo("pisco-sour"),
   },
   {
     slug: "festivals",
@@ -179,7 +179,7 @@ export const experiences: Experience[] = [
     whoFor: "Travellers who like crowds, music and colour.",
     effort: "gentle",
     destinations: ["cusco", "lake-titicaca"],
-    image: img("festivals", "Illustration: festival dancers in bright costumes"),
+    image: photo("festival"),
   },
 
   // Peru Unplugged
@@ -196,7 +196,7 @@ export const experiences: Experience[] = [
     effort: "demanding",
     altitudeM: 4215,
     destinations: ["inca-trail-salkantay", "machu-picchu"],
-    image: img("inca-trail", "Illustration: stone steps winding over a mountain pass"),
+    image: photo("inca-trail-hikers"),
   },
   {
     slug: "salkantay",
@@ -211,7 +211,7 @@ export const experiences: Experience[] = [
     effort: "demanding",
     altitudeM: 4600,
     destinations: ["inca-trail-salkantay", "machu-picchu"],
-    image: img("salkantay", "Illustration: a glacier peak above a high trail"),
+    image: photo("humantay-shore"),
   },
   {
     slug: "rainbow-mountain",
@@ -226,7 +226,7 @@ export const experiences: Experience[] = [
     effort: "demanding",
     altitudeM: 5000,
     destinations: ["rainbow-mountain"],
-    image: img("rainbow-mountain", "Illustration: striped mineral slopes under a blue sky"),
+    image: photo("rainbow-mountain-stripes"),
   },
   {
     slug: "cordillera-blanca",
@@ -241,7 +241,7 @@ export const experiences: Experience[] = [
     effort: "demanding",
     altitudeM: 4600,
     destinations: ["huaraz"],
-    image: img("cordillera-blanca", "Illustration: a turquoise lake below a glacier"),
+    image: photo("laguna-69-turquoise"),
   },
   {
     slug: "amazon-lodges",
@@ -256,7 +256,7 @@ export const experiences: Experience[] = [
     effort: "gentle",
     altitudeM: 200,
     destinations: ["tambopata", "manu", "iquitos"],
-    image: img("amazon-lodges", "Illustration: a lodge in the rainforest at dusk"),
+    image: photo("macaws-flock"),
   },
 ];
 

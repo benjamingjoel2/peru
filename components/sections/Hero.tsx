@@ -8,9 +8,9 @@ import { stoneShapes } from "@/components/ui/StoneMask";
 import { LinkButton } from "@/components/ui/Button";
 
 const slides = [
-  { src: "/images/placeholders/hero-1.svg", alt: "Illustration: Machu Picchu's terraces in morning cloud", caption: "Machu Picchu · ~2,430 m" },
-  { src: "/images/placeholders/hero-2.svg", alt: "Illustration: a reed boat on Lake Titicaca below snowy peaks", caption: "Lake Titicaca · ~3,800 m" },
-  { src: "/images/placeholders/hero-3.svg", alt: "Illustration: a boat on an Amazon river through rainforest", caption: "Tambopata · ~200 m" },
+  { src: "/photos/machu-picchu.jpg", alt: "Machu Picchu among misty mountains", caption: "Machu Picchu · ~2,430 m" },
+  { src: "/photos/uros-boat.jpg", alt: "A reed boat at the Uros floating islands on Lake Titicaca", caption: "Lake Titicaca · ~3,800 m" },
+  { src: "/photos/macaws-flock.jpg", alt: "Scarlet macaws in the Amazon canopy", caption: "Tambopata · ~200 m" },
 ];
 
 export function Hero() {

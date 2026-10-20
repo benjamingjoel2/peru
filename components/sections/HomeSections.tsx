@@ -224,7 +224,7 @@ export function FaqSection({ limit }: { limit?: number }) {
 export function CtaBand({ title = "Ready when *you* are", text = "Tell us when you'd like to go and what you'd love to see. Your Peru Specialist will come back with ideas, honest advice on altitude and timing, and a clear price.", journey }: { title?: string; text?: string; journey?: string }) {
   return (
     <section className="on-dark relative overflow-hidden bg-cochineal py-16">
-      <Image src="/images/places/zone-cusco.svg" alt="" fill sizes="100vw" className="object-cover opacity-10 mix-blend-multiply" />
+      <Image src="/photos/pisac.jpg" alt="" fill sizes="100vw" className="object-cover opacity-10 mix-blend-multiply" />
       <div className="container-x relative flex flex-wrap items-center justify-between gap-8">
         <div className="max-w-2xl">
           <Heading text={title} size="lg" />

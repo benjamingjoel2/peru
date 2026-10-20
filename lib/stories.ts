@@ -36,7 +36,7 @@ export function getStory(slug: string): { meta: StoryMeta; content: string } | n
         excerpt: data.excerpt,
         date: data.date,
         category: data.category,
-        image: data.image ?? `/images/stories/${slug}.svg`,
+        image: data.image,
         imageAlt: data.imageAlt ?? "",
         related: data.related ?? [],
         readingMinutes: Math.max(2, Math.round(words / 220)),

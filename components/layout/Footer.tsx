@@ -84,6 +84,7 @@ export function Footer() {
             <li><Link href="/legal/privacy" className="hover:text-mustard">Privacy policy</Link></li>
             <li><Link href="/legal/terms" className="hover:text-mustard">Terms &amp; booking conditions</Link></li>
             <li><Link href="/legal/cookies" className="hover:text-mustard">Cookies</Link></li>
+            <li><Link href="/credits" className="hover:text-mustard">Photo credits</Link></li>
           </ul>
         </div>
       </div>

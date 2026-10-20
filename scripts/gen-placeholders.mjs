@@ -1,5 +1,5 @@
-// Generates original, stylised placeholder artwork (SVG) for every image slot.
-// Replace with real photography later: data records point at these paths.
+// Generates illustrated placeholder portraits for the team until real team photos exist.
+// (Destination, journey and stay imagery uses real photos in public/photos.)
 // Run: node scripts/gen-placeholders.mjs
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -227,42 +227,6 @@ function write(rel, scene, seed = rel, label = "Placeholder illustration") {
   writeFileSync(p, render(scene, seed, label));
 }
 
-// Places
-const places = {
-  "zone-coast": "coast", "zone-cusco": "valley", "zone-southern-andes": "lake", "zone-amazon": "river", "zone-north": "glacier",
-  lima: "city", paracas: "coast", huacachina: "dunes", "nazca-lines": "nazca", cusco: "wall", "sacred-valley": "valley", "machu-picchu": "ruins",
-  "inca-trail-salkantay": "peaks", "rainbow-mountain": "canyon", "arequipa-colca": "volcano", "lake-titicaca": "lake", tambopata: "jungle",
-  iquitos: "river", manu: "cloudforest", huaraz: "glacier", "chachapoyas-kuelap": "cloudforest", trujillo: "adobe", mancora: "beach",
-};
-for (const [slug, scene] of Object.entries(places)) write(`places/${slug}.svg`, scene);
+for (const slug of ["specialist-1", "specialist-2", "specialist-3", "guide-1", "guide-2"]) write(`team/${slug}.svg`, "portrait", `t-${slug}`, "Placeholder portrait");
 
-const journeys = {
-  "first-peru-done-right": "ruins", "the-classic-inca-trail": "peaks", "salkantay-to-machu-picchu": "glacier", "andes-and-amazon": "river",
-  "titicaca-and-the-high-plains": "lake", "peru-for-food-lovers": "food", "the-wild-north": "glacier", "peru-with-kids": "coast",
-};
-for (const [slug, scene] of Object.entries(journeys)) write(`journeys/${slug}.svg`, scene, `j-${slug}`);
-
-const experiences = {
-  "group-icons": "ruins", "group-culture": "textile", "group-unplugged": "peaks",
-  "machu-picchu": "ruins", "sacred-valley": "valley", "lake-titicaca": "lake", "colca-canyon": "canyon", "nazca-lines": "nazca",
-  "weaving-cooperatives": "textile", homestays: "valley", markets: "food", "lima-food-scene": "food", festivals: "textile",
-  "inca-trail": "peaks", salkantay: "glacier", "rainbow-mountain": "canyon", "cordillera-blanca": "glacier", "amazon-lodges": "jungle",
-};
-for (const [slug, scene] of Object.entries(experiences)) write(`experiences/${slug}.svg`, scene, `e-${slug}`);
-
-const stays = {
-  "casa-brisa-miraflores": "city", "dunas-paracas": "coast", "hacienda-tres-piedras": "valley", "casa-muro-inca": "wall", "posada-del-rio": "cloudforest",
-  "patio-sillar": "volcano", "mirador-del-condor": "canyon", "totora-lodge": "lake", "rio-madre-ecolodge": "jungle", "refugio-huascaran": "peaks",
-  "casa-nube": "cloudforest", "casa-adobe-trujillo": "adobe",
-};
-for (const [slug, scene] of Object.entries(stays)) write(`stays/${slug}.svg`, scene, `s-${slug}`);
-
-for (const slug of ["specialist-1", "specialist-2", "specialist-3", "guide-1", "guide-2", "values-specialist"]) write(`team/${slug}.svg`, "portrait", `t-${slug}`, "Placeholder portrait");
-
-for (const [slug, scene] of Object.entries({ coast: "coast", andes: "peaks", amazon: "river" })) write(`placeholders/film-${slug}.svg`, scene, `film-${slug}`);
-for (const [slug, scene] of Object.entries({ "hero-1": "ruins", "hero-2": "lake", "hero-3": "river" })) write(`placeholders/${slug}.svg`, scene, slug);
-
-const stories = { "how-to-beat-altitude-in-cusco": "wall", "every-way-to-reach-machu-picchu": "ruins", "what-to-eat-in-peru": "food", "peru-beyond-machu-picchu": "glacier" };
-for (const [slug, scene] of Object.entries(stories)) write(`stories/${slug}.svg`, scene, `st-${slug}`);
-
-console.log("Placeholder artwork generated in public/images");
+console.log("Team placeholder portraits generated in public/images/team");

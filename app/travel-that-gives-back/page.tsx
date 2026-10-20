@@ -1,4 +1,5 @@
 import { PageHero } from "@/components/sections/PageHero";
+import { photo } from "@/data/photos";
 import { Heading } from "@/components/ui/Heading";
 import { StoneMask } from "@/components/ui/StoneMask";
 import { PlaceholderBadge } from "@/components/ui/Badges";
@@ -21,7 +22,7 @@ export default function GivesBackPage() {
         eyebrow="Ayni"
         title="Travel that *gives back*"
         intro="In the Andes, ayni means reciprocity: what you receive, you return. It's how neighbours share the harvest, and it's how we want you to travel, with the people who host you better off for your visit."
-        image={{ src: "/images/experiences/weaving-cooperatives.svg", alt: "Illustration: striped woven cloth" }}
+        image={photo("weaving")}
       />
       <section aria-labelledby="principles-title" className="container-x py-16">
         <Heading id="principles-title" eyebrow="How we work" text="Four *promises*" size="md" />
@@ -38,7 +39,7 @@ export default function GivesBackPage() {
 
       <section aria-labelledby="cbt-title" className="bg-cream-deep py-16">
         <div className="container-x grid items-center gap-12 lg:grid-cols-2">
-          <StoneMask src="/images/experiences/homestays.svg" alt="Illustration: an Andean village with terraced fields" shape={2} className="aspect-[4/3]" />
+          <StoneMask src={photo("ausangate").src} alt={photo("ausangate").alt} shape={2} className="aspect-[4/3]" />
           <div>
             <Heading id="cbt-title" eyebrow="Community-based tourism" text="Visits run *by communities*" size="md" />
             <div className="mt-4 space-y-4 text-stone-dark">

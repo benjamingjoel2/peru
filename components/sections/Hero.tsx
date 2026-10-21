@@ -37,7 +37,7 @@ export function Hero() {
           aria-roledescription="slide"
           aria-label={`${n + 1} of ${slides.length}: ${s.caption}`}
         >
-          <Image src={s.src} alt={s.alt} fill priority={n === 0} sizes="100vw" className="object-cover" />
+          <Image src={s.src} alt={s.alt} fill {...(n === 0 ? ({ loading: "eager", fetchPriority: "high" } as const) : {})} sizes="100vw" className="object-cover" />
         </div>
       ))}
       <div aria-hidden className="absolute inset-0 z-[2] bg-gradient-to-t from-indigo-deep/85 via-indigo-deep/10 to-indigo-deep/30" />

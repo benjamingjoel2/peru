@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { foodBands, foods } from "@/data/foods";
 import type { Food, FoodBand } from "@/data/types";
 import { destinationBySlug } from "@/data/destinations";
@@ -29,7 +28,6 @@ export function FoodMap() {
   const [band, setBand] = useState<FoodBand>("pacific");
   const [selected, setSelected] = useState<string | null>(null);
   const [kinds, setKinds] = useState<Food["kind"][]>(["dish", "ingredient", "drink", "experience"]);
-  const reduce = useReducedMotion();
   const btns = useRef<(HTMLButtonElement | null)[]>([]);
 
   const list = useMemo(() => foods.filter((f) => f.band === band && kinds.includes(f.kind)), [band, kinds]);
@@ -140,9 +138,8 @@ export function FoodMap() {
           </ul>
         </div>
         <div aria-live="polite" className="min-h-48 bg-cream-deep/60 p-6">
-          <AnimatePresence mode="wait">
             {food ? (
-              <motion.div key={food.id} initial={reduce ? false : { opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+              <div key={food.id} className="fade-down">
                 <p className="eyebrow text-cochineal">{kindLabel[food.kind]}</p>
                 <h4 className="mt-1 font-display text-2xl text-indigo">{food.name}</h4>
                 <p className="mt-2 text-stone-dark">{food.description}</p>
@@ -159,13 +156,12 @@ export function FoodMap() {
                 {food.experience && experienceBySlug(food.experience) && (
                   <p className="mt-2 text-sm"><strong>Experience: </strong><Link href={`/experiences/${food.experience}`} className="text-cochineal underline">{experienceBySlug(food.experience)!.name}</Link></p>
                 )}
-              </motion.div>
+              </div>
             ) : (
-              <motion.p key="hint" initial={false} animate={{ opacity: 1 }} className="text-stone-dark">
+              <p key="hint" className="text-stone-dark">
                 Choose a dish, ingredient or drink to see where to try it and which journeys include it.
-              </motion.p>
+              </p>
             )}
-          </AnimatePresence>
         </div>
       </div>
     </div>

@@ -1,13 +1,11 @@
 "use client";
 
 import { useId, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 export type AccordionItem = { id: string; title: React.ReactNode; content: React.ReactNode };
 
 export function Accordion({ items, defaultOpen }: { items: AccordionItem[]; defaultOpen?: string }) {
   const [open, setOpen] = useState<string | null>(defaultOpen ?? null);
-  const reduce = useReducedMotion();
   const base = useId();
 
   return (
@@ -36,22 +34,11 @@ export function Accordion({ items, defaultOpen }: { items: AccordionItem[]; defa
                 </span>
               </button>
             </h3>
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={btnId}
-                  initial={reduce ? false : { height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={reduce ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="overflow-hidden"
-                >
-                  <div className="pb-6 pr-12 text-stone-dark">{item.content}</div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {isOpen && (
+              <div id={panelId} role="region" aria-labelledby={btnId} className="fade-down">
+                <div className="pb-6 pr-12 text-stone-dark">{item.content}</div>
+              </div>
+            )}
           </div>
         );
       })}

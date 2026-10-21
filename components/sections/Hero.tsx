@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { StoneMark } from "@/components/ui/Stone";
 
 const slides = [
@@ -17,33 +17,33 @@ export function Hero() {
   const reduce = useReducedMotion();
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
+  // Slides mount the first time they're shown, so only the first photo loads up front
+  const [seen, setSeen] = useState<number[]>([0]);
+  const show = (n: number) => { setI(n); setSeen((s) => (s.includes(n) ? s : [...s, n])); };
 
   useEffect(() => {
     if (reduce || paused) return;
-    const t = setInterval(() => setI((n) => (n + 1) % slides.length), 6500);
+    const t = setInterval(() => setI((n) => { const next = (n + 1) % slides.length; setSeen((s) => (s.includes(next) ? s : [...s, next])); return next; }), 6500);
     return () => clearInterval(t);
   }, [reduce, paused]);
 
   return (
     <section aria-label="Peru, done right" aria-roledescription="carousel" className="on-dark relative h-[calc(100svh-2.5rem)] min-h-[560px] overflow-hidden bg-indigo-deep">
-      <AnimatePresence initial={false}>
-        <motion.div
-          key={i}
-          className="absolute inset-0"
-          initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 1.08, y: -20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: reduce ? 0.01 : 1.4, ease: [0.22, 1, 0.36, 1] }}
+      {slides.map((s, n) => seen.includes(n) && (
+        <div
+          key={s.src}
+          className={`absolute inset-0 ${i === n ? "z-[1]" : "z-0"} ${i === n && seen.length > 1 ? "hero-in" : ""}`}
+          aria-hidden={i !== n}
           aria-roledescription="slide"
-          aria-label={`${i + 1} of ${slides.length}: ${slides[i].caption}`}
+          aria-label={`${n + 1} of ${slides.length}: ${s.caption}`}
         >
-          <Image src={slides[i].src} alt={slides[i].alt} fill priority={i === 0} sizes="100vw" className="object-cover" />
-        </motion.div>
-      </AnimatePresence>
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-indigo-deep/85 via-indigo-deep/10 to-indigo-deep/30" />
+          <Image src={s.src} alt={s.alt} fill priority={n === 0} sizes="100vw" className="object-cover" />
+        </div>
+      ))}
+      <div aria-hidden className="absolute inset-0 z-[2] bg-gradient-to-t from-indigo-deep/85 via-indigo-deep/10 to-indigo-deep/30" />
 
       {/* Brand line split around a centre mark, like a wordmark along the bottom edge */}
-      <div className="container-x absolute inset-x-0 bottom-0 pb-8 sm:pb-12">
+      <div className="container-x absolute inset-x-0 bottom-0 z-[3] pb-8 sm:pb-12">
         <div aria-hidden className="woven-stripe-thin mb-5 w-1/2 opacity-90 sm:mb-8" />
         <div className="grid grid-cols-1 items-end gap-4 md:grid-cols-[auto_1fr_auto]">
           <p className="font-display text-[clamp(3rem,11vw,9.5rem)] font-light leading-[0.85] text-cream">Peru,</p>
@@ -57,7 +57,7 @@ export function Hero() {
           <p aria-live="polite">{slides[i].caption} <span className="text-xs">(verify)</span></p>
           <div className="flex items-center gap-1">
             {slides.map((s, n) => (
-              <button key={s.src} type="button" onClick={() => setI(n)} aria-label={`Show slide ${n + 1}: ${s.caption}`} aria-current={i === n} className="grid h-6 min-w-6 place-items-center">
+              <button key={s.src} type="button" onClick={() => show(n)} aria-label={`Show slide ${n + 1}: ${s.caption}`} aria-current={i === n} className="grid h-6 min-w-6 place-items-center">
                 <span aria-hidden className={`block h-0.5 transition-all ${i === n ? "w-10 bg-cream" : "w-5 bg-cream/50"}`} />
               </button>
             ))}

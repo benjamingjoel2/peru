@@ -9,8 +9,8 @@ import { CurrencyProvider } from "@/lib/currency";
 import { EnquireProvider } from "@/components/enquire/EnquireProvider";
 import { JsonLd, organizationLd } from "@/lib/seo";
 
-const serif = Crimson_Pro({ subsets: ["latin"], weight: ["300", "400", "500"], style: ["normal", "italic"], variable: "--font-serif", display: "swap" });
-const grotesk = Hanken_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-grotesk", display: "swap" });
+const serif = Crimson_Pro({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-serif", display: "swap" });
+const grotesk = Hanken_Grotesk({ subsets: ["latin"], variable: "--font-grotesk", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

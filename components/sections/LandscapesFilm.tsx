@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useOnScreen } from "@/lib/useInViewOnce";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { media } from "@/config/media";
 import { PlaceholderBadge } from "@/components/ui/Badges";
 import { photo } from "@/data/photos";
@@ -32,16 +33,45 @@ export function LandscapesFilm() {
   const reduce = useReducedMotion();
   const [playing, setPlaying] = useState(true);
   const [i, setI] = useState(0);
+  const [prev, setPrev] = useState(-1);
+  const go = (n: number) => { setPrev(i); setI(n); };
   const video = useRef<HTMLVideoElement>(null);
   const section = useRef<HTMLElement>(null);
-  const active = playing && !reduce;
+  // Only animate while the film is on screen
+  const onScreen = useOnScreen(section, "200px");
+  const active = playing && !reduce && onScreen;
 
-  const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end end"] });
-  const inset = useTransform(scrollYProgress, [0, 0.55], ["27%", "0%"]);
-  const insetY = useTransform(scrollYProgress, [0, 0.55], ["6%", "0%"]);
-  const tilesOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
-  const tilesShiftL = useTransform(scrollYProgress, [0, 0.55], ["0%", "-30%"]);
-  const tilesShiftR = useTransform(scrollYProgress, [0, 0.55], ["0%", "30%"]);
+  // Scroll-linked mosaic: written straight to the DOM in a rAF, so scrolling never re-renders React
+  const filmBox = useRef<HTMLDivElement>(null);
+  const tilesL = useRef<HTMLDivElement>(null);
+  const tilesR = useRef<HTMLDivElement>(null);
+  const ctrlBox = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = section.current;
+    if (!el || reduce || !onScreen) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const r = el.getBoundingClientRect();
+      const p = Math.min(Math.max(-r.top / Math.max(r.height - window.innerHeight, 1), 0), 1);
+      const grow = 1 - Math.min(p / 0.55, 1);
+      const fade = 1 - Math.min(p / 0.45, 1);
+      if (filmBox.current) filmBox.current.style.clipPath = `inset(${6 * grow}% ${27 * grow}%)`;
+      // The caption sits inside the visible window (a small absolutely positioned box, so layout stays cheap)
+      if (ctrlBox.current) Object.assign(ctrlBox.current.style, { left: `${27 * grow}%`, right: `${27 * grow}%`, bottom: `${6 * grow}%` });
+      if (tilesL.current) Object.assign(tilesL.current.style, { opacity: `${fade}`, transform: `translateX(${-30 * (1 - grow)}%)` });
+      if (tilesR.current) Object.assign(tilesR.current.style, { opacity: `${fade}`, transform: `translateX(${30 * (1 - grow)}%)` });
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [reduce, onScreen]);
 
   useEffect(() => {
     if (media.filmSrc) {
@@ -50,7 +80,7 @@ export function LandscapesFilm() {
       return;
     }
     if (!active) return;
-    const t = setInterval(() => setI((n) => (n + 1) % frames.length), 4500);
+    const t = setInterval(() => setI((n) => { setPrev(n); return (n + 1) % frames.length; }), 4500);
     return () => clearInterval(t);
   }, [active]);
 
@@ -59,18 +89,16 @@ export function LandscapesFilm() {
       {media.filmSrc ? (
         <video ref={video} className="absolute inset-0 h-full w-full object-cover" src={media.filmSrc} poster={media.filmPoster} muted loop playsInline autoPlay={active} aria-hidden />
       ) : (
-        <AnimatePresence initial={false}>
-          <motion.div key={i} className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduce ? 0.01 : 1.4 }}>
-            <motion.div
-              className="absolute inset-[-4%]"
-              initial={{ scale: 1.08, x: "-2%" }}
-              animate={active ? { scale: 1, x: "2%" } : { scale: 1.04, x: 0 }}
-              transition={{ duration: 6, ease: "linear" }}
-            >
-              <Image src={frames[i].src} alt="" fill sizes="100vw" className="object-cover" />
-            </motion.div>
-          </motion.div>
-        </AnimatePresence>
+        // Stills stacked and cross-faded with CSS; the drift is a compositor-only keyframe animation
+        <div className="absolute inset-0" data-paused={active ? undefined : ""}>
+          {frames.map((f, n) => (
+            <div key={f.src} className={`absolute inset-0 transition-opacity duration-[1400ms] ${i === n ? "opacity-100" : "opacity-0"}`}>
+              <div className={`absolute inset-[-4%] ${i === n || prev === n ? "ken-burns" : ""}`}>
+                <Image src={f.src} alt="" fill sizes="100vw" className="object-cover" />
+              </div>
+            </div>
+          ))}
+        </div>
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-indigo-deep/85 via-indigo-deep/10 to-transparent" />
     </>
@@ -88,7 +116,7 @@ export function LandscapesFilm() {
             <li key={f.label}>
               <button
                 type="button"
-                onClick={() => setI(n)}
+                onClick={() => go(n)}
                 aria-current={!media.filmSrc && i === n}
                 className={`rounded-sm px-3 py-1.5 text-xs font-bold uppercase tracking-wider ${!media.filmSrc && i === n ? "bg-mustard text-indigo" : "bg-cream/15 text-cream hover:bg-cream/25"}`}
               >
@@ -125,18 +153,18 @@ export function LandscapesFilm() {
     <section ref={section} aria-label="Landscapes film: from the coast to the Andes to the Amazon" className="relative bg-cream md:h-[220vh]">
       <div className="md:hidden">{staticFilm}</div>
       <div className="sticky top-0 hidden h-screen overflow-hidden md:block">
-        <motion.div style={{ opacity: tilesOpacity, x: tilesShiftL }} className="absolute inset-y-[6%] left-[2%] flex w-[23%] flex-col gap-4">
+        <div ref={tilesL} className="absolute inset-y-[6%] left-[2%] flex w-[23%] flex-col gap-4">
           <Tile img={tiles[0]} className="flex-1" />
           <Tile img={tiles[1]} className="flex-[1.3]" />
-        </motion.div>
-        <motion.div style={{ opacity: tilesOpacity, x: tilesShiftR }} className="absolute inset-y-[6%] right-[2%] flex w-[23%] flex-col gap-4">
+        </div>
+        <div ref={tilesR} className="absolute inset-y-[6%] right-[2%] flex w-[23%] flex-col gap-4">
           <Tile img={tiles[2]} className="flex-[1.3]" />
           <Tile img={tiles[3]} className="flex-1" />
-        </motion.div>
-        <motion.div style={{ left: inset, right: inset, top: insetY, bottom: insetY }} className="absolute overflow-hidden bg-indigo-deep">
+        </div>
+        <div ref={filmBox} className="absolute inset-0 overflow-hidden bg-indigo-deep [clip-path:inset(6%_27%)]">
           {film}
-          {controls}
-        </motion.div>
+          <div ref={ctrlBox} className="absolute inset-x-[27%] bottom-[6%] top-0">{controls}</div>
+        </div>
       </div>
     </section>
   );

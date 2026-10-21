@@ -4,7 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
-import { SiteMenu } from "./SiteMenu";
+import dynamic from "next/dynamic";
+
+// The menu is only fetched and mounted the first time it opens
+const SiteMenu = dynamic(() => import("./SiteMenu").then((m) => m.SiteMenu), { ssr: false });
 import { useEnquire } from "@/components/enquire/EnquireProvider";
 
 const leftLinks = [
@@ -27,6 +30,7 @@ export function Header() {
   const overlay = pathname === "/";
   const [menu, setMenu] = useState<{ open: boolean; initial?: string }>({ open: false });
   const [scrolled, setScrolled] = useState(false);
+  const [menuLoaded, setMenuLoaded] = useState(false);
   const { openEnquire } = useEnquire();
 
   // eslint-disable-next-line react-hooks/set-state-in-effect -- close the menu on navigation
@@ -78,9 +82,9 @@ export function Header() {
           </button>
           <button
             type="button"
-            onClick={() => setMenu({ open: true })}
+            onClick={() => { setMenuLoaded(true); setMenu({ open: true }); }}
             aria-haspopup="dialog"
-            aria-controls="site-menu"
+            aria-controls={menuLoaded ? "site-menu" : undefined}
             aria-expanded={menu.open}
             className={`flex h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] ${transparent ? "text-cream" : "text-indigo"}`}
           >
@@ -93,7 +97,7 @@ export function Header() {
         </div>
       </nav>
       {!transparent && <div className="woven-stripe-thin" aria-hidden />}
-      <SiteMenu open={menu.open} initial={menu.initial} onClose={() => setMenu({ open: false })} />
+      {menuLoaded && <SiteMenu open={menu.open} initial={menu.initial} onClose={() => setMenu({ open: false })} />}
     </header>
   );
 }

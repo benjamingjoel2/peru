@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { zones } from "@/data/zones";
 import { destinations } from "@/data/destinations";
 import { Emph, Heading } from "@/components/ui/Heading";
@@ -14,7 +13,6 @@ import { monthNames } from "@/data/seasons";
 /** Vertical ARIA tabs (arrow keys, Home/End): areas on the left, two images, intro and a region carousel on the right. */
 export function DestinationTabs() {
   const [active, setActive] = useState(0);
-  const reduce = useReducedMotion();
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const z = zones[active];
   const regions = destinations.filter((d) => d.zone === z.id);
@@ -60,14 +58,7 @@ export function DestinationTabs() {
           </div>
 
           <div role="tabpanel" id={`panel-${z.id}`} aria-labelledby={`tab-${z.id}`} tabIndex={0} className="min-w-0">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={z.id}
-                initial={reduce ? false : { opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              >
+              <div key={z.id} className="fade-up">
                 <div className="grid grid-cols-[1.4fr_1fr] gap-4">
                   <StoneMask src={z.image.src} alt={z.image.alt} shape={active} className="aspect-[4/3]" settle={false} sizes="(min-width:1024px) 40vw, 60vw" />
                   {regions[1] && <StoneMask src={regions[1].image.src} alt={regions[1].image.alt} shape={active + 2} className="mt-10 aspect-[3/4]" settle={false} sizes="(min-width:1024px) 25vw, 40vw" />}
@@ -96,8 +87,7 @@ export function DestinationTabs() {
                   {regions.map((d, i) => <DestinationCard key={d.slug} d={d} shape={i} />)}
                 </Carousel>
                 <ArrowLink href={`/destinations/${z.id}`} className="mt-4">Explore {z.name}</ArrowLink>
-              </motion.div>
-            </AnimatePresence>
+              </div>
           </div>
         </div>
       </div>

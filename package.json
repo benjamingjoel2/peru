@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.9.0",
-    "framer-motion": "^12.43.0",
     "gray-matter": "^4.0.3",
     "next": "^16.4.2",
     "next-mdx-remote": "^6.0.0",

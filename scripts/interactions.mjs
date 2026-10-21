@@ -20,7 +20,7 @@ async function check(name, fn, viewport = { width: 1440, height: 900 }) {
 
 await check("Full-screen menu: three levels on desktop, closes with Esc", async (page) => {
   await page.goto(base + "/", { waitUntil: "networkidle" });
-  const toggle = page.locator('button[aria-controls="site-menu"]');
+  const toggle = page.locator("header button[aria-haspopup=dialog]");
   await toggle.focus();
   await page.keyboard.press("Enter");
   const menu = page.locator("dialog#site-menu[open]");

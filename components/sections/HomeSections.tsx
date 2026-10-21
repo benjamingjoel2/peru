@@ -29,7 +29,7 @@ export function JourneyCarouselSection({ title = "Journeys, *paced right*", eyeb
           Every journey is private and tailored to you. Each one shows its altitude, night by night, so you know exactly how it climbs.
         </p>
         <Carousel label="Journeys" dark arrows="sides" className="mt-10" itemClassName="w-[82%] sm:w-[46%] lg:w-[31%]">
-          {list.map((j, i) => <JourneyOverlayCard key={j.slug} j={j} priority={i === 0} />)}
+          {list.map((j, i) => <JourneyOverlayCard key={j.slug} j={j} />)}
         </Carousel>
         <div className="mt-10 text-center">
           <LinkButton href="/journeys" variant="light">Browse all journeys</LinkButton>

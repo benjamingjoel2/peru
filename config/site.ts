@@ -1,12 +1,15 @@
 // Brand settings. Everything marked PLACEHOLDER must be replaced before launch.
+
+// Brand sites live on subdomains of tourground.com (DNS on Vercel)
+const domain = "discoverperutravel.tourground.com";
+
 export const site = {
   name: "Discover Peru Travel",
   shortName: "Discover Peru",
   promise: "Peru, done right.",
-  // Set NEXT_PUBLIC_SITE_URL once the real domain is live; Vercel's production URL is used until then
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
+  domain,
+  // Canonical URL: the brand domain on Vercel, localhost in development (override with NEXT_PUBLIC_SITE_URL)
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL ? `https://${domain}` : "http://localhost:3000"),
   description:
     "Private, well-paced Peru journeys planned around altitude, distance and permits. Machu Picchu, the Andes, the Amazon and the coast, done right.",
   contact: {
@@ -14,7 +17,7 @@ export const site = {
     phoneHref: "tel:+5110000000",
     whatsapp: "+51 900 000 000", // PLACEHOLDER
     whatsappHref: "https://wa.me/51900000000",
-    email: "hello@discoverperutravel.example", // PLACEHOLDER
+    email: `hello@${domain}`,
     hours: "Mon–Fri, 09:00–18:00",
     timezone: "America/Lima",
     timezoneLabel: "Lima time",

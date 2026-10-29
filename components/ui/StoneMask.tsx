@@ -18,7 +18,7 @@ type Props = {
 };
 
 export function StoneMask({ src, alt, className = "", sizes = "(min-width: 1024px) 50vw, 100vw", priority, settle = true }: Props) {
-  const [ref, inView] = useInViewOnce<HTMLDivElement>();
+  const [ref, inView] = useInViewOnce<HTMLDivElement>(0, "0px 0px -60px 0px");
   return (
     <div ref={ref} data-in={inView || !settle ? "" : undefined} className={`reveal-settle relative overflow-hidden bg-stone-light ${className}`}>
       <div className="reveal-inner absolute inset-0">

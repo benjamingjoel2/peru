@@ -39,7 +39,7 @@ npm run test:e2e     # mega-menu, mobile drawer, enquire modal, gated PDF, altit
 
 | Name | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Canonical URL for SEO (falls back to the Vercel production URL) |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URL override (defaults to https://discoverperutravel.tourground.com on Vercel) |
 | `ITINERARY_TOKEN_SECRET` | Signs the gated itinerary PDF links. **Set this in production.** |
 
 ## Forms and leads

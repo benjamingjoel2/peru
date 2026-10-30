@@ -7,7 +7,7 @@ import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta({
   title: "Contact us",
-  description: "Talk to a Peru Specialist by phone, email or WhatsApp, or send an enquiry. Office hours in Lima time.",
+  description: "Write to a Peru Specialist or send an enquiry. We're based in Lima and reply in Lima office hours.",
   path: "/contact",
 });
 
@@ -16,17 +16,15 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
-        image={photo("sacsayhuaman")} crumbs={[{ name: "Contact", path: "/contact" }]} eyebrow="Contact us" title="Let's *talk* Peru" intro="Call, write or WhatsApp. We're in Lima, so we answer in Lima time." />
+        image={photo("sacsayhuaman")} crumbs={[{ name: "Contact", path: "/contact" }]} eyebrow="Contact us" title="Let's *talk* Peru" intro="Write to us or send an enquiry. We're in Lima, so we answer in Lima time." />
       <section className="container-x grid gap-12 py-14 lg:grid-cols-[1fr_1.6fr]">
         <aside className="space-y-8">
           <div>
             <h2 className="font-display text-2xl text-indigo">Get in touch</h2>
             <ul className="mt-4 space-y-3">
-              <li><span className="eyebrow block text-stone-dark">Phone</span><a href={c.phoneHref} className="text-lg font-semibold text-indigo hover:text-cochineal">{c.phone}</a></li>
               <li><span className="eyebrow block text-stone-dark">Email</span><a href={`mailto:${c.email}`} className="text-lg font-semibold text-indigo hover:text-cochineal">{c.email}</a></li>
-              <li><span className="eyebrow block text-stone-dark">WhatsApp</span><a href={c.whatsappHref} target="_blank" rel="noopener" className="text-lg font-semibold text-indigo hover:text-cochineal">{c.whatsapp}</a></li>
               <li><span className="eyebrow block text-stone-dark">Office hours</span><span className="text-lg">{c.hours} ({c.timezoneLabel})</span></li>
-              <li><span className="eyebrow block text-stone-dark">Office</span><span>{site.company.address}</span></li>
+              <li><span className="eyebrow block text-stone-dark">Office</span><span>{site.address.full}</span></li>
             </ul>
           </div>
           <div className="bg-cream-deep/60 p-6">

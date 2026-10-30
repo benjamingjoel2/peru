@@ -7,7 +7,6 @@ import { AltitudeSparkline } from "@/components/altitude/Sparkline";
 import { stoneShapes } from "@/components/ui/StoneMask";
 import { destinationBySlug } from "@/data/destinations";
 import type { StoryMeta } from "@/lib/stories";
-import { PlaceholderBadge } from "@/components/ui/Badges";
 
 export function JourneyCard({ j, dark = false, priority }: { j: Journey; dark?: boolean; priority?: boolean }) {
   return (
@@ -88,7 +87,7 @@ export function StayCard({ s }: { s: Stay }) {
   const d = destinationBySlug(s.destination);
   return (
     <article className="group relative">
-      <div className="relative aspect-[4/3] overflow-hidden" style={{ clipPath: stoneShapes[s.name.length % stoneShapes.length] }}>
+      <div className="relative aspect-[4/3] overflow-hidden" style={{ clipPath: stoneShapes[s.slug.length % stoneShapes.length] }}>
         <Image src={s.image.src} alt={s.image.alt} fill sizes="(min-width:1024px) 30vw, 80vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
       </div>
       <div className="mt-3">
@@ -97,7 +96,6 @@ export function StayCard({ s }: { s: Stay }) {
           <Link href={`/accommodation/${s.slug}`} className="after:absolute after:inset-0">{s.name}</Link>
         </h3>
         <p className="mt-1 text-sm text-stone-dark">{s.summary}</p>
-        <PlaceholderBadge label="Placeholder stay" className="mt-2" />
       </div>
     </article>
   );

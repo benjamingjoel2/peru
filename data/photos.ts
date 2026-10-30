@@ -2,7 +2,7 @@ import sources from "./photo-sources.json";
 import type { ImageRef } from "./types";
 
 // Free Unsplash License photos, downloaded to public/photos by scripts/fetch-photos.mjs.
-// Credits are shown on /credits.
+// Unsplash License: no attribution required.
 export interface PhotoSource {
   slot: string;
   alt: string;

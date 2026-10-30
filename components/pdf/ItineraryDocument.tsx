@@ -92,7 +92,7 @@ export function ItineraryDocument({ j }: { j: Journey }) {
   const mp = j.machuPicchu ? mpRoutes.find((r) => r.id === j.machuPicchu!.route) : null;
   const footer = (
     <View style={s.footer} fixed>
-      <Text>{site.name} · {site.contact.email} · {site.contact.phone}</Text>
+      <Text>{site.name} · {site.contact.email}</Text>
       <Text render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`} />
     </View>
   );
@@ -103,7 +103,7 @@ export function ItineraryDocument({ j }: { j: Journey }) {
         <Text style={s.eyebrow}>{site.name} · {j.days}-day journey</Text>
         <Title text={j.title} />
         <Text style={[s.p, { marginTop: 8, fontSize: 11 }]}>{j.intro}</Text>
-        <Text style={s.muted}>From US${j.fromPriceUSD.toLocaleString("en-US")} per person (placeholder price), excluding international flights.</Text>
+        <Text style={s.muted}>From US${j.fromPriceUSD.toLocaleString("en-US")} per person, excluding international flights.</Text>
 
         <Text style={s.h2}>Altitude profile</Text>
         <Text style={[s.muted, { marginBottom: 6, fontSize: 8.5 }]}>Where you sleep each night (dots, coloured by altitude band) and the day&apos;s high point (dashed). ! marks a pacing tip. All altitudes approximate (verify).</Text>
@@ -140,7 +140,7 @@ export function ItineraryDocument({ j }: { j: Journey }) {
                 <Text style={s.chip}>
                   Sleep: {day.sleepLabel}, about {day.sleepAltitudeM.toLocaleString("en-GB")} m ({bandFor(day.sleepAltitudeM).label.toLowerCase()})
                   {day.maxAltitudeM && day.maxAltitudeM > day.sleepAltitudeM ? `  ·  High point: about ${day.maxAltitudeM.toLocaleString("en-GB")} m${day.maxLabel ? ` (${day.maxLabel})` : ""}` : ""}
-                  {stay ? `  ·  Stay: ${stay.name} (placeholder)` : ""}
+                  {stay ? `  ·  Stay: ${stay.name}` : ""}
                   {day.transport.length ? `  ·  ${day.transport.join(", ")}` : ""}
                 </Text>
                 {day.tip ? <Text style={s.tip}>{tipText[day.tip]}</Text> : null}
@@ -158,7 +158,7 @@ export function ItineraryDocument({ j }: { j: Journey }) {
         <View wrap={false}>
           <Text style={s.h2}>Make it yours</Text>
           <Text style={s.p}>Every journey is private and tailored. Talk to a Peru Specialist about dates, hotels and pace.</Text>
-          <Text>{site.contact.phone}  ·  {site.contact.email}  ·  WhatsApp {site.contact.whatsapp}</Text>
+          <Text>{site.contact.email}  ·  {site.address.full}</Text>
           <Text style={s.muted}>{site.contact.hours} ({site.contact.timezoneLabel})</Text>
         </View>
         {footer}

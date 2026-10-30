@@ -103,7 +103,6 @@ export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: (
           <Logo light />
           <div className="space-y-2 text-sm">
             <p className="eyebrow text-mustard">Talk to a Peru Specialist</p>
-            <p><a href={site.contact.phoneHref} className="hover:text-mustard">{site.contact.phone}</a></p>
             <p><a href={`mailto:${site.contact.email}`} className="text-[0.8rem] [overflow-wrap:anywhere] hover:text-mustard">{site.contact.email}</a></p>
             <p>{site.contact.hours}<br />({site.contact.timezoneLabel})</p>
           </div>
@@ -164,7 +163,6 @@ export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: (
               </>
             )}
             <div className="mt-10 space-y-1 text-sm text-stone-dark">
-              <p><a className="font-semibold text-indigo" href={site.contact.phoneHref}>{site.contact.phone}</a></p>
               <p><a className="font-semibold text-indigo" href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
               <p>{site.contact.hours} ({site.contact.timezoneLabel})</p>
             </div>

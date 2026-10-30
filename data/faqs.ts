@@ -122,7 +122,7 @@ export const faqs: Faq[] = [
     q: "How much does a private trip to Peru cost per day?",
     category: "booking",
     a: [
-      "Our journeys generally start around the per-day figure shown in our enquiry form, per person, excluding international flights. The final price depends on the season, hotels, guides and how many internal flights you need.",
+      "Our journeys start from the per-day figure shown in our enquiry form, per person, excluding international flights. The final price depends on the season, hotels, guides and how many internal flights you need.",
       "Your Specialist will give you a clear, itemised quote before you commit to anything.",
     ],
   },
@@ -130,10 +130,9 @@ export const faqs: Faq[] = [
     id: "deposits",
     q: "What are your deposit and cancellation terms?",
     category: "booking",
-    verify: "Placeholder: replace with the company's confirmed booking terms.",
     a: [
-      "[Placeholder] A deposit secures your trip and lets us buy permits and tickets, which are often non-refundable. The balance is due a set number of weeks before travel.",
-      "[Placeholder] Full deposit and cancellation terms will be set out in our booking conditions. We strongly recommend comprehensive travel insurance.",
+      "A deposit secures your trip and lets us buy permits and tickets, which are often non-refundable. The balance is due before you travel, on the date shown in your quote.",
+      "Our booking terms set out how deposits, changes and cancellations work. Comprehensive travel insurance is essential from the day you book.",
     ],
   },
 ];

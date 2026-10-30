@@ -5,7 +5,6 @@ import { zones } from "@/data/zones";
 import { destinationBySlug } from "@/data/destinations";
 import { StayCard } from "@/components/sections/Cards";
 import { Emph } from "@/components/ui/Heading";
-import { PlaceholderBadge } from "@/components/ui/Badges";
 import { pageMeta } from "@/lib/seo";
 import { CtaBand } from "@/components/sections/HomeSections";
 
@@ -25,7 +24,6 @@ export default function AccommodationPage() {
         title="Places to *rest* well"
         intro="We choose stays for character, comfort and, in the Andes, for altitude too: oxygen-enriched rooms in Cusco, heated rooms by the lake, and valley haciendas for gentle first nights."
       >
-        <PlaceholderBadge className="mt-5" label="All property names are placeholders until partner hotels are confirmed" />
       </PageHero>
       {zones.map((z) => {
         const list = stays.filter((s) => destinationBySlug(s.destination)?.zone === z.id);

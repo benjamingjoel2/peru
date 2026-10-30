@@ -1,9 +1,7 @@
 import { Emph } from "@/components/ui/Heading";
 import { StoneMask } from "@/components/ui/StoneMask";
 import { LinkButton } from "@/components/ui/Button";
-import { PlaceholderBadge } from "@/components/ui/Badges";
 import { photo } from "@/data/photos";
-import { press } from "@/config/media";
 
 /** Left: eyebrow, H1, intro and a row of recognition badges. Right: a tall image. */
 export function IntroSection() {
@@ -31,14 +29,6 @@ export function IntroSection() {
             <LinkButton href="/journeys">Explore journeys</LinkButton>
             <LinkButton href="/start-planning" variant="ghost">Start planning</LinkButton>
           </div>
-          <ul className="mt-12 flex flex-wrap items-center gap-3" aria-label="Recognition">
-            {press.items.slice(0, 4).map((p) => (
-              <li key={p.name} className="grid h-14 w-28 place-items-center border-2 border-dashed border-stone-light px-2 text-center text-[0.6rem] font-bold uppercase tracking-wider text-stone-dark">
-                {p.name.replace(" placeholder", "")}
-              </li>
-            ))}
-            {press.isPlaceholder && <li><PlaceholderBadge label="Placeholder badges" /></li>}
-          </ul>
         </div>
         <StoneMask src={img.src} alt={img.alt} shape={2} className="aspect-[4/5] w-full lg:max-w-lg lg:justify-self-end" sizes="(min-width:1024px) 40vw, 100vw" />
       </div>

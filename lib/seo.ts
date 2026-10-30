@@ -33,9 +33,14 @@ export const organizationLd = () => ({
   url: site.url,
   slogan: site.promise,
   email: site.contact.email,
-  telephone: site.contact.phone,
   areaServed: { "@type": "Country", name: "Peru" },
-  address: { "@type": "PostalAddress", addressLocality: "Lima", addressCountry: "PE" },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: `${site.address.venue}, ${site.address.street}`,
+    addressLocality: `${site.address.locality}, ${site.address.city}`,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.countryCode,
+  },
   openingHours: "Mo-Fr 09:00-18:00",
 });
 
@@ -53,7 +58,7 @@ export const tripLd = (j: Journey) => ({
   url: `${site.url}/journeys/${j.slug}`,
   touristType: j.tags,
   provider: { "@type": "TravelAgency", name: site.name, url: site.url },
-  offers: { "@type": "Offer", priceCurrency: "USD", price: j.fromPriceUSD, description: "From price per person (placeholder)" },
+  offers: { "@type": "Offer", priceCurrency: "USD", price: j.fromPriceUSD, description: "From price per person" },
   itinerary: {
     "@type": "ItemList",
     itemListElement: j.itinerary.map((d) => ({ "@type": "ListItem", position: d.day, name: `Day ${d.day}: ${d.title}`, description: d.summary })),

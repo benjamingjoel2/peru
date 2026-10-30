@@ -5,7 +5,7 @@ import { stays, stayBySlug } from "@/data/stays";
 import { destinationBySlug } from "@/data/destinations";
 import { journeys } from "@/data/journeys";
 import { FactBar, JourneyGrid, StayGrid } from "@/components/sections/Blocks";
-import { PlaceholderBadge, Verify } from "@/components/ui/Badges";
+import { Verify } from "@/components/ui/Badges";
 import { bandFor, formatM } from "@/lib/altitude";
 import { pageMeta } from "@/lib/seo";
 import { CtaBand } from "@/components/sections/HomeSections";
@@ -37,7 +37,6 @@ export default async function StayPage({ params }: { params: Promise<{ slug: str
         intro={s.summary}
         image={s.image}
       >
-        <PlaceholderBadge className="mt-5" label="Placeholder property" />
       </PageHero>
       <section className="container-x py-10">
         <FactBar

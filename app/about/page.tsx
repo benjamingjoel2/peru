@@ -1,9 +1,8 @@
 import { PageHero } from "@/components/sections/PageHero";
 import { photo } from "@/data/photos";
 import { ValuesIntro } from "@/components/sections/ValuesIntro";
-import { PressStrip, TeamCarousel, Testimonials, CtaBand } from "@/components/sections/HomeSections";
+import { CtaBand } from "@/components/sections/HomeSections";
 import { Heading } from "@/components/ui/Heading";
-import { PlaceholderBadge } from "@/components/ui/Badges";
 import { ArrowLink } from "@/components/ui/Button";
 import { pageMeta } from "@/lib/seo";
 
@@ -34,7 +33,6 @@ export default function AboutPage() {
         <div className="space-y-4 text-lg text-stone-dark">
           <p>Discover Peru Travel began with a simple idea: most Peru trips go wrong in the same few ways. People fly straight into Cusco and spend two days feeling awful. They find out Inca Trail permits sold out months ago. They lose a whole day to a bus that a one-hour flight would have replaced.</p>
           <p>So we plan the other way round: altitude first, permits early, travel times honest. Then we fill the days with the things that make Peru unforgettable: the food, the people, the trails and the views.</p>
-          <PlaceholderBadge label="Company story placeholder, replace with the real founding story" />
         </div>
         <div className="grid grid-cols-2 gap-4">
           {reasons.map((r) => (
@@ -50,14 +48,9 @@ export default function AboutPage() {
         <Heading text="Learn *more*" size="md" />
         <div className="mt-6 flex flex-wrap gap-8">
           <ArrowLink href="/about/our-process">Our process</ArrowLink>
-          <ArrowLink href="/about/our-team">Our team</ArrowLink>
-          <ArrowLink href="/about/testimonials">Testimonials</ArrowLink>
           <ArrowLink href="/travel-that-gives-back">Travel that gives back</ArrowLink>
         </div>
       </section>
-      <TeamCarousel />
-      <Testimonials />
-      <PressStrip />
       <CtaBand />
     </>
   );

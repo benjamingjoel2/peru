@@ -1,15 +1,12 @@
 import Link from "next/link";
 import { journeys } from "@/data/journeys";
 import { experienceGroups, experiencesByGroup } from "@/data/experiences";
-import { team, testimonials } from "@/data/people";
 import { faqs } from "@/data/faqs";
-import { press } from "@/config/media";
 import { site } from "@/config/site";
 import { Emph, Heading } from "@/components/ui/Heading";
 import { Carousel } from "@/components/ui/Carousel";
 import { StoneMask } from "@/components/ui/StoneMask";
 import { ArrowLink, LinkButton } from "@/components/ui/Button";
-import { PlaceholderBadge } from "@/components/ui/Badges";
 import { JourneyOverlayCard, StoryCard } from "./Cards";
 import { WipeImage } from "@/components/ui/WipeImage";
 import { EnquiryForm } from "@/components/enquire/EnquiryForm";
@@ -110,78 +107,6 @@ export function ExperienceGroups() {
   );
 }
 
-export function Testimonials() {
-  const pics = [photo("uros-islands"), photo("machu-picchu-llamas"), photo("macaws")];
-  // Quotes and photos interleaved in a masonry grid
-  const tiles: ({ kind: "quote"; t: (typeof testimonials)[number] } | { kind: "photo"; p: { src: string; alt: string } })[] = [];
-  testimonials.forEach((t, i) => {
-    tiles.push({ kind: "quote", t });
-    if (i % 2 === 1 && pics[(i - 1) / 2]) tiles.push({ kind: "photo", p: pics[(i - 1) / 2] });
-  });
-  return (
-    <section aria-labelledby="testimonials-title" className="bg-cream-deep py-20 lg:py-28">
-      <div className="container-x">
-        <div className="text-center">
-          <Heading id="testimonials-title" eyebrow="What travellers say" text="Our latest *traveller* stories" align="center" />
-          <PlaceholderBadge label="Placeholder testimonials, replace before launch" className="mt-3" />
-        </div>
-        <ul className="mt-12 columns-1 gap-6 sm:columns-2 lg:columns-3">
-          {tiles.map((tile, i) =>
-            tile.kind === "quote" ? (
-              <li key={i} className="mb-6 break-inside-avoid">
-                <figure className="bg-cream p-7">
-                  <div className="woven-stripe-thin -mx-7 -mt-7 mb-6" aria-hidden />
-                  <blockquote className="font-display text-xl leading-snug text-indigo">&ldquo;{tile.t.quote}&rdquo;</blockquote>
-                  <figcaption className="mt-5 flex items-center gap-3 text-sm">
-                    <span className="text-2xl" role="img" aria-label={tile.t.country}>{tile.t.flag}</span>
-                    <span>
-                      <span className="block font-bold text-ink">{tile.t.name}</span>
-                      <span className="text-stone-dark">{tile.t.country}</span>
-                    </span>
-                  </figcaption>
-                </figure>
-              </li>
-            ) : (
-              <li key={i} className="mb-6 break-inside-avoid">
-                <StoneMask src={tile.p.src} alt={tile.p.alt} shape={i} className="aspect-[4/5]" sizes="(min-width:1024px) 30vw, 90vw" />
-              </li>
-            ),
-          )}
-        </ul>
-        <div className="mt-6 text-center">
-          <ArrowLink href="/about/testimonials">All testimonials</ArrowLink>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function TeamCarousel() {
-  return (
-    <section aria-labelledby="team-title" className="py-20 lg:py-28">
-      <div className="container-x">
-        <div className="text-center">
-          <Heading id="team-title" eyebrow="Our team" text="*Meet* our team" align="center" />
-          <PlaceholderBadge label="Placeholder team" className="mt-3" />
-        </div>
-        <Carousel label="Our team" arrows="sides" className="mt-10" itemClassName="w-[70%] sm:w-[40%] lg:w-[23%]">
-          {team.map((m, i) => (
-            <article key={m.slug} className="text-center">
-              <StoneMask src={`/images/team/${m.slug}.svg`} alt={`Placeholder portrait of ${m.name}`} shape={i + 2} className="aspect-[4/5]" sizes="(min-width:1024px) 22vw, 70vw" />
-              <h3 className="mt-4 font-display text-xl text-indigo">{m.name}</h3>
-              <p className="text-sm font-semibold text-cochineal">{m.role}</p>
-              <p className="text-sm text-stone-dark">Based in {m.base}</p>
-            </article>
-          ))}
-        </Carousel>
-        <div className="mt-8 text-center">
-          <LinkButton href="/about/our-team" variant="ghost">More about our team</LinkButton>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /** Dark contact section: details on the left, the enquiry form inline on the right. */
 export function EnquireBand() {
   const c = site.contact;
@@ -192,9 +117,7 @@ export function EnquireBand() {
           <Heading id="enquire-band-title" eyebrow="Contact us" text="Let's plan *your* Peru" />
           <p className="mt-4 text-cream/80">For anything at all, talk to a Peru Specialist. We&apos;re in Lima, so we answer in Lima time.</p>
           <ul className="mt-8 space-y-3 text-lg">
-            <li><span className="eyebrow block text-mustard-soft">Phone</span><a href={c.phoneHref} className="font-semibold hover:text-mustard">{c.phone}</a></li>
             <li><span className="eyebrow block text-mustard-soft">Email</span><a href={`mailto:${c.email}`} className="font-semibold hover:text-mustard">{c.email}</a></li>
-            <li><span className="eyebrow block text-mustard-soft">WhatsApp</span><a href={c.whatsappHref} target="_blank" rel="noopener" className="font-semibold hover:text-mustard">{c.whatsapp}</a></li>
             <li><span className="eyebrow block text-mustard-soft">Hours</span>{c.hours} ({c.timezoneLabel})</li>
           </ul>
           <div className="mt-10 bg-cream p-6 text-ink">
@@ -228,32 +151,6 @@ export function StoriesSection({ stories }: { stories: StoryMeta[] }) {
         <div className="mt-8 text-center">
           <LinkButton href="/stories" variant="ghost">All stories</LinkButton>
         </div>
-      </div>
-    </section>
-  );
-}
-
-export function PressStrip() {
-  return (
-    <section aria-labelledby="press-title" className="border-y border-stone-light bg-cream py-16">
-      <div className="container-x grid items-center gap-10 lg:grid-cols-[1fr_1.6fr]">
-        <div>
-          <p className="eyebrow text-stone-dark">Press &amp; recognition</p>
-          <h2 id="press-title" className="mt-3 font-display text-3xl text-indigo sm:text-4xl">
-            <em>Don&apos;t just</em> take our word for it
-          </h2>
-          {press.isPlaceholder && <PlaceholderBadge label="Placeholder press & awards, add real coverage before launch" className="mt-4" />}
-        </div>
-        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {press.items.map((p, i) => (
-            <li
-              key={p.name}
-              className={`grid h-20 place-items-center border-2 border-dashed border-stone-light px-3 text-center text-xs font-bold uppercase tracking-wider text-stone-dark ${i % 2 ? "rotate-1" : "-rotate-1"}`}
-            >
-              {p.name}
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

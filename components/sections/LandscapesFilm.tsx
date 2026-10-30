@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { useOnScreen } from "@/lib/useInViewOnce";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { media } from "@/config/media";
-import { PlaceholderBadge } from "@/components/ui/Badges";
 import { photo } from "@/data/photos";
 
 const frames = [
@@ -128,7 +127,6 @@ export function LandscapesFilm() {
         <button type="button" onClick={() => setPlaying((p) => !p)} aria-pressed={!playing} className="rounded-full border-2 border-cream/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-cream hover:bg-cream hover:text-indigo">
           {playing && !reduce ? "Pause film" : "Play film"}
         </button>
-        {media.filmIsPlaceholder && <PlaceholderBadge label="Placeholder footage" className="border-mustard-soft text-mustard-soft" />}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-// "Travel that gives back". All partners are PLACEHOLDERS.
+// "Travel that gives back". Partners are described by type until named partners are confirmed.
 export const ayniPrinciples = [
   {
     title: "Community-run, community-paid",
@@ -27,8 +27,8 @@ export const porterStandards = [
 ];
 
 export const partners = [
-  { name: "[Weaving cooperative partner] (placeholder)", region: "Sacred Valley", what: "Natural-dye demonstrations and fairly priced textiles." },
-  { name: "[Community homestay network] (placeholder)", region: "Lake Titicaca", what: "Family homestays on Amantaní, booked and paid through the community." },
-  { name: "[Porter welfare organisation] (placeholder)", region: "Cusco", what: "Independent checks on our trekking partners' porter standards." },
-  { name: "[Rainforest conservation partner] (placeholder)", region: "Tambopata", what: "A share of every Amazon night supports forest protection." },
+  { name: "A weaving cooperative", region: "Sacred Valley", what: "Natural-dye demonstrations and fairly priced textiles." },
+  { name: "A community homestay network", region: "Lake Titicaca", what: "Family homestays on Amantaní, booked and paid through the community." },
+  { name: "A porter welfare organisation", region: "Cusco", what: "Independent checks on our trekking partners' porter standards." },
+  { name: "A rainforest conservation project", region: "Tambopata", what: "A share of every Amazon night supports forest protection." },
 ];

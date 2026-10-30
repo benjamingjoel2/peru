@@ -50,7 +50,7 @@ export function ValuesIntro() {
       </div>
 
       <div className="container-x mt-14 flex flex-wrap justify-center gap-8">
-        <ArrowLink href="/about/our-team">Meet your specialists</ArrowLink>
+        <ArrowLink href="/about/our-process">How we plan</ArrowLink>
         <ArrowLink href="/travel-that-gives-back">Travel that gives back</ArrowLink>
       </div>
     </section>

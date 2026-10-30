@@ -2,7 +2,6 @@ import { PageHero } from "@/components/sections/PageHero";
 import { photo } from "@/data/photos";
 import { Heading } from "@/components/ui/Heading";
 import { StoneMask } from "@/components/ui/StoneMask";
-import { PlaceholderBadge } from "@/components/ui/Badges";
 import { ArrowLink } from "@/components/ui/Button";
 import { ayniPrinciples, partners, porterStandards } from "@/data/givesBack";
 import { pageMeta } from "@/lib/seo";
@@ -74,7 +73,6 @@ export default function GivesBackPage() {
       <section aria-labelledby="partners-title" className="border-t border-stone-light bg-cream py-16">
         <div className="container-x">
           <Heading id="partners-title" eyebrow="Partners" text="Who we *work with*" size="md" />
-          <PlaceholderBadge className="mt-3" label="Placeholder partners, replace with real organisations" />
           <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {partners.map((p) => (
               <li key={p.name} className="border-2 border-dashed border-stone-light p-5">

@@ -11,8 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const paths = [
     "/", "/destinations", "/experiences", "/journeys", "/accommodation", "/altitude", "/machu-picchu", "/peru-by-altitude",
-    "/travel-that-gives-back", "/about", "/about/our-process", "/about/our-team", "/about/testimonials", "/stories", "/contact",
-    "/start-planning", "/faq", "/credits",
+    "/travel-that-gives-back", "/about", "/about/our-process", "/stories", "/contact",
+    "/start-planning", "/faq",
     ...zones.map((z) => `/destinations/${z.id}`),
     ...destinations.map((d) => `/destinations/${d.zone}/${d.slug}`),
     ...experiences.map((e) => `/experiences/${e.slug}`),

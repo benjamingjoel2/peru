@@ -5,14 +5,3 @@ export const media = {
   filmIsPlaceholder: true,
 };
 
-/** Press & awards. All PLACEHOLDER until real coverage exists. */
-export const press = {
-  isPlaceholder: true,
-  items: [
-    { name: "Press logo placeholder 1" },
-    { name: "Press logo placeholder 2" },
-    { name: "Award placeholder 1" },
-    { name: "Press logo placeholder 3" },
-    { name: "Award placeholder 2" },
-  ],
-};

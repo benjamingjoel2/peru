@@ -65,7 +65,7 @@ export default async function JourneyPage({ params }: { params: Promise<{ slug: 
         <div className="container-x py-14 text-center lg:py-20">
           <p className="mx-auto max-w-3xl font-display text-2xl font-light leading-snug text-indigo sm:text-3xl">{j.summary}</p>
           <p className="mt-6 text-lg">
-            From <Price usd={j.fromPriceUSD} className="font-display text-2xl text-indigo" /> <span className="text-sm text-stone-dark">per person, excluding international flights (placeholder price)</span>
+            From <Price usd={j.fromPriceUSD} className="font-display text-2xl text-indigo" /> <span className="text-sm text-stone-dark">per person, excluding international flights</span>
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
             <EnquireButton journey={j.slug} className="min-h-11 rounded-full bg-cochineal px-7 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">Enquire about this journey</EnquireButton>

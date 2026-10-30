@@ -267,7 +267,7 @@ export function EnquiryForm({ journey, onDone, budgetConfirmed = false, compact 
           <div>
             <span className={label} id={`${id}-contact`}>Preferred contact</span>
             <div role="radiogroup" aria-labelledby={`${id}-contact`} className="flex flex-wrap gap-2">
-              {["Email", "WhatsApp", "Phone"].map((v, i) => (
+              {["Email", "Phone"].map((v, i) => (
                 <label key={v} className={pill}>
                   <input type="radio" name="contact" value={v.toLowerCase()} className="sr-only" defaultChecked={i === 0} />
                   {v}

@@ -7,10 +7,7 @@ import {
   ExperienceGroups,
   FaqSection,
   JourneyCarouselSection,
-  PressStrip,
   StoriesSection,
-  TeamCarousel,
-  Testimonials,
 } from "@/components/sections/HomeSections";
 import { DestinationTabs } from "@/components/sections/DestinationTabs";
 import { AltitudeTeaser, MachuPicchuTeaser } from "@/components/sections/PlanTeasers";
@@ -29,11 +26,8 @@ export default function Home() {
       <JourneyCarouselSection />
       <ExperienceGroups />
       <DestinationTabs />
-      <Testimonials />
-      <TeamCarousel />
       <EnquireBand />
       <StoriesSection stories={stories} />
-      <PressStrip />
       <FaqSection limit={6} />
       <AltitudeTeaser />
       <MachuPicchuTeaser />

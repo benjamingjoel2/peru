@@ -48,7 +48,7 @@ export function PageHero({
     <>
       {image ? (
         <section className="on-dark relative h-[62vh] min-h-[420px] overflow-hidden bg-indigo-deep lg:h-[72vh]">
-          <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className="object-cover" />
+          <Image src={image.src} alt={image.alt} fill loading="eager" fetchPriority="high" sizes="100vw" className="object-cover" />
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-indigo-deep/85 via-indigo-deep/20 to-indigo-deep/10" />
           <div className="container-x absolute inset-x-0 bottom-0 pb-10 sm:pb-14">
             {crumbs.length > 0 && <Breadcrumb all={all} light />}

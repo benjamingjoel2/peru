@@ -67,7 +67,7 @@ export function JourneyFilter({ list }: { list: Journey[] }) {
         <p className="ml-auto text-sm text-stone-dark" aria-live="polite">{results.length} of {list.length} journeys</p>
       </div>
       <div className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-        {results.map((j, i) => <JourneyCard key={j.slug} j={j} priority={i < 3} />)}
+        {results.map((j) => <JourneyCard key={j.slug} j={j} />)}
       </div>
       {results.length === 0 && (
         <p className="py-10 text-center text-stone-dark">No journeys match all of those. Try fewer filters, or ask us to design one from scratch.</p>

@@ -57,7 +57,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
         </header>
         <div className="container-x max-w-5xl">
           <div className="relative aspect-[16/8] overflow-hidden" style={{ clipPath: stoneShapes[2] }}>
-            <Image src={meta.image} alt={meta.imageAlt} fill priority sizes="(min-width:1024px) 70vw, 100vw" className="object-cover" />
+            <Image src={meta.image} alt={meta.imageAlt} fill loading="eager" fetchPriority="high" sizes="(min-width:1024px) 70vw, 100vw" className="object-cover" />
           </div>
         </div>
         <div className="container-x grid max-w-5xl grid-cols-1 gap-10 py-12 lg:grid-cols-[minmax(0,1fr)_220px] [&>*]:min-w-0">

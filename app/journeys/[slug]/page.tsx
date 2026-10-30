@@ -47,7 +47,7 @@ export default async function JourneyPage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <section className="on-dark relative h-[72vh] min-h-[460px] overflow-hidden bg-indigo-deep">
-        <Image src={j.image.src} alt={j.image.alt} fill priority sizes="100vw" className="object-cover" />
+        <Image src={j.image.src} alt={j.image.alt} fill loading="eager" fetchPriority="high" sizes="100vw" className="object-cover" />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-indigo-deep/90 via-indigo-deep/20 to-indigo-deep/10" />
         <div className="container-x absolute inset-x-0 bottom-0 pb-10 sm:pb-14">
           <nav aria-label="Breadcrumb" className="mb-5 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-cream/80">

@@ -5,21 +5,21 @@ import { useEffect, useRef, useState } from "react";
 import { useOnScreen } from "@/lib/useInViewOnce";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 import { media } from "@/config/media";
-import { PlaceholderBadge } from "@/components/ui/Badges";
 import { photo } from "@/data/photos";
+import { t, L } from "@/lib/i18n";
 
-const frames = [
+const frames = L([
   { src: "/photos/coast-cliffs.jpg", label: "The Coast", note: "Sea level" },
   { src: "/photos/rainbow-mountain-wide.jpg", label: "The Andes", note: "Up to ~5,000 m" },
   { src: "/photos/amazon-river.jpg", label: "The Amazon", note: "~200 m" },
-];
+]);
 
 const tiles = [photo("huacachina"), photo("kuelap"), photo("llanganuco"), photo("weaving-hands")];
 
 function Tile({ img, className }: { img: { src: string; alt: string }; className: string }) {
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      <Image src={img.src} alt={img.alt} fill sizes="27vw" className="object-cover" />
+      <Image src={img.src} alt={t(img.alt)} fill sizes="27vw" className="object-cover" />
     </div>
   );
 }
@@ -106,12 +106,12 @@ export function LandscapesFilm() {
 
   const controls = (
     <div className="on-dark container-x absolute inset-x-0 bottom-0 pb-8 sm:pb-10">
-      <p className="eyebrow text-mustard-soft">Three countries in one</p>
+      <p className="eyebrow text-mustard-soft">{t("Three countries in one")}</p>
       <p className="mt-2 max-w-3xl font-display text-3xl text-cream sm:text-5xl">
-        From the Pacific to the peaks <em>to the jungle</em>.
+        {t("From the Pacific to the peaks")} <em>{t("to the jungle")}</em>.
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-3">
-        <ol className="flex flex-wrap gap-2" aria-label="Film chapters">
+        <ol className="flex flex-wrap gap-2" aria-label={t("Film chapters")}>
           {frames.map((f, n) => (
             <li key={f.label}>
               <button
@@ -126,9 +126,8 @@ export function LandscapesFilm() {
           ))}
         </ol>
         <button type="button" onClick={() => setPlaying((p) => !p)} aria-pressed={!playing} className="rounded-full border-2 border-cream/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-cream hover:bg-cream hover:text-indigo">
-          {playing && !reduce ? "Pause film" : "Play film"}
+          {playing && !reduce ? t("Pause film") : t("Play film")}
         </button>
-        {media.filmIsPlaceholder && <PlaceholderBadge label="Placeholder footage" className="border-mustard-soft text-mustard-soft" />}
       </div>
     </div>
   );
@@ -143,14 +142,14 @@ export function LandscapesFilm() {
 
   if (reduce) {
     return (
-      <section aria-label="Landscapes film: from the coast to the Andes to the Amazon" className="bg-indigo-deep">
+      <section aria-label={t("Landscapes film: from the coast to the Andes to the Amazon")} className="bg-indigo-deep">
         {staticFilm}
       </section>
     );
   }
 
   return (
-    <section ref={section} aria-label="Landscapes film: from the coast to the Andes to the Amazon" className="relative bg-cream md:h-[220vh]">
+    <section ref={section} aria-label={t("Landscapes film: from the coast to the Andes to the Amazon")} className="relative bg-cream md:h-[220vh]">
       <div className="md:hidden">{staticFilm}</div>
       <div className="sticky top-0 hidden h-screen overflow-hidden md:block">
         <div ref={tilesL} className="absolute inset-y-[6%] left-[2%] flex w-[23%] flex-col gap-4">

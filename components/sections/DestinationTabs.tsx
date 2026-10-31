@@ -9,6 +9,7 @@ import { ArrowLink } from "@/components/ui/Button";
 import { StoneMask } from "@/components/ui/StoneMask";
 import { DestinationCard } from "./Cards";
 import { monthNames } from "@/data/seasons";
+import { t } from "@/lib/i18n";
 
 /** Vertical ARIA tabs (arrow keys, Home/End): areas on the left, two images, intro and a region carousel on the right. */
 export function DestinationTabs() {
@@ -33,12 +34,12 @@ export function DestinationTabs() {
     <section aria-labelledby="dest-title" className="bg-cream-deep py-20 lg:py-28">
       <div className="container-x">
         <div className="text-center">
-          <Heading id="dest-title" eyebrow="Destinations" text="Five Perus, *one* trip" align="center" />
-          <p className="mx-auto mt-4 max-w-2xl text-stone-dark">From sea level to above 4,000 metres and down into the rainforest. Choose an area to see where it sits, and how high.</p>
+          <Heading id="dest-title" eyebrow={t("Destinations")} text={t("Five Perus, *one* trip")} align="center" />
+          <p className="mx-auto mt-4 max-w-2xl text-stone-dark">{t("From sea level to above 4,000 metres and down into the rainforest. Choose an area to see where it sits, and how high.")}</p>
         </div>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[260px_minmax(0,1fr)]">
-          <div role="tablist" aria-label="Areas of Peru" aria-orientation="vertical" onKeyDown={onKey} className="flex gap-1 overflow-x-auto border-b-2 border-stone-light [scrollbar-width:none] lg:flex-col lg:overflow-visible lg:border-b-0 lg:border-l-2">
+          <div role="tablist" aria-label={t("Areas of Peru")} aria-orientation="vertical" onKeyDown={onKey} className="flex gap-1 overflow-x-auto border-b-2 border-stone-light [scrollbar-width:none] lg:flex-col lg:overflow-visible lg:border-b-0 lg:border-l-2">
             {zones.map((zone, i) => (
               <button
                 key={zone.id}
@@ -70,23 +71,23 @@ export function DestinationTabs() {
                   </div>
                   <dl className="flex gap-6 text-sm">
                     <div>
-                      <dt className="eyebrow text-stone-dark">Altitude</dt>
+                      <dt className="eyebrow text-stone-dark">{t("Altitude")}</dt>
                       <dd className="mt-1 font-bold text-indigo">
-                        ~{z.altitudeRange[0].toLocaleString("en-GB")}–{z.altitudeRange[1].toLocaleString("en-GB")} m <span className="text-xs font-normal">(verify)</span>
+                        ~{z.altitudeRange[0].toLocaleString("en-GB")}–{z.altitudeRange[1].toLocaleString("en-GB")} m <span className="text-xs font-normal">{t("(verify)")}</span>
                       </dd>
                     </div>
                     <div>
-                      <dt className="eyebrow text-stone-dark">Best months</dt>
+                      <dt className="eyebrow text-stone-dark">{t("Best months")}</dt>
                       <dd className="mt-1 font-bold text-indigo">
                         {monthNames[z.bestMonths[0]].slice(0, 3)}–{monthNames[z.bestMonths[z.bestMonths.length - 1]].slice(0, 3)}
                       </dd>
                     </div>
                   </dl>
                 </div>
-                <Carousel label={`Regions in ${z.name}`} className="mt-6" itemClassName="w-[78%] sm:w-[46%] xl:w-[31%]">
+                <Carousel label={t("Regions in {name}", { name: z.name })} className="mt-6" itemClassName="w-[78%] sm:w-[46%] xl:w-[31%]">
                   {regions.map((d, i) => <DestinationCard key={d.slug} d={d} shape={i} />)}
                 </Carousel>
-                <ArrowLink href={`/destinations/${z.id}`} className="mt-4">Explore {z.name}</ArrowLink>
+                <ArrowLink href={`/destinations/${z.id}`} className="mt-4">{t("Explore {name}", { name: z.name })}</ArrowLink>
               </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 // Downloads the photos listed in data/photo-sources.json into public/photos/<slot>.jpg.
-// Sources are free Unsplash License photos; credits are listed on /credits.
+// Sources are free Unsplash License photos.
 // Run: node scripts/fetch-photos.mjs [--force]
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";

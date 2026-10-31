@@ -1,6 +1,7 @@
 import type { Food, FoodBand } from "./types";
+import { L } from "@/lib/i18n";
 
-export const foodBands: { id: FoodBand; name: string; range: string; altitude: [number, number]; intro: string }[] = [
+export const foodBands: { id: FoodBand; name: string; range: string; altitude: [number, number]; intro: string }[] = L([
   {
     id: "pacific",
     name: "The Pacific",
@@ -43,9 +44,9 @@ export const foodBands: { id: FoodBand; name: string; range: string; altitude: [
     altitude: [100, 500],
     intro: "River fish cooked in leaves, plantains, and fruits you've never heard of, many of them sour enough to make you blink.",
   },
-];
+]);
 
-export const foods: Food[] = [
+export const foods: Food[] = L([
   // Pacific
   { id: "ceviche", name: "Ceviche", kind: "dish", band: "pacific", description: "Raw white fish 'cooked' in lime juice with red onion, chilli and salt, served with sweet potato and corn. Lunch food: Peruvians rarely eat it at night.", where: ["lima", "paracas", "trujillo", "mancora"], journeys: ["first-peru-done-right", "peru-for-food-lovers", "andes-and-amazon"] },
   { id: "tiradito", name: "Tiradito", kind: "dish", band: "pacific", description: "Ceviche's Japanese-influenced cousin: thin slices of fish, no onion, a smooth chilli sauce poured over the top.", where: ["lima", "mancora"], journeys: ["peru-for-food-lovers"] },
@@ -91,6 +92,6 @@ export const foods: Food[] = [
   { id: "paiche", name: "Paiche", kind: "dish", band: "amazon", description: "One of the world's largest freshwater fish, now farmed sustainably. Firm and mild, often grilled in leaves.", where: ["iquitos", "tambopata"], journeys: ["andes-and-amazon"] },
   { id: "camu-camu", name: "Camu camu", kind: "ingredient", band: "amazon", description: "A small, very sour river fruit packed with vitamin C, usually drunk as juice.", where: ["iquitos", "tambopata", "manu"], journeys: ["andes-and-amazon"] },
   { id: "tacacho", name: "Tacacho con cecina", kind: "dish", band: "amazon", description: "Mashed green plantain with pork fat, served with smoked dried pork. The jungle breakfast.", where: ["tambopata", "iquitos"], journeys: ["andes-and-amazon", "peru-with-kids"] },
-];
+]);
 
 export const foodById = (id: string) => foods.find((f) => f.id === id);

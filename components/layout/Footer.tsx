@@ -1,10 +1,11 @@
-import Link from "next/link";
+import Link from "@/components/i18n/Link";
 import { site } from "@/config/site";
 import { Logo } from "./Logo";
 import { StoneDivider } from "@/components/ui/Stone";
 import { Newsletter } from "./Newsletter";
+import { t, L } from "@/lib/i18n";
 
-const columns = [
+const columns = L([
   {
     title: "Explore",
     links: [
@@ -30,13 +31,11 @@ const columns = [
     links: [
       { label: "About us", href: "/about" },
       { label: "Our process", href: "/about/our-process" },
-      { label: "Our team", href: "/about/our-team" },
-      { label: "Testimonials", href: "/about/testimonials" },
       { label: "Travel that gives back", href: "/travel-that-gives-back" },
       { label: "Contact", href: "/contact" },
     ],
   },
-];
+]);
 
 export function Footer() {
   const c = site.contact;
@@ -62,32 +61,21 @@ export function Footer() {
             <div>
               <Logo light />
               <ul className="mt-4 space-y-1 text-sm">
-                <li><a href={c.phoneHref} className="hover:text-mustard">{c.phone}</a> · <a href={`mailto:${c.email}`} className="hover:text-mustard">{c.email}</a></li>
-                <li><a href={c.whatsappHref} className="hover:text-mustard" target="_blank" rel="noopener">WhatsApp {c.whatsapp}</a> · {c.hours} ({c.timezoneLabel})</li>
+                <li><a href={`mailto:${c.email}`} className="hover:text-mustard">{c.email}</a></li>
+                <li>{t(c.hours)} ({t(c.timezoneLabel)})</li>
+                <li>{t(site.address.full)}</li>
               </ul>
             </div>
-            <ul className="flex flex-wrap gap-3">
-              {site.socials.map((s) => (
-                <li key={s.label}>
-                  <a href={s.href} target="_blank" rel="noopener" className="inline-block rounded-full border border-cream/30 px-3 py-1 text-xs font-semibold hover:border-mustard hover:text-mustard">
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
       <div className="container-x border-t border-cream/15 py-6 text-xs leading-relaxed text-cream/65">
-        <p>{site.company.legalName} · {site.company.address}</p>
-        <p>{site.company.tourismRegistration} · {site.company.incaTrailPartner}</p>
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p>© {new Date().getFullYear()} {site.name}. {t("All rights reserved.")}</p>
           <ul className="flex gap-4">
-            <li><Link href="/legal/privacy" className="hover:text-mustard">Privacy policy</Link></li>
-            <li><Link href="/legal/terms" className="hover:text-mustard">Terms &amp; booking conditions</Link></li>
-            <li><Link href="/legal/cookies" className="hover:text-mustard">Cookies</Link></li>
-            <li><Link href="/credits" className="hover:text-mustard">Photo credits</Link></li>
+            <li><Link href="/legal/privacy" className="hover:text-mustard">{t("Privacy policy")}</Link></li>
+            <li><Link href="/legal/booking-terms" className="hover:text-mustard">{t("Booking terms")}</Link></li>
+            <li><Link href="/legal/cookies" className="hover:text-mustard">{t("Cookie policy")}</Link></li>
           </ul>
         </div>
       </div>

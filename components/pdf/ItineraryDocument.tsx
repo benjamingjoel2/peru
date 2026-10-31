@@ -4,6 +4,7 @@ import { altitudeBands, bandFor, bandHex, tipText } from "@/lib/altitude";
 import { site } from "@/config/site";
 import { stayBySlug } from "@/data/stays";
 import { mpRoutes } from "@/config/machuPicchu";
+import { t } from "@/lib/i18n";
 
 const C = { cream: "#f6f1e7", indigo: "#23285a", cochineal: "#b3283c", mustard: "#e0a526", stone: "#8a857c", stoneDark: "#4a4741", stoneLight: "#d8d2c6", ink: "#1d1b19" };
 
@@ -92,7 +93,7 @@ export function ItineraryDocument({ j }: { j: Journey }) {
   const mp = j.machuPicchu ? mpRoutes.find((r) => r.id === j.machuPicchu!.route) : null;
   const footer = (
     <View style={s.footer} fixed>
-      <Text>{site.name} · {site.contact.email} · {site.contact.phone}</Text>
+      <Text>{site.name} · {site.contact.email}</Text>
       <Text render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`} />
     </View>
   );
@@ -100,13 +101,13 @@ export function ItineraryDocument({ j }: { j: Journey }) {
     <Document title={`${j.days} days: ${j.title.replace(/\*/g, "")} | ${site.name}`} author={site.name}>
       <Page size="A4" style={s.page}>
         <Stripe />
-        <Text style={s.eyebrow}>{site.name} · {j.days}-day journey</Text>
+        <Text style={s.eyebrow}>{site.name} · {j.days}{t("-day journey")}</Text>
         <Title text={j.title} />
         <Text style={[s.p, { marginTop: 8, fontSize: 11 }]}>{j.intro}</Text>
-        <Text style={s.muted}>From US${j.fromPriceUSD.toLocaleString("en-US")} per person (placeholder price), excluding international flights.</Text>
+        <Text style={s.muted}>{t("From US$")}{j.fromPriceUSD.toLocaleString("en-US")} {t("per person, excluding international flights.")}</Text>
 
-        <Text style={s.h2}>Altitude profile</Text>
-        <Text style={[s.muted, { marginBottom: 6, fontSize: 8.5 }]}>Where you sleep each night (dots, coloured by altitude band) and the day&apos;s high point (dashed). ! marks a pacing tip. All altitudes approximate (verify).</Text>
+        <Text style={s.h2}>{t("Altitude profile")}</Text>
+        <Text style={[s.muted, { marginBottom: 6, fontSize: 8.5 }]}>{t("Where you sleep each night (dots, coloured by altitude band) and the day's high point (dashed). ! marks a pacing tip. All altitudes approximate (verify).")}</Text>
         <AltitudeChart j={j} />
         <View style={{ flexDirection: "row", flexWrap: "wrap", marginTop: 4 }}>
           {altitudeBands.map((b) => (
@@ -116,31 +117,31 @@ export function ItineraryDocument({ j }: { j: Journey }) {
             </View>
           ))}
         </View>
-        <Text style={s.note}>General guidance, not medical advice. Talk to your doctor before you travel.</Text>
+        <Text style={s.note}>{t("General guidance, not medical advice. Talk to your doctor before you travel.")}</Text>
 
-        <Text style={s.h2}>Highlights</Text>
+        <Text style={s.h2}>{t("Highlights")}</Text>
         {j.highlights.map((h) => <Text key={h} style={{ marginBottom: 2 }}>-  {pdfSafe(h)}</Text>)}
 
-        <Text style={s.h2}>How you travel</Text>
+        <Text style={s.h2}>{t("How you travel")}</Text>
         {j.howYouTravel.map((h) => <Text key={h} style={{ marginBottom: 2 }}>-  {pdfSafe(h)}</Text>)}
         {footer}
       </Page>
 
       <Page size="A4" style={s.page}>
         <Stripe />
-        <Text style={s.h2}>Day by day</Text>
+        <Text style={s.h2}>{t("Day by day")}</Text>
         {j.itinerary.map((day) => {
           const stay = day.stay ? stayBySlug(day.stay) : null;
           return (
             <View key={day.day} style={s.day} wrap={false}>
-              <Text style={s.dayNum}>Day {day.day}</Text>
+              <Text style={s.dayNum}>{t("Day")} {day.day}</Text>
               <View style={{ flex: 1 }}>
                 <Text style={s.dayTitle}>{day.title}</Text>
                 <Text>{pdfSafe(day.summary)}</Text>
                 <Text style={s.chip}>
-                  Sleep: {day.sleepLabel}, about {day.sleepAltitudeM.toLocaleString("en-GB")} m ({bandFor(day.sleepAltitudeM).label.toLowerCase()})
+                  {t("Sleep:")} {day.sleepLabel}{t(", about")} {day.sleepAltitudeM.toLocaleString("en-GB")} m ({bandFor(day.sleepAltitudeM).label.toLowerCase()})
                   {day.maxAltitudeM && day.maxAltitudeM > day.sleepAltitudeM ? `  ·  High point: about ${day.maxAltitudeM.toLocaleString("en-GB")} m${day.maxLabel ? ` (${day.maxLabel})` : ""}` : ""}
-                  {stay ? `  ·  Stay: ${stay.name} (placeholder)` : ""}
+                  {stay ? `  ·  Stay: ${stay.name}` : ""}
                   {day.transport.length ? `  ·  ${day.transport.join(", ")}` : ""}
                 </Text>
                 {day.tip ? <Text style={s.tip}>{tipText[day.tip]}</Text> : null}
@@ -150,16 +151,16 @@ export function ItineraryDocument({ j }: { j: Journey }) {
         })}
         {mp && j.machuPicchu && (
           <View wrap={false}>
-            <Text style={s.h2}>Machu Picchu</Text>
-            <Text style={s.p}>Route: {mp.name}. {j.machuPicchu.note}</Text>
-            <Text style={s.note}>Rules change often. Tickets are timed, named and tied to a circuit; we&apos;ll confirm the latest rules when you book.</Text>
+            <Text style={s.h2}>{t("Machu Picchu")}</Text>
+            <Text style={s.p}>{t("Route:")} {mp.name}. {j.machuPicchu.note}</Text>
+            <Text style={s.note}>{t("Rules change often. Tickets are timed, named and tied to a circuit; we'll confirm the latest rules when you book.")}</Text>
           </View>
         )}
         <View wrap={false}>
-          <Text style={s.h2}>Make it yours</Text>
-          <Text style={s.p}>Every journey is private and tailored. Talk to a Peru Specialist about dates, hotels and pace.</Text>
-          <Text>{site.contact.phone}  ·  {site.contact.email}  ·  WhatsApp {site.contact.whatsapp}</Text>
-          <Text style={s.muted}>{site.contact.hours} ({site.contact.timezoneLabel})</Text>
+          <Text style={s.h2}>{t("Make it yours")}</Text>
+          <Text style={s.p}>{t("Every journey is private and tailored. Talk to a Peru Specialist about dates, hotels and pace.")}</Text>
+          <Text>{site.contact.email}  ·  {t(site.address.full)}</Text>
+          <Text style={s.muted}>{t(site.contact.hours)} ({t(site.contact.timezoneLabel)})</Text>
         </View>
         {footer}
       </Page>

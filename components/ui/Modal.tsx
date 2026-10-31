@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { t } from "@/lib/i18n";
 
 type Props = {
   open: boolean;
@@ -45,7 +46,7 @@ export function Modal({ open, onClose, labelledBy, children, className = "" }: P
         type="button"
         onClick={onClose}
         className="absolute right-3 top-5 grid h-10 w-10 place-items-center rounded-full text-2xl text-indigo hover:bg-cream-deep"
-        aria-label="Close"
+        aria-label={t("Close")}
       >
         ×
       </button>

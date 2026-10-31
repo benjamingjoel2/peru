@@ -38,8 +38,9 @@ npm run deploy     # build, then deploy to Cloudflare (needs a Cloudflare accoun
 - Use `npm run preview` (not bare `wrangler dev`) to test locally: it copies the prerendered pages into the assets before starting.
 - `npm run cf-build` runs `npm run build`, so the `prebuild` image step (`scripts/build-images.mjs`, which generates `public/img`) runs on Cloudflare too.
 - Set `ITINERARY_TOKEN_SECRET` as a Worker secret (`wrangler secret put ITINERARY_TOKEN_SECRET`) before going live.
-- **Not working on Workers yet: the itinerary PDF (`/api/itinerary/[slug]`) returns 500.** The Worker bundle uses pdfkit's Node build, which loads its standard fonts (`#standard-fonts/Helvetica`) with a runtime `require` that cannot resolve inside a bundled Worker. Fix options: generate the PDFs at build time as static files, or bundle pdfkit's browser build for the Worker. Everything else (pages, `/api/enquiry`, `/api/leads`, `/api/newsletter`) works.
-- The Worker is about 3.5 MiB gzipped (mostly `@react-pdf/renderer`). That is over the Workers Free limit of 3 MiB, so it needs the Workers Paid plan (10 MiB).
+- **Itinerary PDFs are rendered at build time.** `scripts/build-itineraries.mjs` (run by `prebuild`, `predev` and `pretypecheck`; also `npm run itineraries`) renders `components/pdf/ItineraryDocument.tsx` for every journey into `lib/itineraryPdfs.generated.mjs` (git-ignored). `/api/itinerary/[slug]` still checks the download token and serves those bytes, so `@react-pdf/renderer` never reaches the server bundle. Rebuild after editing journeys or the PDF layout (dev and build do it for you).
+- **The default share image is a static file.** `app/opengraph-image.png` is rendered from `scripts/og/opengraph-image.tsx` with `npm run og-image`; run it and commit the PNG after editing the design. It used to be a `next/og` route, which pulled `@vercel/og` (resvg and yoga WebAssembly) into the Worker.
+- The Worker is about 2.2 MiB gzipped (`npx wrangler deploy --dry-run --outdir /tmp/cf-dry` prints it), under the Workers Free limit of 3 MiB. Keep heavy libraries (PDF, image rendering, parsers) out of request-time code: render at build time instead.
 
 ## Where things live
 

@@ -21,7 +21,7 @@ export function pageMeta({ title, description, path, image }: { title: string; d
       url: localizePath(path, locale),
       locale: ogLocale[locale],
       // SVG placeholders are not valid social images, so fall back to the generated site image
-      images: [image && !image.endsWith(".svg") ? { url: image } : { url: "/opengraph-image", width: 1200, height: 630, alt: site.name }],
+      images: [image && !image.endsWith(".svg") ? { url: image } : { url: "/opengraph-image.png", width: 1200, height: 630, alt: site.name }],
     },
   };
 }

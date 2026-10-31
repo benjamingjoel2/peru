@@ -1,7 +1,8 @@
 import { photo } from "./photos";
 import type { Zone, ZoneId } from "./types";
+import { L } from "@/lib/i18n";
 
-export const zones: Zone[] = [
+export const zones: Zone[] = L([
   {
     id: "coast",
     name: "The Coast",
@@ -52,6 +53,6 @@ export const zones: Zone[] = [
     bestMonths: ["May", "Jun", "Jul", "Aug", "Sep"],
     image: photo("laguna-69"),
   },
-];
+]);
 
 export const zoneById = (id: ZoneId) => zones.find((z) => z.id === id)!;

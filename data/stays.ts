@@ -1,12 +1,14 @@
 import { photo } from "./photos";
 import type { Stay } from "./types";
+import { L } from "@/lib/i18n";
 
 
-// All stay names are PLACEHOLDERS. Replace them with real partner properties.
-export const stays: Stay[] = [
+// Stays are described by place, not by hotel name, until partner properties are confirmed
+// (see IMAGES-NEEDED.md: each needs the partner's own photography once named).
+export const stays: Stay[] = L([
   {
     slug: "casa-brisa-miraflores",
-    name: "Casa Brisa Miraflores",
+    name: "A garden house in Miraflores",
     destination: "lima",
     style: "boutique",
     elevationM: 80,
@@ -18,7 +20,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "dunas-paracas",
-    name: "Dunas Paracas",
+    name: "A bayside hotel in Paracas",
     destination: "paracas",
     style: "hotel",
     elevationM: 5,
@@ -30,7 +32,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "hacienda-tres-piedras",
-    name: "Hacienda Tres Piedras",
+    name: "A hacienda in the Sacred Valley",
     destination: "sacred-valley",
     style: "hacienda",
     elevationM: 2870,
@@ -42,7 +44,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "casa-muro-inca",
-    name: "Casa Muro Inca",
+    name: "A boutique house in old Cusco",
     destination: "cusco",
     style: "boutique",
     elevationM: 3400,
@@ -54,7 +56,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "posada-del-rio",
-    name: "Posada del Río",
+    name: "A riverside lodge below Machu Picchu",
     destination: "machu-picchu",
     style: "lodge",
     elevationM: 2040,
@@ -66,7 +68,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "patio-sillar",
-    name: "Patio Sillar",
+    name: "A sillar-stone house in Arequipa",
     destination: "arequipa-colca",
     style: "boutique",
     elevationM: 2335,
@@ -78,7 +80,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "mirador-del-condor",
-    name: "Mirador del Cóndor",
+    name: "A canyon-edge lodge in the Colca",
     destination: "arequipa-colca",
     style: "lodge",
     elevationM: 3450,
@@ -90,7 +92,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "totora-lodge",
-    name: "Totora Lodge",
+    name: "A lakeshore lodge on Titicaca",
     destination: "lake-titicaca",
     style: "lodge",
     elevationM: 3830,
@@ -102,7 +104,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "rio-madre-ecolodge",
-    name: "Río Madre Eco-lodge",
+    name: "A rainforest eco-lodge in Tambopata",
     destination: "tambopata",
     style: "eco-lodge",
     elevationM: 200,
@@ -114,7 +116,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "refugio-huascaran",
-    name: "Refugio Huascarán",
+    name: "A mountain lodge near Huaraz",
     destination: "huaraz",
     style: "lodge",
     elevationM: 3050,
@@ -126,7 +128,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "casa-nube",
-    name: "Casa Nube",
+    name: "A cloud-forest lodge near Kuélap",
     destination: "chachapoyas-kuelap",
     style: "eco-lodge",
     elevationM: 2300,
@@ -138,7 +140,7 @@ export const stays: Stay[] = [
   },
   {
     slug: "casa-adobe-trujillo",
-    name: "Casa Adobe Trujillo",
+    name: "An adobe house in Trujillo",
     destination: "trujillo",
     style: "boutique",
     elevationM: 35,
@@ -148,6 +150,6 @@ export const stays: Stay[] = [
     isPlaceholder: true,
     image: photo("stay-trujillo"),
   },
-];
+]);
 
 export const stayBySlug = (slug: string) => stays.find((s) => s.slug === slug);

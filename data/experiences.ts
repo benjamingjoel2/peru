@@ -1,8 +1,9 @@
 import { photo } from "./photos";
 import type { Experience, ExperienceGroup, ExperienceGroupId } from "./types";
+import { L } from "@/lib/i18n";
 
 
-export const experienceGroups: ExperienceGroup[] = [
+export const experienceGroups: ExperienceGroup[] = L([
   {
     id: "icons-of-peru",
     name: "Icons of Peru",
@@ -27,9 +28,9 @@ export const experienceGroups: ExperienceGroup[] = [
       "Trails, passes, glaciers and rivers. These are the days you'll talk about most, and the ones where good pacing matters most. We'll make sure you're ready before the trail starts climbing.",
     image: photo("trekker"),
   },
-];
+]);
 
-export const experiences: Experience[] = [
+export const experiences: Experience[] = L([
   // Icons of Peru
   {
     slug: "machu-picchu",
@@ -258,7 +259,7 @@ export const experiences: Experience[] = [
     destinations: ["tambopata", "manu", "iquitos"],
     image: photo("macaws-flock"),
   },
-];
+]);
 
 export const experienceBySlug = (slug: string) => experiences.find((e) => e.slug === slug);
 export const experiencesByGroup = (g: ExperienceGroupId) => experiences.filter((e) => e.group === g);

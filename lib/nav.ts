@@ -3,6 +3,7 @@ import { experienceGroups, experiences } from "@/data/experiences";
 import { journeys } from "@/data/journeys";
 import { zones } from "@/data/zones";
 import { plain } from "@/components/ui/Heading";
+import { L } from "@/lib/i18n";
 
 export type NavLink = { label: string; href: string; note?: string };
 export type NavGroup = { label: string; href: string; links: NavLink[]; intro?: string };
@@ -10,7 +11,7 @@ export type NavItem = { label: string; href: string; groups?: NavGroup[]; featur
 
 export const destinationHref = (zone: string, slug?: string) => (slug ? `/destinations/${zone}/${slug}` : `/destinations/${zone}`);
 
-export const mainNav: NavItem[] = [
+export const mainNav: NavItem[] = L([
   {
     label: "Journeys",
     href: "/journeys",
@@ -79,8 +80,6 @@ export const mainNav: NavItem[] = [
         links: [
           { label: "Why travel with us", href: "/about" },
           { label: "Our process", href: "/about/our-process" },
-          { label: "Our team", href: "/about/our-team" },
-          { label: "Testimonials", href: "/about/testimonials" },
           { label: "Travel that gives back", href: "/travel-that-gives-back" },
           { label: "Contact", href: "/contact" },
         ],
@@ -88,4 +87,4 @@ export const mainNav: NavItem[] = [
     ],
   },
   { label: "Stories", href: "/stories" },
-];
+]);

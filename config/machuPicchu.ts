@@ -1,17 +1,18 @@
 import type { MPRouteId, Month } from "@/data/types";
+import { L } from "@/lib/i18n";
 
 /**
  * Machu Picchu and Inca Trail rules. These change often.
  * Each rule carries a verifiedAsOf date and official sources. Re-check before every season.
  * PLACEHOLDER: verifiedAsOf dates must be updated by the team after checking the official sources.
  */
-export const officialSources = {
+export const officialSources = L({
   tickets: { label: "Official Machu Picchu ticket site (Ministerio de Cultura)", url: "https://tuboleto.cultura.pe/" },
   ministry: { label: "Ministerio de Cultura del Perú", url: "https://www.gob.pe/cultura" },
   sernanp: { label: "SERNANP (protected areas)", url: "https://www.gob.pe/sernanp" },
   promperu: { label: "PromPerú – Peru.travel", url: "https://www.peru.travel/" },
   migraciones: { label: "Superintendencia Nacional de Migraciones", url: "https://www.gob.pe/migraciones" },
-};
+});
 
 export interface MPRule {
   id: string;
@@ -21,7 +22,7 @@ export interface MPRule {
   sources: { label: string; url: string }[];
 }
 
-export const mpRules: MPRule[] = [
+export const mpRules: MPRule[] = L([
   {
     id: "timed-entry",
     title: "Tickets are timed and named",
@@ -71,7 +72,7 @@ export const mpRules: MPRule[] = [
     verifiedAsOf: "2026-09-01",
     sources: [officialSources.tickets],
   },
-];
+]);
 
 export interface MPRoute {
   id: MPRouteId;
@@ -88,7 +89,7 @@ export interface MPRoute {
   cons: string[];
 }
 
-export const mpRoutes: MPRoute[] = [
+export const mpRoutes: MPRoute[] = L([
   {
     id: "train",
     name: "By train",
@@ -141,7 +142,7 @@ export const mpRoutes: MPRoute[] = [
     pros: ["No Inca Trail permit", "Glaciers to cloud forest in two days", "Lodge options"],
     cons: ["Higher than the Inca Trail", "Wet-season mud"],
   },
-];
+]);
 
 /** Peak months for Machu Picchu demand (verify) */
 export const mpPeakMonths: Month[] = ["May", "Jun", "Jul", "Aug", "Sep"];

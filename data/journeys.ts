@@ -1,5 +1,6 @@
 import { photo } from "./photos";
 import type { Journey, JourneyDay } from "./types";
+import { L } from "@/lib/i18n";
 
 
 /** Shorthand for a day. Altitudes are approximate (verify). */
@@ -26,7 +27,7 @@ const CUSCO: [string, string, number] = ["cusco", "Cusco", 3400];
 const AGUAS: [string, string, number] = ["machu-picchu", "Aguas Calientes", 2040];
 const TAMBOPATA: [string, string, number] = ["tambopata", "Tambopata", 200];
 
-export const journeys: Journey[] = [
+export const journeys: Journey[] = L([
   {
     slug: "first-peru-done-right",
     days: 10,
@@ -266,7 +267,7 @@ export const journeys: Journey[] = [
       d(11, "Fly home", "Boat and flight to Lima to connect home.", ["home", "Departure via Lima", 150], { transport: ["boat", "flight"] }),
     ],
   },
-];
+]);
 
 export const journeyBySlug = (slug: string) => journeys.find((j) => j.slug === slug);
 export const journeysThrough = (destSlug: string) =>

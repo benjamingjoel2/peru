@@ -1,5 +1,6 @@
-import Link from "next/link";
+import Link from "@/components/i18n/Link";
 import type { ComponentProps } from "react";
+import { t } from "@/lib/i18n";
 
 type Variant = "primary" | "secondary" | "ghost" | "light";
 

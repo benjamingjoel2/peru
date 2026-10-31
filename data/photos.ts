@@ -1,8 +1,9 @@
+import { L } from "@/lib/i18n";
 import sources from "./photo-sources.json";
 import type { ImageRef } from "./types";
 
 // Free Unsplash License photos, downloaded to public/photos by scripts/fetch-photos.mjs.
-// Credits are shown on /credits.
+// Unsplash License: no attribution required.
 export interface PhotoSource {
   slot: string;
   alt: string;
@@ -16,5 +17,5 @@ export const photoSources = sources as PhotoSource[];
 export function photo(slot: string): ImageRef {
   const s = photoSources.find((p) => p.slot === slot);
   if (!s) throw new Error(`Unknown photo slot: ${slot}`);
-  return { src: `/photos/${slot}.jpg`, alt: s.alt };
+  return L({ src: `/photos/${slot}.jpg`, alt: s.alt });
 }

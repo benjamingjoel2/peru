@@ -8,25 +8,28 @@ import { routeWarnings, formatM, type ProfilePoint } from "@/lib/altitude";
 import { AltitudeProfile } from "./AltitudeProfile";
 import { plain } from "@/components/ui/Heading";
 import { useEnquire } from "@/components/enquire/EnquireProvider";
+import { L, raw, t } from "@/lib/i18n";
 
 // Places you can sleep: overnight-able destinations with a sensible sleeping altitude
-const sleepable = destinations
+const sleepable = L(
+  destinations
   .filter((d) => !["inca-trail-salkantay", "rainbow-mountain", "nazca-lines"].includes(d.slug))
   .map((d) => ({
     slug: d.slug,
-    name: d.slug === "machu-picchu" ? "Aguas Calientes (Machu Picchu)" : d.slug === "sacred-valley" ? "Sacred Valley" : d.slug === "arequipa-colca" ? "Arequipa" : d.name,
+    name: d.slug === "machu-picchu" ? "Aguas Calientes (Machu Picchu)" : d.slug === "sacred-valley" ? "Sacred Valley" : d.slug === "arequipa-colca" ? "Arequipa" : raw(d).name,
     zone: d.zone,
     // Aguas Calientes is where you actually sleep for Machu Picchu
     m: d.slug === "machu-picchu" ? 2040 : d.elevationM,
   }))
-  .concat([{ slug: "colca", name: "Colca Canyon villages", zone: "southern-andes" as const, m: 3450 }]);
+  .concat([{ slug: "colca", name: "Colca Canyon villages", zone: "southern-andes" as const, m: 3450 }]),
+);
 
 type Stop = { key: number; slug: string; nights: number };
 
-const presets: { label: string; stops: Omit<Stop, "key">[] }[] = [
+const presets: { label: string; stops: Omit<Stop, "key">[] }[] = L([
   { label: "Straight to Cusco (not ideal)", stops: [{ slug: "lima", nights: 1 }, { slug: "cusco", nights: 3 }, { slug: "machu-picchu", nights: 1 }, { slug: "lake-titicaca", nights: 2 }] },
   { label: "Sleep lower first", stops: [{ slug: "lima", nights: 1 }, { slug: "sacred-valley", nights: 2 }, { slug: "machu-picchu", nights: 1 }, { slug: "cusco", nights: 3 }, { slug: "lake-titicaca", nights: 2 }] },
-];
+]);
 
 let keySeq = 100;
 
@@ -41,7 +44,7 @@ export function RouteBuilder() {
     const out: ProfilePoint[] = [];
     stops.forEach((s) => {
       const place = sleepable.find((p) => p.slug === s.slug)!;
-      for (let n = 0; n < s.nights; n++) out.push({ label: `Night ${out.length + 1}`, sublabel: place.name, sleepM: place.m });
+      for (let n = 0; n < s.nights; n++) out.push({ label: t("Night {n}", { n: out.length + 1 }), sublabel: place.name, sleepM: place.m });
     });
     return out.map((p) => ({ ...p, label: p.label.replace("Night", "Day") }));
   }, [stops]);
@@ -58,7 +61,7 @@ export function RouteBuilder() {
       return copy;
     });
     const name = sleepable.find((p) => p.slug === stops[i].slug)?.name;
-    setAnnounce(`${name} moved ${dir < 0 ? "up" : "down"}.`);
+    setAnnounce(dir < 0 ? t("{name} moved up.", { name }) : t("{name} moved down.", { name }));
   };
 
   const loadJourney = (slug: string) => {
@@ -74,7 +77,7 @@ export function RouteBuilder() {
       else out.push({ key: keySeq++, slug: slugGuess, nights: 1 });
     });
     setStops(out);
-    setAnnounce(`Loaded ${plain(j.title)}: ${out.length} stops.`);
+    setAnnounce(t("Loaded {title}: {n} stops.", { title: plain(j.title), n: out.length }));
   };
 
   const input = "min-h-11 rounded-[3px] border-2 border-stone-light bg-cream px-2 text-ink";
@@ -85,25 +88,25 @@ export function RouteBuilder() {
       <div>
         <div className="flex flex-wrap gap-2">
           {presets.map((p) => (
-            <button key={p.label} type="button" onClick={() => { setStops(p.stops.map((s) => ({ ...s, key: keySeq++ }))); setAnnounce(`Loaded: ${p.label}`); }} className="rounded-full border-2 border-indigo px-3 py-1 text-sm font-semibold text-indigo hover:bg-indigo hover:text-cream">
+            <button key={p.label} type="button" onClick={() => { setStops(p.stops.map((s) => ({ ...s, key: keySeq++ }))); setAnnounce(t("Loaded: {name}", { name: p.label })); }} className="rounded-full border-2 border-indigo px-3 py-1 text-sm font-semibold text-indigo hover:bg-indigo hover:text-cream">
               {p.label}
             </button>
           ))}
         </div>
-        <label htmlFor={`${id}-journey`} className="mt-4 block text-sm font-bold text-stone-dark">Or start from one of our journeys</label>
+        <label htmlFor={`${id}-journey`} className="mt-4 block text-sm font-bold text-stone-dark">{t("Or start from one of our journeys")}</label>
         <select id={`${id}-journey`} className={`${input} mt-1 w-full`} defaultValue="" onChange={(e) => loadJourney(e.target.value)}>
-          <option value="" disabled>Choose a journey</option>
-          {journeys.map((j) => <option key={j.slug} value={j.slug}>{j.days} days: {plain(j.title)}</option>)}
+          <option value="" disabled>{t("Choose a journey")}</option>
+          {journeys.map((j) => <option key={j.slug} value={j.slug}>{t("{n} days: {title}", { n: j.days, title: plain(j.title) })}</option>)}
         </select>
 
-        <h3 className="mt-6 font-display text-xl text-indigo">Your stops</h3>
+        <h3 className="mt-6 font-display text-xl text-indigo">{t("Your stops")}</h3>
         <ol className="mt-3 space-y-2">
           {stops.map((s, i) => {
             const place = sleepable.find((p) => p.slug === s.slug)!;
             return (
               <li key={s.key} className="flex flex-wrap items-center gap-2 rounded-sm bg-cream p-2 ring-1 ring-stone-light">
                 <span className="w-6 text-center font-display font-light text-cochineal">{i + 1}</span>
-                <label className="sr-only" htmlFor={`${id}-p-${s.key}`}>Stop {i + 1} place</label>
+                <label className="sr-only" htmlFor={`${id}-p-${s.key}`}>{t("Stop {n} place", { n: i + 1 })}</label>
                 <select id={`${id}-p-${s.key}`} className={`${input} min-w-0 flex-1`} value={s.slug} onChange={(e) => update(s.key, { slug: e.target.value })}>
                   {zones.map((z) => (
                     <optgroup key={z.id} label={z.name}>
@@ -111,20 +114,20 @@ export function RouteBuilder() {
                     </optgroup>
                   ))}
                 </select>
-                <label className="sr-only" htmlFor={`${id}-n-${s.key}`}>Nights at stop {i + 1}</label>
+                <label className="sr-only" htmlFor={`${id}-n-${s.key}`}>{t("Nights at stop {n}", { n: i + 1 })}</label>
                 <input id={`${id}-n-${s.key}`} type="number" min={1} max={14} value={s.nights} onChange={(e) => update(s.key, { nights: Math.max(1, Math.min(14, Number(e.target.value) || 1)) })} className={`${input} w-16`} />
-                <span className="text-xs text-stone-dark">night{s.nights > 1 ? "s" : ""}</span>
+                <span className="text-xs text-stone-dark">{s.nights > 1 ? t("nights") : t("night")}</span>
                 <span className="ml-auto flex gap-1">
-                  <button type="button" className={iconBtn} disabled={i === 0} onClick={() => move(i, -1)} aria-label={`Move ${place.name} up`}>↑</button>
-                  <button type="button" className={iconBtn} disabled={i === stops.length - 1} onClick={() => move(i, 1)} aria-label={`Move ${place.name} down`}>↓</button>
-                  <button type="button" className={iconBtn} disabled={stops.length === 1} onClick={() => { setStops((ss) => ss.filter((x) => x.key !== s.key)); setAnnounce(`${place.name} removed.`); }} aria-label={`Remove ${place.name}`}>×</button>
+                  <button type="button" className={iconBtn} disabled={i === 0} onClick={() => move(i, -1)} aria-label={t("Move {name} up", { name: place.name })}>↑</button>
+                  <button type="button" className={iconBtn} disabled={i === stops.length - 1} onClick={() => move(i, 1)} aria-label={t("Move {name} down", { name: place.name })}>↓</button>
+                  <button type="button" className={iconBtn} disabled={stops.length === 1} onClick={() => { setStops((ss) => ss.filter((x) => x.key !== s.key)); setAnnounce(t("{name} removed.", { name: place.name })); }} aria-label={t("Remove {name}", { name: place.name })}>×</button>
                 </span>
               </li>
             );
           })}
         </ol>
         <div className="mt-3 flex gap-2">
-          <label htmlFor={`${id}-add`} className="sr-only">Add a stop</label>
+          <label htmlFor={`${id}-add`} className="sr-only">{t("Add a stop")}</label>
           <select id={`${id}-add`} className={`${input} min-w-0 flex-1`} value={adding} onChange={(e) => setAdding(e.target.value)}>
             {zones.map((z) => (
               <optgroup key={z.id} label={z.name}>
@@ -132,15 +135,15 @@ export function RouteBuilder() {
               </optgroup>
             ))}
           </select>
-          <button type="button" onClick={() => { setStops((ss) => [...ss, { key: keySeq++, slug: adding, nights: 1 }]); setAnnounce(`${sleepable.find((p) => p.slug === adding)?.name} added.`); }} className="rounded-full bg-indigo px-4 text-[0.72rem] font-semibold uppercase tracking-wider text-cream hover:bg-indigo-deep">
-            Add stop
+          <button type="button" onClick={() => { setStops((ss) => [...ss, { key: keySeq++, slug: adding, nights: 1 }]); setAnnounce(t("{name} added.", { name: sleepable.find((p) => p.slug === adding)?.name ?? "" })); }} className="rounded-full bg-indigo px-4 text-[0.72rem] font-semibold uppercase tracking-wider text-cream hover:bg-indigo-deep">
+            {t("Add stop")}
           </button>
         </div>
         <p className="sr-only" aria-live="polite">{announce}</p>
       </div>
 
       <div className="min-w-0">
-        <AltitudeProfile points={points} title="Your route" />
+        <AltitudeProfile points={points} title={t("Your route")} />
         <div aria-live="polite" className="mt-4">
           {warnings.length ? (
             <ul className="space-y-2">
@@ -152,13 +155,13 @@ export function RouteBuilder() {
               ))}
             </ul>
           ) : (
-            <p className="rounded-sm border-l-4 border-amazon bg-amazon/10 px-4 py-3 text-sm">This route climbs gradually. Nicely paced.</p>
+            <p className="rounded-sm border-l-4 border-amazon bg-amazon/10 px-4 py-3 text-sm">{t("This route climbs gradually. Nicely paced.")}</p>
           )}
           <p className="mt-3 text-xs text-stone-dark">
-            The builder shows sleeping altitudes only, not passes or day trips. General guidance, not medical advice: talk to your doctor before travel.
+            {t("The builder shows sleeping altitudes only, not passes or day trips. General guidance, not medical advice: talk to your doctor before travel.")}
           </p>
           <button type="button" onClick={() => openEnquire()} className="mt-4 min-h-11 rounded-full bg-cochineal px-6 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-cream hover:bg-cochineal-dark">
-            Ask a Specialist to check my route
+            {t("Ask a Specialist to check my route")}
           </button>
         </div>
       </div>

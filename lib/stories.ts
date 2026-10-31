@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import matter from "gray-matter";
+import { currentLocale } from "@/lib/i18n";
 
 export interface StoryMeta {
   slug: string;
@@ -18,7 +19,7 @@ const DIR = join(process.cwd(), "content/stories");
 
 export function getStories(): StoryMeta[] {
   return readdirSync(DIR)
-    .filter((f) => f.endsWith(".mdx"))
+    .filter((f) => /^[a-z0-9-]+\.mdx$/.test(f))
     .map((f) => getStory(f.replace(/\.mdx$/, ""))!.meta)
     .sort((a, b) => b.date.localeCompare(a.date));
 }
@@ -26,7 +27,14 @@ export function getStories(): StoryMeta[] {
 export function getStory(slug: string): { meta: StoryMeta; content: string } | null {
   if (!/^[a-z0-9-]+$/.test(slug)) return null;
   try {
-    const raw = readFileSync(join(DIR, `${slug}.mdx`), "utf8");
+    // Translations sit next to the English file: slug.fr.mdx, slug.de.mdx, slug.es.mdx
+    const locale = currentLocale();
+    let raw: string;
+    try {
+      raw = readFileSync(join(DIR, locale === "en" ? `${slug}.mdx` : `${slug}.${locale}.mdx`), "utf8");
+    } catch {
+      raw = readFileSync(join(DIR, `${slug}.mdx`), "utf8");
+    }
     const { data, content } = matter(raw);
     const words = content.split(/\s+/).length;
     return {

@@ -1,12 +1,13 @@
-import Link from "next/link";
+import Link from "@/components/i18n/Link";
 import { foodById } from "@/data/foods";
 import { journeyBySlug } from "@/data/journeys";
 import type { Journey } from "@/data/types";
 import { Heading, plain } from "@/components/ui/Heading";
 import { JourneyCard, StayCard } from "./Cards";
 import { stays } from "@/data/stays";
+import { t } from "@/lib/i18n";
 
-export function FoodStrip({ ids, title = "What to *eat* here" }: { ids: string[]; title?: string }) {
+export function FoodStrip({ ids, title = t("What to *eat* here") }: { ids: string[]; title?: string }) {
   const items = ids.map(foodById).filter(Boolean);
   if (!items.length) return null;
   return (
@@ -14,7 +15,7 @@ export function FoodStrip({ ids, title = "What to *eat* here" }: { ids: string[]
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <Heading id="eat-title" text={title} size="md" />
-          <Link href="/peru-by-altitude" className="text-sm font-bold uppercase tracking-[0.12em] text-cochineal underline underline-offset-4">Open the food map</Link>
+          <Link href="/peru-by-altitude" className="text-sm font-bold uppercase tracking-[0.12em] text-cochineal underline underline-offset-4">{t("Open the food map")}</Link>
         </div>
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((f) => (
@@ -29,7 +30,7 @@ export function FoodStrip({ ids, title = "What to *eat* here" }: { ids: string[]
   );
 }
 
-export function JourneyGrid({ list, title = "Journeys that *go here*", eyebrow = "Journeys" }: { list: Journey[]; title?: string; eyebrow?: string }) {
+export function JourneyGrid({ list, title = t("Journeys that *go here*"), eyebrow = t("Journeys") }: { list: Journey[]; title?: string; eyebrow?: string }) {
   if (!list.length) return null;
   return (
     <section aria-labelledby="jg-title" className="container-x py-16">
@@ -41,12 +42,12 @@ export function JourneyGrid({ list, title = "Journeys that *go here*", eyebrow =
   );
 }
 
-export function StayGrid({ destination, slugs, title = "Where to *stay*" }: { destination?: string; slugs?: string[]; title?: string }) {
+export function StayGrid({ destination, slugs, title = t("Where to *stay*") }: { destination?: string; slugs?: string[]; title?: string }) {
   const list = stays.filter((s) => (slugs ? slugs.includes(s.slug) : s.destination === destination));
   if (!list.length) return null;
   return (
     <section aria-labelledby="stay-title" className="container-x py-16">
-      <Heading id="stay-title" eyebrow="Accommodation" text={title} size="md" />
+      <Heading id="stay-title" eyebrow={t("Accommodation")} text={title} size="md" />
       <div className="mt-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((s) => <StayCard key={s.slug} s={s} />)}
       </div>

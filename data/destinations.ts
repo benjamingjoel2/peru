@@ -1,9 +1,10 @@
 import { photo } from "./photos";
 import type { Destination, ZoneId } from "./types";
+import { L } from "@/lib/i18n";
 
 
 // All elevations are approximate and marked "verify" in the UI.
-export const destinations: Destination[] = [
+export const destinations: Destination[] = L([
   // ── The Coast ──────────────────────────────────────────────
   {
     slug: "lima",
@@ -310,7 +311,7 @@ export const destinations: Destination[] = [
     timeNeeded: "3–4 nights",
     image: photo("mancora"),
   },
-];
+]);
 
 export const destinationBySlug = (slug: string) => destinations.find((d) => d.slug === slug);
 export const destinationsByZone = (zone: ZoneId) => destinations.filter((d) => d.zone === zone);

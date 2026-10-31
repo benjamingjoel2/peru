@@ -1,0 +1,18 @@
+// Cloudflare Workers config for the OpenNext build (`npm run cf-build`, `npm run preview`, `npm run deploy`).
+// Vercel ignores this file; `next build` is unchanged.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "peru",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    // Self-reference used by OpenNext's cache layer; must match "name".
+    { "binding": "WORKER_SELF_REFERENCE", "service": "peru" }
+  ],
+  "observability": { "enabled": true }
+}

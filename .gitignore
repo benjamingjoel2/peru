@@ -8,3 +8,12 @@ next-env.d.ts
 .DS_Store
 .env*
 public/img
+
+# Cloudflare Workers (OpenNext / wrangler)
+/.open-next/
+/.wrangler/
+.dev.vars*
+!.dev.vars.example
+
+# Itinerary PDFs rendered at build time (scripts/build-itineraries.mjs)
+lib/itineraryPdfs.generated.mjs

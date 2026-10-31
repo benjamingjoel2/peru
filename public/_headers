@@ -1,0 +1,7 @@
+# Cloudflare Workers static-asset headers (https://developers.cloudflare.com/workers/static-assets/headers).
+# Mirrors headers() in next.config.ts, which Workers does not apply to files served from assets.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000

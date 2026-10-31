@@ -1,3 +1,4 @@
+// Design for the default share image. Not a route: `npm run og-image` renders it to app/opengraph-image.png.
 import { ImageResponse } from "next/og";
 import { site } from "@/config/site";
 

@@ -21,6 +21,27 @@ npm run test:smoke   # every sitemap route, mobile + desktop: status, console er
 npm run test:e2e     # mega-menu, mobile drawer, enquire modal, gated PDF, altitude chart, route builder, food map, currency…
 ```
 
+
+## Cloudflare Workers (OpenNext)
+
+The site also runs on Cloudflare Workers through the [OpenNext adapter](https://opennext.js.org/cloudflare). This sits alongside Vercel: `npm run build` / `next build` and the Vercel deployment are unchanged.
+
+```
+npm run cf-build   # opennextjs-cloudflare build: runs `npm run build` (with its prebuild hook), then bundles .open-next/
+npm run preview    # build, then serve the Worker locally in workerd (http://localhost:8787)
+npm run deploy     # build, then deploy to Cloudflare (needs a Cloudflare account / `wrangler login`)
+```
+
+- `wrangler.jsonc`: Worker name `peru`, `nodejs_compat`, static assets from `.open-next/assets`.
+- `open-next.config.ts`: every page is prerendered and nothing revalidates, so prerendered pages are served read-only from Workers static assets (no R2 or KV to create). If ISR / `revalidate` is added later, switch to the R2 incremental cache.
+- `public/_headers`: cache headers for static files (Workers serves them before Next's `headers()` would run). Redirects in `next.config.ts` are handled by the Worker.
+- Use `npm run preview` (not bare `wrangler dev`) to test locally: it copies the prerendered pages into the assets before starting.
+- `npm run cf-build` runs `npm run build`, so the `prebuild` image step (`scripts/build-images.mjs`, which generates `public/img`) runs on Cloudflare too.
+- Set `ITINERARY_TOKEN_SECRET` as a Worker secret (`wrangler secret put ITINERARY_TOKEN_SECRET`) before going live.
+- **Itinerary PDFs are rendered at build time.** `scripts/build-itineraries.mjs` (run by `prebuild`, `predev` and `pretypecheck`; also `npm run itineraries`) renders `components/pdf/ItineraryDocument.tsx` for every journey into `lib/itineraryPdfs.generated.mjs` (git-ignored). `/api/itinerary/[slug]` still checks the download token and serves those bytes, so `@react-pdf/renderer` never reaches the server bundle. Rebuild after editing journeys or the PDF layout (dev and build do it for you).
+- **The default share image is a static file.** `app/opengraph-image.png` is rendered from `scripts/og/opengraph-image.tsx` with `npm run og-image`; run it and commit the PNG after editing the design. It used to be a `next/og` route, which pulled `@vercel/og` (resvg and yoga WebAssembly) into the Worker.
+- The Worker is about 2.2 MiB gzipped (`npx wrangler deploy --dry-run --outdir /tmp/cf-dry` prints it), under the Workers Free limit of 3 MiB. Keep heavy libraries (PDF, image rendering, parsers) out of request-time code: render at build time instead.
+
 ## Where things live
 
 | What | Where |

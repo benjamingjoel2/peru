@@ -17,3 +17,7 @@ public/img
 
 # Itinerary PDFs rendered at build time (scripts/build-itineraries.mjs)
 lib/itineraryPdfs.generated.mjs
+
+# Cloudflare Pages build output
+/dist-pages
+/.cf-bundle

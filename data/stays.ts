@@ -1,10 +1,11 @@
 import { photo } from "./photos";
 import type { Stay } from "./types";
+import { L } from "@/lib/i18n";
 
 
 // Stays are described by place, not by hotel name, until partner properties are confirmed
 // (see IMAGES-NEEDED.md: each needs the partner's own photography once named).
-export const stays: Stay[] = [
+export const stays: Stay[] = L([
   {
     slug: "casa-brisa-miraflores",
     name: "A garden house in Miraflores",
@@ -149,6 +150,6 @@ export const stays: Stay[] = [
     isPlaceholder: true,
     image: photo("stay-trujillo"),
   },
-];
+]);
 
 export const stayBySlug = (slug: string) => stays.find((s) => s.slug === slug);

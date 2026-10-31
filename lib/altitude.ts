@@ -1,33 +1,34 @@
 import type { AltitudeTip } from "@/data/types";
+import { L } from "@/lib/i18n";
 
 export type BandId = "low" | "mid" | "high" | "veryhigh";
 
-export const altitudeBands: { id: BandId; label: string; min: number; max: number; color: string; advice: string }[] = [
+export const altitudeBands: { id: BandId; label: string; min: number; max: number; color: string; advice: string }[] = L([
   { id: "low", label: "Low", min: 0, max: 1500, color: "var(--color-band-low)", advice: "No altitude effects expected." },
   { id: "mid", label: "Moderate", min: 1500, max: 2500, color: "var(--color-band-mid)", advice: "Few people notice it. A good place to sleep while you adjust." },
   { id: "high", label: "High", min: 2500, max: 3500, color: "var(--color-band-high)", advice: "Most people notice it at first. Take the first day easy and drink plenty of water." },
   { id: "veryhigh", label: "Very high", min: 3500, max: 9000, color: "var(--color-band-veryhigh)", advice: "Sleep here only after acclimatising lower down. Go slowly." },
-];
+]);
 
 /** Hex equivalents for contexts without CSS variables (PDF). */
-export const bandHex: Record<BandId, string> = {
+export const bandHex: Record<BandId, string> = L({
   low: "#3a8fb7",
   mid: "#1f7d45",
   high: "#e0a526",
   veryhigh: "#b3283c",
-};
+});
 
 export function bandFor(m: number) {
   return altitudeBands.find((b) => m >= b.min && m < b.max) ?? altitudeBands[altitudeBands.length - 1];
 }
 
-export const tipText: Record<AltitudeTip, string> = {
+export const tipText: Record<AltitudeTip, string> = L({
   "sleep-lower": "Sleep lower first",
   "take-it-easy": "Take it easy today",
   hydrate: "Drink plenty of water",
   "big-day": "Big day: start slow, go steady",
   descend: "Heading lower: easier breathing",
-};
+});
 
 export const formatM = (m: number) => `${m.toLocaleString("en-GB")} m`;
 export const formatFt = (m: number) => `${Math.round(m * 3.28084).toLocaleString("en-GB")} ft`;

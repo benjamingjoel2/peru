@@ -1,10 +1,11 @@
-import Link from "next/link";
+import Link from "@/components/i18n/Link";
 import { site } from "@/config/site";
 import { Logo } from "./Logo";
 import { StoneDivider } from "@/components/ui/Stone";
 import { Newsletter } from "./Newsletter";
+import { t, L } from "@/lib/i18n";
 
-const columns = [
+const columns = L([
   {
     title: "Explore",
     links: [
@@ -34,7 +35,7 @@ const columns = [
       { label: "Contact", href: "/contact" },
     ],
   },
-];
+]);
 
 export function Footer() {
   const c = site.contact;
@@ -61,8 +62,8 @@ export function Footer() {
               <Logo light />
               <ul className="mt-4 space-y-1 text-sm">
                 <li><a href={`mailto:${c.email}`} className="hover:text-mustard">{c.email}</a></li>
-                <li>{c.hours} ({c.timezoneLabel})</li>
-                <li>{site.address.full}</li>
+                <li>{t(c.hours)} ({t(c.timezoneLabel)})</li>
+                <li>{t(site.address.full)}</li>
               </ul>
             </div>
           </div>
@@ -70,11 +71,11 @@ export function Footer() {
       </div>
       <div className="container-x border-t border-cream/15 py-6 text-xs leading-relaxed text-cream/65">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {site.name}. {t("All rights reserved.")}</p>
           <ul className="flex gap-4">
-            <li><Link href="/legal/privacy" className="hover:text-mustard">Privacy policy</Link></li>
-            <li><Link href="/legal/booking-terms" className="hover:text-mustard">Booking terms</Link></li>
-            <li><Link href="/legal/cookies" className="hover:text-mustard">Cookie policy</Link></li>
+            <li><Link href="/legal/privacy" className="hover:text-mustard">{t("Privacy policy")}</Link></li>
+            <li><Link href="/legal/booking-terms" className="hover:text-mustard">{t("Booking terms")}</Link></li>
+            <li><Link href="/legal/cookies" className="hover:text-mustard">{t("Cookie policy")}</Link></li>
           </ul>
         </div>
       </div>

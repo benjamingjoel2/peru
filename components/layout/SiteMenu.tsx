@@ -1,8 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { mainNav, type NavLink } from "@/lib/nav";
+import Link from "@/components/i18n/Link";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { NavItem, NavLink } from "@/lib/nav";
+import { t } from "@/lib/i18n";
+import { LanguageSelector } from "@/components/i18n/LanguageSelector";
 import { site } from "@/config/site";
 import { Logo } from "./Logo";
 
@@ -12,17 +14,19 @@ type Node = { label: string; href: string; note?: string; children?: Node[] };
 const toNode = (l: NavLink): Node => ({ label: l.label, href: l.href, note: l.note });
 
 // Normalise the nav into up to three levels: section → group → link
-const tree: Node[] = mainNav.map((item) => {
-  if (!item.groups) return { label: item.label, href: item.href };
-  if (item.groups.length === 1) return { label: item.label, href: item.href, children: item.groups[0].links.map(toNode) };
-  return { label: item.label, href: item.href, children: item.groups.map((g) => ({ label: g.label, href: g.href, children: g.links.map(toNode) })) };
-});
+const toTree = (nav: NavItem[]): Node[] =>
+  nav.map((item) => {
+    if (!item.groups) return { label: item.label, href: item.href };
+    if (item.groups.length === 1) return { label: item.label, href: item.href, children: item.groups[0].links.map(toNode) };
+    return { label: item.label, href: item.href, children: item.groups.map((g) => ({ label: g.label, href: g.href, children: g.links.map(toNode) })) };
+  });
 
 /**
  * Full-screen, three-level menu in a native modal dialog (focus trap + Esc for free).
  * Desktop: columns open on hover/focus. Mobile: one level at a time with Back.
  */
-export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: () => void; initial?: string }) {
+export function SiteMenu({ nav, open, onClose, initial }: { nav: NavItem[]; open: boolean; onClose: () => void; initial?: string }) {
+  const tree = useMemo(() => toTree(nav), [nav]);
   const ref = useRef<HTMLDialogElement>(null);
   const [a1, setA1] = useState<number | null>(null);
   const [a2, setA2] = useState<number | null>(null);
@@ -40,7 +44,7 @@ export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: (
       document.documentElement.style.overflow = "hidden";
     }
     if (!open && d.open) d.close();
-  }, [open, initial]);
+  }, [open, initial, tree]);
 
   const l1 = a1 !== null ? tree[a1] : null;
   const l2 = l1?.children && a2 !== null ? l1.children[a2] : null;
@@ -82,7 +86,7 @@ export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: (
 
   const exploreAll = (n: Node) => (
     <Link href={n.href} onClick={onClose} className="eyebrow mb-4 inline-flex items-center gap-2 text-cochineal underline underline-offset-4">
-      All {n.label}
+      {t("All: {name}", { name: n.label })}
     </Link>
   );
 
@@ -90,7 +94,7 @@ export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: (
     <dialog
       ref={ref}
       id="site-menu"
-      aria-label="Menu"
+      aria-label={t("Menu")}
       onClose={() => {
         document.documentElement.style.overflow = "";
         onClose();
@@ -102,9 +106,9 @@ export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: (
         <aside className="on-dark hidden w-[260px] shrink-0 flex-col justify-between bg-indigo-deep p-8 text-cream/85 lg:flex">
           <Logo light />
           <div className="space-y-2 text-sm">
-            <p className="eyebrow text-mustard">Talk to a Peru Specialist</p>
+            <p className="eyebrow text-mustard">{t("Talk to a Peru Specialist")}</p>
             <p><a href={`mailto:${site.contact.email}`} className="text-[0.8rem] [overflow-wrap:anywhere] hover:text-mustard">{site.contact.email}</a></p>
-            <p>{site.contact.hours}<br />({site.contact.timezoneLabel})</p>
+            <p>{t(site.contact.hours)}<br />({t(site.contact.timezoneLabel)})</p>
           </div>
           <div className="woven-stripe -mx-8 -mb-8" aria-hidden />
         </aside>
@@ -113,20 +117,20 @@ export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: (
           <div className="flex items-center justify-between border-b border-stone-light px-5 py-4 lg:px-10">
             {depth > 0 ? (
               <button type="button" onClick={() => setDepth((d) => d - 1)} className="flex items-center gap-2 py-2 text-sm font-bold uppercase tracking-[0.14em] text-cochineal lg:hidden">
-                <span aria-hidden>←</span> Back
+                <span aria-hidden>←</span> {t("Back")}
               </button>
             ) : (
               <span className="lg:hidden"><Logo /></span>
             )}
-            <span className="eyebrow hidden text-stone-dark lg:block">Explore Peru</span>
-            <button type="button" onClick={onClose} className="flex items-center gap-2 py-2 text-sm font-bold uppercase tracking-[0.14em] text-indigo" aria-label="Close menu">
-              Close <span aria-hidden className="text-2xl leading-none">×</span>
+            <span className="eyebrow hidden text-stone-dark lg:block">{t("Explore Peru")}</span>
+            <button type="button" onClick={onClose} className="flex items-center gap-2 py-2 text-sm font-bold uppercase tracking-[0.14em] text-indigo" aria-label={t("Close menu")}>
+              {t("Close")} <span aria-hidden className="text-2xl leading-none">×</span>
             </button>
           </div>
 
           {/* Desktop: three columns */}
           <div className="hidden flex-1 grid-cols-[1.1fr_1fr_1fr] gap-10 overflow-y-auto px-10 py-12 lg:grid">
-            <nav aria-label="Sections">
+            <nav aria-label={t("Sections")}>
               {col(tree, 1, a1, (i) => { setA1(i); setA2(null); })}
             </nav>
             <div className="border-l border-stone-light pl-10">
@@ -162,9 +166,10 @@ export function SiteMenu({ open, onClose, initial }: { open: boolean; onClose: (
                 {col(l2.children, 3, null)}
               </>
             )}
-            <div className="mt-10 space-y-1 text-sm text-stone-dark">
+            <LanguageSelector className="mt-10 text-sm font-semibold text-indigo lg:hidden" linkClassName="hover:text-cochineal" />
+            <div className="mt-6 space-y-1 text-sm text-stone-dark">
               <p><a className="font-semibold text-indigo" href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>
-              <p>{site.contact.hours} ({site.contact.timezoneLabel})</p>
+              <p>{t(site.contact.hours)} ({t(site.contact.timezoneLabel)})</p>
             </div>
           </div>
         </div>

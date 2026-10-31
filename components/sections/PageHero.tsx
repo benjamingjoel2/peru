@@ -1,13 +1,14 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/i18n/Link";
 import { Emph } from "@/components/ui/Heading";
 import { JsonLd, breadcrumbLd } from "@/lib/seo";
+import { t } from "@/lib/i18n";
 
 type Crumb = { name: string; path: string };
 
 function Breadcrumb({ all, light }: { all: Crumb[]; light?: boolean }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-5 text-[0.72rem] font-medium uppercase tracking-[0.16em]">
+    <nav aria-label={t("Breadcrumb")} className="mb-5 text-[0.72rem] font-medium uppercase tracking-[0.16em]">
       <ol className={`flex flex-wrap items-center gap-2 ${light ? "text-cream/80" : "text-stone-dark"}`}>
         {all.map((c, i) => (
           <li key={c.path} className="flex items-center gap-2">
@@ -43,7 +44,7 @@ export function PageHero({
   crumbs?: Crumb[];
   children?: React.ReactNode;
 }) {
-  const all = [{ name: "Home", path: "/" }, ...crumbs];
+  const all = [{ name: t("Home"), path: "/" }, ...crumbs];
   return (
     <>
       {image ? (

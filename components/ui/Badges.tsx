@@ -1,3 +1,4 @@
+import { t } from "@/lib/i18n";
 /** Clearly flags placeholder content until it's real. */
 export function PlaceholderBadge({ label = "Placeholder", className = "" }: { label?: string; className?: string }) {
   return (
@@ -13,10 +14,10 @@ export function PlaceholderBadge({ label = "Placeholder", className = "" }: { la
 export function Verify({ note, className = "" }: { note?: string; className?: string }) {
   return (
     <abbr
-      title={note ?? "Approximate. Verify before travel."}
+      title={note ?? t("Approximate. Verify before travel.")}
       className={`ml-1 inline-block rounded-sm bg-mustard/25 px-1.5 align-middle text-[0.65rem] font-bold uppercase tracking-wider text-stone-dark no-underline ${className}`}
     >
-      verify
+      {t("verify")}
     </abbr>
   );
 }

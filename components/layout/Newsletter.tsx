@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { t } from "@/lib/i18n";
 
 /** Newsletter sign-up, shown in the footer's left column. */
 export function Newsletter() {
@@ -20,21 +21,21 @@ export function Newsletter() {
 
   return (
     <section aria-labelledby="newsletter-heading">
-      <p className="eyebrow text-mustard">Newsletter</p>
+      <p className="eyebrow text-mustard">{t("Newsletter")}</p>
       <h2 id="newsletter-heading" className="mt-3 font-display text-3xl text-cream sm:text-4xl">
-        Peru in your <em>inbox</em>
+        {t("Peru in your")} <em>{t("inbox")}</em>
       </h2>
       <p className="mt-3 max-w-md text-cream/80">
-        One letter a month: permit dates, the best months to go, and what we&apos;re eating. No spam, unsubscribe any time.
+        {t("One letter a month: permit dates, the best months to go, and what we're eating. No spam, unsubscribe any time.")}
       </p>
       {state === "done" ? (
         <p role="status" className="mt-6 font-display text-2xl text-mustard">
-          Gracias. You&apos;re on the list.
+          {t("Gracias. You're on the list.")}
         </p>
       ) : (
         <form onSubmit={onSubmit} className="mt-6 flex max-w-md flex-col gap-3 sm:flex-row">
           <label htmlFor="nl-email" className="sr-only">
-            Email address
+            {t("Email address")}
           </label>
           <input
             id="nl-email"
@@ -42,7 +43,7 @@ export function Newsletter() {
             type="email"
             required
             autoComplete="email"
-            placeholder="Your email address"
+            placeholder={t("Your email address")}
             className="min-h-12 flex-1 rounded-[3px] border-2 border-cream/40 bg-transparent px-4 text-cream placeholder:text-cream/60 focus:border-mustard"
           />
           {/* Honeypot */}
@@ -52,11 +53,11 @@ export function Newsletter() {
             disabled={state === "sending"}
             className="min-h-12 rounded-full bg-mustard px-6 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-indigo-deep hover:bg-mustard-soft disabled:opacity-60"
           >
-            {state === "sending" ? "Sending…" : "Subscribe"}
+            {state === "sending" ? "Sending…" : t("Subscribe")}
           </button>
           {state === "error" && (
             <p role="alert" className="text-sm font-semibold text-mustard-soft sm:basis-full">
-              Something went wrong. Please try again.
+              {t("Something went wrong. Please try again.")}
             </p>
           )}
         </form>

@@ -2,8 +2,9 @@ import { Emph } from "@/components/ui/Heading";
 import { StoneMask } from "@/components/ui/StoneMask";
 import { photo } from "@/data/photos";
 import { ArrowLink } from "@/components/ui/Button";
+import { t, L } from "@/lib/i18n";
 
-const values = [
+const values = L([
   {
     name: "Pace",
     color: "bg-cochineal",
@@ -14,7 +15,7 @@ const values = [
     color: "bg-mustard",
     body: "In the Andes, ayni means reciprocity: what you receive, you give back. Weaving cooperatives and community homestays are paid fairly and directly, and our trek teams' porters are paid, equipped and loaded properly.",
   },
-];
+]);
 
 /** Centred section on deep green: the dedicated planner, and two values joined by a woven thread. */
 export function ValuesIntro() {
@@ -22,12 +23,12 @@ export function ValuesIntro() {
   return (
     <section aria-labelledby="values-title" className="on-dark relative overflow-hidden bg-amazon-deep py-20 text-cream lg:py-28">
       <div className="container-x text-center">
-        <p className="eyebrow text-mustard-soft">Why travel with us</p>
+        <p className="eyebrow text-mustard-soft">{t("Why travel with us")}</p>
         <h2 id="values-title" className="mt-4 text-4xl text-cream sm:text-5xl">
-          <Emph text="Your own *Peru Specialist*" />
+          <Emph text={t("Your own *Peru Specialist*")} />
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-cream/85">
-          One person plans your trip from first call to flight home. They know which nights to spend lower down, which train to catch, when Inca Trail permits open and where to eat in every town.
+          {t("One person plans your trip from first call to flight home. They know which nights to spend lower down, which train to catch, when Inca Trail permits open and where to eat in every town.")}
         </p>
       </div>
 
@@ -50,8 +51,8 @@ export function ValuesIntro() {
       </div>
 
       <div className="container-x mt-14 flex flex-wrap justify-center gap-8">
-        <ArrowLink href="/about/our-process">How we plan</ArrowLink>
-        <ArrowLink href="/travel-that-gives-back">Travel that gives back</ArrowLink>
+        <ArrowLink href="/about/our-process">{t("How we plan")}</ArrowLink>
+        <ArrowLink href="/travel-that-gives-back">{t("Travel that gives back")}</ArrowLink>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import type { Faq } from "./types";
+import { L } from "@/lib/i18n";
 
-export const faqs: Faq[] = [
+export const faqs: Faq[] = L([
   {
     id: "altitude-sickness",
     q: "Will I get altitude sickness?",
@@ -135,4 +136,4 @@ export const faqs: Faq[] = [
       "Our booking terms set out how deposits, changes and cancellations work. Comprehensive travel insurance is essential from the day you book.",
     ],
   },
-];
+]);

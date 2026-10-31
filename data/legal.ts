@@ -1,4 +1,5 @@
 import { site } from "@/config/site";
+import { L } from "@/lib/i18n";
 
 export type LegalPage = { title: string; description: string; updated: string; intro: string; sections: { h: string; p: string[] }[] };
 
@@ -6,7 +7,7 @@ const brand = site.name;
 const email = site.contact.email;
 const address = site.address.full;
 
-export const legalPages: Record<string, LegalPage> = {
+export const legalPages: Record<string, LegalPage> = L({
   privacy: {
     title: "Privacy policy",
     description: "How Discover Peru Travel collects, uses and protects your personal data.",
@@ -91,4 +92,4 @@ export const legalPages: Record<string, LegalPage> = {
       { h: "Questions", p: [`Email ${email} with any questions about this policy.`] },
     ],
   },
-};
+});

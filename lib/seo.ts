@@ -3,16 +3,23 @@ import type { Metadata } from "next";
 import { site } from "@/config/site";
 import type { Faq, Journey } from "@/data/types";
 import { plain } from "@/components/ui/Heading";
+import { currentLocale, localizePath, locales, ogLocale, t } from "@/lib/i18n";
+import "@/lib/i18n/server";
 
 export function pageMeta({ title, description, path, image }: { title: string; description: string; path: string; image?: string }): Metadata {
+  const locale = currentLocale();
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: {
+      canonical: localizePath(path, locale),
+      languages: { ...Object.fromEntries(locales.map((l) => [l, localizePath(path, l)])), "x-default": path },
+    },
     openGraph: {
       title,
       description,
-      url: path,
+      url: localizePath(path, locale),
+      locale: ogLocale[locale],
       // SVG placeholders are not valid social images, so fall back to the generated site image
       images: [image && !image.endsWith(".svg") ? { url: image } : { url: "/opengraph-image", width: 1200, height: 630, alt: site.name }],
     },
@@ -31,7 +38,8 @@ export const organizationLd = () => ({
   "@type": "TravelAgency",
   name: site.name,
   url: site.url,
-  slogan: site.promise,
+  slogan: t(site.promise),
+  description: t(site.description),
   email: site.contact.email,
   areaServed: { "@type": "Country", name: "Peru" },
   address: {
@@ -53,20 +61,21 @@ export const faqLd = (faqs: Faq[]) => ({
 export const tripLd = (j: Journey) => ({
   "@context": "https://schema.org",
   "@type": "TouristTrip",
-  name: `${j.days} days: ${plain(j.title)}`,
+  name: t("{n} days: {title}", { n: j.days, title: plain(j.title) }),
   description: j.summary,
-  url: `${site.url}/journeys/${j.slug}`,
+  url: `${site.url}${localizePath(`/journeys/${j.slug}`, currentLocale())}`,
+  inLanguage: currentLocale(),
   touristType: j.tags,
   provider: { "@type": "TravelAgency", name: site.name, url: site.url },
-  offers: { "@type": "Offer", priceCurrency: "USD", price: j.fromPriceUSD, description: "From price per person" },
+  offers: { "@type": "Offer", priceCurrency: "USD", price: j.fromPriceUSD, description: t("From price per person") },
   itinerary: {
     "@type": "ItemList",
-    itemListElement: j.itinerary.map((d) => ({ "@type": "ListItem", position: d.day, name: `Day ${d.day}: ${d.title}`, description: d.summary })),
+    itemListElement: j.itinerary.map((d) => ({ "@type": "ListItem", position: d.day, name: `${t("Day {n}", { n: d.day })}: ${d.title}`, description: d.summary })),
   },
 });
 
 export const breadcrumbLd = (items: { name: string; path: string }[]) => ({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
-  itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, item: `${site.url}${it.path}` })),
+  itemListElement: items.map((it, i) => ({ "@type": "ListItem", position: i + 1, name: it.name, item: `${site.url}${localizePath(it.path, currentLocale())}` })),
 });

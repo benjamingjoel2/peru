@@ -2,6 +2,7 @@
 
 import { useId, useMemo, useRef, useState } from "react";
 import { altitudeBands, bandFor, formatFt, formatM, tipText, type ProfilePoint } from "@/lib/altitude";
+import { t } from "@/lib/i18n";
 
 type Props = {
   points: ProfilePoint[];
@@ -32,17 +33,25 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
   const y = (m: number) => PAD.top + innerH - (m / yMax) * innerH;
 
   const summary = useMemo(() => {
-    if (!points.length) return "No nights added yet.";
+    if (!points.length) return t("No nights added yet.");
     const highest = points.reduce((a, b, i) => (b.sleepM > points[a].sleepM ? i : a), 0);
     const peak = points.reduce((a, b, i) => ((b.maxM ?? b.sleepM) > (points[a].maxM ?? points[a].sleepM) ? i : a), 0);
     const veryHighNights = points.filter((p) => p.sleepM >= 3500).length;
-    return `${points.length} days. Highest night: ${points[highest].sublabel ?? points[highest].label}, about ${formatM(points[highest].sleepM)} (day ${highest + 1}). Highest point: about ${formatM(points[peak].maxM ?? points[peak].sleepM)}${points[peak].maxLabel ? ` at ${points[peak].maxLabel}` : ""} (day ${peak + 1}). ${veryHighNights} night${veryHighNights === 1 ? "" : "s"} above 3,500 m. All altitudes approximate (verify).`;
+    return [
+      t("{n} days.", { n: points.length }),
+      t("Highest night: {place}, about {m} (day {day}).", { place: points[highest].sublabel ?? points[highest].label, m: formatM(points[highest].sleepM), day: highest + 1 }),
+      points[peak].maxLabel
+        ? t("Highest point: about {m} at {place} (day {day}).", { m: formatM(points[peak].maxM ?? points[peak].sleepM), place: points[peak].maxLabel, day: peak + 1 })
+        : t("Highest point: about {m} (day {day}).", { m: formatM(points[peak].maxM ?? points[peak].sleepM), day: peak + 1 }),
+      t("Nights above 3,500 m: {n}.", { n: veryHighNights }),
+      t("All altitudes approximate (verify)."),
+    ].join(" ");
   }, [points]);
 
   const describe = (i: number) => {
     const p = points[i];
-    const parts = [`${p.label}: sleep in ${p.sublabel ?? "—"}, about ${formatM(p.sleepM)} (${bandFor(p.sleepM).label.toLowerCase()})`];
-    if (p.maxM && p.maxM > p.sleepM) parts.push(`highest point about ${formatM(p.maxM)}${p.maxLabel ? ` at ${p.maxLabel}` : ""}`);
+    const parts = [t("{day}: sleep in {place}, about {m} ({band})", { day: p.label, place: p.sublabel ?? "—", m: formatM(p.sleepM), band: bandFor(p.sleepM).label.toLowerCase() })];
+    if (p.maxM && p.maxM > p.sleepM) parts.push(p.maxLabel ? t("highest point about {m} at {place}", { m: formatM(p.maxM), place: p.maxLabel }) : t("highest point about {m}", { m: formatM(p.maxM) }));
     if (p.tip) parts.push(tipText[p.tip]);
     return parts.join(". ") + ".";
   };
@@ -89,7 +98,7 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
       </figcaption>
 
       {/* Legend: band names + ranges; identity never by colour alone */}
-      <ul className="mb-3 flex flex-wrap gap-x-4 gap-y-1 text-xs font-semibold text-stone-dark" aria-label="Altitude bands">
+      <ul className="mb-3 flex flex-wrap gap-x-4 gap-y-1 text-xs font-semibold text-stone-dark" aria-label={t("Altitude bands")}>
         {altitudeBands.map((b) => (
           <li key={b.id} className="flex items-center gap-1.5">
             <span aria-hidden className="inline-block h-3 w-3 rounded-full ring-2 ring-cream" style={{ background: b.color }} />
@@ -98,7 +107,7 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
         ))}
         <li className="flex items-center gap-1.5">
           <svg aria-hidden width="18" height="10"><path d="M1 9 L9 1 L17 9" fill="none" stroke="var(--color-stone-dark)" strokeWidth="2" strokeDasharray="3 2" /></svg>
-          Day&apos;s high point
+          {t("Day's high point")}
         </li>
       </ul>
 
@@ -106,8 +115,8 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
         <svg
           ref={svgRef}
           role="application"
-          aria-roledescription="altitude chart"
-          aria-label={`${title}. Use left and right arrow keys to move between days.`}
+          aria-roledescription={t("altitude chart")}
+          aria-label={`${title}. ${t("Use left and right arrow keys to move between days.")}`}
           aria-describedby={`${id}-sum`}
           tabIndex={0}
           onKeyDown={onKey}
@@ -136,7 +145,7 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
             <g key={m}>
               <line x1={PAD.left - 8} x2={PAD.left + innerW + 8} y1={y(m)} y2={y(m)} stroke="var(--color-stone-light)" strokeWidth={1} />
               <text x={PAD.left - 14} y={y(m)} textAnchor="end" dominantBaseline="middle" className="fill-stone-dark text-[11px]">
-                {m === 0 ? "Sea level" : `${m / 1000}k m`}
+                {m === 0 ? t("Sea level") : `${m / 1000}k m`}
               </text>
             </g>
           ))}
@@ -176,7 +185,7 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
               </g>
             );
           })}
-          <text x={PAD.left - 14} y={H - PAD.bottom + 38} textAnchor="end" className="fill-stone-dark text-[10px]">{compact ? "" : "Sleep (m)"}</text>
+          <text x={PAD.left - 14} y={H - PAD.bottom + 38} textAnchor="end" className="fill-stone-dark text-[10px]">{compact ? "" : t("Sleep (m)")}</text>
         </svg>
       </div>
 
@@ -189,31 +198,31 @@ export function AltitudeProfile({ points, title, compact = false, className = ""
               {a.sublabel ? `: ${a.sublabel}` : ""}
             </p>
             <p className="text-stone-dark">
-              Sleep about <strong>{formatM(a.sleepM)}</strong> ({formatFt(a.sleepM)}) · {bandFor(a.sleepM).label}
-              {a.maxM && a.maxM > a.sleepM ? <> · High point about <strong>{formatM(a.maxM)}</strong>{a.maxLabel ? ` (${a.maxLabel})` : ""}</> : null}
+              {t("Sleep about")} <strong>{formatM(a.sleepM)}</strong> ({formatFt(a.sleepM)}) · {bandFor(a.sleepM).label}
+              {a.maxM && a.maxM > a.sleepM ? <> {t("· High point about")} <strong>{formatM(a.maxM)}</strong>{a.maxLabel ? ` (${a.maxLabel})` : ""}</> : null}
             </p>
             {a.tip && <p className="mt-1 font-semibold text-cochineal">{tipText[a.tip]}</p>}
           </div>
         ) : (
           <p className="text-stone-dark">
-            Hover, tap or use the arrow keys on the chart to see each night. Altitudes are approximate (verify). This is general guidance, not medical advice.
+            {t("Hover, tap or use the arrow keys on the chart to see each night. Altitudes are approximate (verify). This is general guidance, not medical advice.")}
           </p>
         )}
       </div>
 
       {!compact && (
         <details className="mt-3 text-sm">
-          <summary className="cursor-pointer font-bold text-cochineal">Show as a table</summary>
+          <summary className="cursor-pointer font-bold text-cochineal">{t("Show as a table")}</summary>
           <div className="mt-2 overflow-x-auto">
             <table className="w-full min-w-[520px] border-collapse text-left">
-              <caption className="sr-only">{title}: altitude by day</caption>
+              <caption className="sr-only">{t("{title}: altitude by day", { title })}</caption>
               <thead>
                 <tr className="border-b-2 border-stone-light text-xs uppercase tracking-wide text-stone-dark">
-                  <th scope="col" className="py-2 pr-3">Day</th>
-                  <th scope="col" className="py-2 pr-3">Sleep</th>
-                  <th scope="col" className="py-2 pr-3">Sleep altitude</th>
-                  <th scope="col" className="py-2 pr-3">High point</th>
-                  <th scope="col" className="py-2">Tip</th>
+                  <th scope="col" className="py-2 pr-3">{t("Day")}</th>
+                  <th scope="col" className="py-2 pr-3">{t("Sleep")}</th>
+                  <th scope="col" className="py-2 pr-3">{t("Sleep altitude")}</th>
+                  <th scope="col" className="py-2 pr-3">{t("High point")}</th>
+                  <th scope="col" className="py-2">{t("Tip")}</th>
                 </tr>
               </thead>
               <tbody>

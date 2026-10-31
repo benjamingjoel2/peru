@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { site } from "@/config/site";
 import { currencies, type CurrencyCode } from "@/config/pricing";
 import { useCurrency } from "@/lib/currency";
+import { LanguageSelector } from "@/components/i18n/LanguageSelector";
+import { t } from "@/lib/i18n";
 
 function LimaClock() {
   const [time, setTime] = useState<string | null>(null);
@@ -16,7 +18,7 @@ function LimaClock() {
     return () => clearInterval(t);
   }, []);
   if (!time) return null;
-  return <span className="hidden lg:inline"> · now {time}</span>;
+  return <span className="hidden lg:inline"> · {t("now {time}", { time })}</span>;
 }
 
 export function TopBar() {
@@ -29,17 +31,18 @@ export function TopBar() {
           <li>
             <a href={`mailto:${c.email}`} className="flex items-center gap-1.5 hover:text-mustard">
               <MailIcon /> <span className="hidden md:inline">{c.email}</span>
-              <span className="md:hidden">Email</span>
+              <span className="md:hidden">{t("Email")}</span>
             </a>
           </li>
         </ul>
         <div className="flex items-center gap-4">
           <p className="hidden md:block">
-            {c.hours} ({c.timezoneLabel})
+            {t(c.hours)} ({t(c.timezoneLabel)})
             <LimaClock />
           </p>
+          <LanguageSelector className="font-semibold" linkClassName="hover:text-mustard" />
           <label className="flex items-center gap-1.5">
-            <span className="sr-only">Currency</span>
+            <span className="sr-only">{t("Currency")}</span>
             <select
               value={code}
               onChange={(e) => setCode(e.target.value as CurrencyCode)}

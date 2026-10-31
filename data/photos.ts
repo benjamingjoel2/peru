@@ -1,3 +1,4 @@
+import { L } from "@/lib/i18n";
 import sources from "./photo-sources.json";
 import type { ImageRef } from "./types";
 
@@ -16,5 +17,5 @@ export const photoSources = sources as PhotoSource[];
 export function photo(slot: string): ImageRef {
   const s = photoSources.find((p) => p.slot === slot);
   if (!s) throw new Error(`Unknown photo slot: ${slot}`);
-  return { src: `/photos/${slot}.jpg`, alt: s.alt };
+  return L({ src: `/photos/${slot}.jpg`, alt: s.alt });
 }

@@ -1,5 +1,6 @@
 import { bandFor, formatM } from "@/lib/altitude";
 import type { JourneyDay } from "@/data/types";
+import { t } from "@/lib/i18n";
 
 /** Tiny decorative altitude line for journey cards. Text alternative provided via the label. */
 export function AltitudeSparkline({ days, className = "" }: { days: JourneyDay[]; className?: string }) {
@@ -8,7 +9,7 @@ export function AltitudeSparkline({ days, className = "" }: { days: JourneyDay[]
   const y = (m: number) => H - 4 - (Math.min(m, max) / max) * (H - 10);
   const peak = Math.max(...days.map((d) => d.sleepAltitudeM));
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className={className} role="img" aria-label={`Altitude profile: highest night about ${formatM(peak)}`}>
+    <svg viewBox={`0 0 ${W} ${H}`} className={className} role="img" aria-label={t("Altitude profile: highest night about {m}", { m: formatM(peak) })}>
       <line x1="0" x2={W} y1={y(3500)} y2={y(3500)} stroke="currentColor" strokeOpacity=".25" strokeDasharray="2 3" />
       <path d={days.map((d, i) => `${i ? "L" : "M"}${x(i)} ${y(d.sleepAltitudeM)}`).join(" ")} fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
       {days.map((d, i) => (

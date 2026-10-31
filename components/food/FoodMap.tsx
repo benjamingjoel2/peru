@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/i18n/Link";
 import { useMemo, useRef, useState } from "react";
 import { foodBands, foods } from "@/data/foods";
 import type { Food, FoodBand } from "@/data/types";
@@ -8,8 +8,11 @@ import { destinationBySlug } from "@/data/destinations";
 import { journeyBySlug } from "@/data/journeys";
 import { experienceBySlug } from "@/data/experiences";
 import { plain } from "@/components/ui/Heading";
+import { t, L } from "@/lib/i18n";
 
-const kindLabel: Record<Food["kind"], string> = { dish: "Dish", ingredient: "Ingredient", drink: "Drink", experience: "Food experience" };
+const kindKeys: Food["kind"][] = ["dish", "ingredient", "drink", "experience"];
+const kindLabel = (k: Food["kind"]) => ({ dish: t("Dish"), ingredient: t("Ingredient"), drink: t("Drink"), experience: t("Food experience") })[k];
+const kindPlural = (k: Food["kind"]) => ({ dish: t("Dishes"), ingredient: t("Ingredients"), drink: t("Drinks"), experience: t("Food experiences") })[k];
 const kindIcon: Record<Food["kind"], string> = { dish: "●", ingredient: "◆", drink: "▲", experience: "★" };
 
 // Order in which the bands appear along the cross-section: Pacific → coast → valleys → high Andes → cloud forest → Amazon
@@ -64,7 +67,7 @@ export function FoodMap() {
             <path d="M48 18 L54 14 L58 20 Z" fill="#fff" />
           </g>
         </svg>
-        <div role="tablist" aria-label="Altitude zones, from the Pacific to the Amazon" onKeyDown={onKey} className="absolute inset-0">
+        <div role="tablist" aria-label={t("Altitude zones, from the Pacific to the Amazon")} onKeyDown={onKey} className="absolute inset-0">
           {order.map((id, i) => {
             const fb = foodBands.find((x) => x.id === id)!;
             const active = id === band;
@@ -90,23 +93,23 @@ export function FoodMap() {
             );
           })}
         </div>
-        <p className="absolute left-3 top-3 text-[11px] font-bold uppercase tracking-wider text-stone-dark">Pacific ← west · east → Amazon</p>
+        <p className="absolute left-3 top-3 text-[11px] font-bold uppercase tracking-wider text-stone-dark">{t("Pacific ← west · east → Amazon")}</p>
       </div>
 
       {/* Mobile band chooser */}
       <label className="mt-4 block sm:hidden">
-        <span className="text-sm font-bold text-stone-dark">Altitude zone</span>
+        <span className="text-sm font-bold text-stone-dark">{t("Altitude zone")}</span>
         <select className="mt-1 min-h-11 w-full rounded-[3px] border-2 border-stone-light bg-cream px-3" value={band} onChange={(e) => { setBand(e.target.value as FoodBand); setSelected(null); }}>
           {order.map((id) => { const fb = foodBands.find((x) => x.id === id)!; return <option key={id} value={id}>{fb.name} ({fb.range})</option>; })}
         </select>
       </label>
 
       <fieldset className="mt-5 flex flex-wrap items-center gap-2">
-        <legend className="sr-only">Show</legend>
-        {(Object.keys(kindLabel) as Food["kind"][]).map((k) => (
+        <legend className="sr-only">{t("Show")}</legend>
+        {kindKeys.map((k) => (
           <label key={k} className="cursor-pointer rounded-full border-2 border-stone-light px-3 py-1 text-sm font-semibold text-indigo has-[:checked]:border-indigo has-[:checked]:bg-indigo has-[:checked]:text-cream has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-mustard">
             <input type="checkbox" className="sr-only" checked={kinds.includes(k)} onChange={(e) => setKinds((ks) => (e.target.checked ? [...ks, k] : ks.filter((x) => x !== k)))} />
-            <span aria-hidden className="mr-1">{kindIcon[k]}</span>{kindLabel[k]}s
+            <span aria-hidden className="mr-1">{kindIcon[k]}</span>{kindPlural(k)}
           </label>
         ))}
       </fieldset>
@@ -114,7 +117,7 @@ export function FoodMap() {
       <div id="food-panel" role="tabpanel" aria-labelledby={`food-tab-${band}`} className="mt-6 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
         <div>
           <h3 className="font-display text-3xl text-indigo">
-            {b.name} <span className="text-lg font-normal text-stone-dark">· {b.range} (verify)</span>
+            {b.name} <span className="text-lg font-normal text-stone-dark">· {b.range} ({t("verify")})</span>
           </h3>
           <p className="mt-2 text-stone-dark">{b.intro}</p>
           <ul className="mt-5 grid gap-2 sm:grid-cols-2">
@@ -129,37 +132,37 @@ export function FoodMap() {
                   <span aria-hidden className={selected === f.id ? "text-mustard" : "text-cochineal"}>{kindIcon[f.kind]}</span>
                   <span>
                     <span className="block font-semibold">{f.name}</span>
-                    <span className={`text-xs ${selected === f.id ? "text-cream/75" : "text-stone-dark"}`}>{kindLabel[f.kind]}</span>
+                    <span className={`text-xs ${selected === f.id ? "text-cream/75" : "text-stone-dark"}`}>{kindLabel(f.kind)}</span>
                   </span>
                 </button>
               </li>
             ))}
-            {list.length === 0 && <li className="text-sm text-stone-dark">Nothing to show with these filters.</li>}
+            {list.length === 0 && <li className="text-sm text-stone-dark">{t("Nothing to show with these filters.")}</li>}
           </ul>
         </div>
         <div aria-live="polite" className="min-h-48 bg-cream-deep/60 p-6">
             {food ? (
               <div key={food.id} className="fade-down">
-                <p className="eyebrow text-cochineal">{kindLabel[food.kind]}</p>
+                <p className="eyebrow text-cochineal">{kindLabel(food.kind)}</p>
                 <h4 className="mt-1 font-display text-2xl text-indigo">{food.name}</h4>
                 <p className="mt-2 text-stone-dark">{food.description}</p>
                 {food.where.length > 0 && (
-                  <p className="mt-4 text-sm"><strong>Where: </strong>
+                  <p className="mt-4 text-sm"><strong>{t("Where:")} </strong>
                     {food.where.map((w, i) => { const d = destinationBySlug(w); return d ? <span key={w}>{i > 0 && ", "}<Link href={`/destinations/${d.zone}/${d.slug}`} className="text-cochineal underline">{d.name}</Link></span> : null; })}
                   </p>
                 )}
                 {food.journeys.length > 0 && (
-                  <p className="mt-2 text-sm"><strong>On these journeys: </strong>
+                  <p className="mt-2 text-sm"><strong>{t("On these journeys:")} </strong>
                     {food.journeys.map((s, i) => { const j = journeyBySlug(s); return j ? <span key={s}>{i > 0 && ", "}<Link href={`/journeys/${s}`} className="text-cochineal underline">{plain(j.title)}</Link></span> : null; })}
                   </p>
                 )}
                 {food.experience && experienceBySlug(food.experience) && (
-                  <p className="mt-2 text-sm"><strong>Experience: </strong><Link href={`/experiences/${food.experience}`} className="text-cochineal underline">{experienceBySlug(food.experience)!.name}</Link></p>
+                  <p className="mt-2 text-sm"><strong>{t("Experience:")} </strong><Link href={`/experiences/${food.experience}`} className="text-cochineal underline">{experienceBySlug(food.experience)!.name}</Link></p>
                 )}
               </div>
             ) : (
               <p key="hint" className="text-stone-dark">
-                Choose a dish, ingredient or drink to see where to try it and which journeys include it.
+                {t("Choose a dish, ingredient or drink to see where to try it and which journeys include it.")}
               </p>
             )}
         </div>

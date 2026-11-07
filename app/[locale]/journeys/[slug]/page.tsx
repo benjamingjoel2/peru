@@ -176,10 +176,10 @@ export default async function JourneyPage({ params }: { params: Promise<{ slug: 
       {j.experiences.length > 0 && (
         <section aria-labelledby="jexp-title" className="container-x py-10">
           <Heading id="jexp-title" eyebrow={t("Experiences")} text={t("Along the *way*")} size="md" />
-          <ul className="mt-5 flex flex-wrap gap-2">
+          <ul className="text-links mt-5">
             {j.experiences.map((s) => {
               const e = experienceBySlug(s);
-              return e ? <li key={s}><Link href={`/experiences/${s}`} className="inline-block rounded-full border-2 border-stone-light px-4 py-1.5 font-semibold text-indigo hover:border-cochineal hover:text-cochineal">{e.name}</Link></li> : null;
+              return e ? <li key={s}><Link href={`/experiences/${s}`}>{e.name}</Link></li> : null;
             })}
           </ul>
         </section>

@@ -69,6 +69,23 @@
 }
 
 @layer components {
+  /* Plain text links in a row (replaces the old pill chips): no boxes, just underlined words */
+  .text-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.4rem;
+  }
+  .text-links a {
+    font-weight: 600;
+    color: var(--color-indigo);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-indigo) 30%, transparent);
+    text-underline-offset: 0.3em;
+  }
+  .text-links a:hover {
+    color: var(--color-cochineal);
+    text-decoration-color: currentColor;
+  }
   /* Wide content area like the reference: up to ~1780px, with side padding that scales with the screen */
   .container-x {
     width: 100%;

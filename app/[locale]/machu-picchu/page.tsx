@@ -38,9 +38,9 @@ export default async function MachuPicchuPage() {
         intro={t("Machu Picchu tickets come in time slots and sell out. Book the trip, then breathe. Here's how to get there, how tickets and permits work, and when to book.")}
         image={photo("machu-picchu-ruins")}
       >
-        <nav aria-label={t("On this page")} className="mt-6 flex flex-wrap gap-2 text-sm">
+        <nav aria-label={t("On this page")} className="text-links mt-6 text-sm">
           {[["#routes", t("Ways to get there")], ["#tickets", t("Tickets & circuits")], ["#permits", t("Inca Trail permits")], ["#when", t("Best time")], ["#book", t("When to book")]].map(([h, l]) => (
-            <a key={h} href={h} className="rounded-full border-2 border-stone-light px-3 py-1 font-semibold text-indigo hover:border-cochineal hover:text-cochineal">{l}</a>
+            <a key={h} href={h}>{l}</a>
           ))}
         </nav>
       </PageHero>

@@ -42,10 +42,10 @@ export default async function DestinationsPage() {
               <p className="eyebrow text-stone-dark">~{z.altitudeRange[0].toLocaleString("en-GB")}–{z.altitudeRange[1].toLocaleString("en-GB")} m ({t("verify")})</p>
               <h3 className="mt-2 text-3xl text-indigo sm:text-4xl"><Emph text={z.title} /></h3>
               <p className="mt-4 text-stone-dark">{z.intro}</p>
-              <ul className="mt-5 flex flex-wrap gap-2">
+              <ul className="text-links mt-5 text-sm">
                 {destinationsByZone(z.id).map((d) => (
                   <li key={d.slug}>
-                    <Link href={`/destinations/${z.id}/${d.slug}`} className="inline-block rounded-full border-2 border-stone-light px-3 py-1 text-sm font-semibold text-indigo hover:border-cochineal hover:text-cochineal">
+                    <Link href={`/destinations/${z.id}/${d.slug}`}>
                       {d.name}
                     </Link>
                   </li>

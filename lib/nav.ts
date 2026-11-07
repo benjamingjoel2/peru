@@ -62,7 +62,7 @@ export const mainNav: NavItem[] = L([
         links: [
           { label: "Altitude, explained", href: "/altitude" },
           { label: "Machu Picchu planner", href: "/machu-picchu" },
-          { label: "Peru by altitude: a food map", href: "/peru-by-altitude" },
+          { label: "Peru by altitude: food from coast to jungle", href: "/peru-by-altitude" },
           { label: "Travel that gives back", href: "/travel-that-gives-back" },
           { label: "Questions travellers ask", href: "/faq" },
         ],

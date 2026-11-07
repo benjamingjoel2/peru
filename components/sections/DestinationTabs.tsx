@@ -11,7 +11,7 @@ import { DestinationCard } from "./Cards";
 import { monthNames } from "@/data/seasons";
 import { t } from "@/lib/i18n";
 
-/** Vertical ARIA tabs (arrow keys, Home/End): areas on the left, two images, intro and a region carousel on the right. */
+/** ARIA tabs in one plain text row (arrow keys, Home/End), then two images, the intro and a region carousel. */
 export function DestinationTabs() {
   const [active, setActive] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -20,8 +20,8 @@ export function DestinationTabs() {
 
   const onKey = (e: React.KeyboardEvent) => {
     let n = active;
-    if (e.key === "ArrowDown" || e.key === "ArrowRight") n = (active + 1) % zones.length;
-    else if (e.key === "ArrowUp" || e.key === "ArrowLeft") n = (active - 1 + zones.length) % zones.length;
+    if (e.key === "ArrowRight") n = (active + 1) % zones.length;
+    else if (e.key === "ArrowLeft") n = (active - 1 + zones.length) % zones.length;
     else if (e.key === "Home") n = 0;
     else if (e.key === "End") n = zones.length - 1;
     else return;
@@ -38,8 +38,8 @@ export function DestinationTabs() {
           <p className="mx-auto mt-4 max-w-2xl text-stone-dark">{t("From sea level to above 4,000 metres and down into the rainforest. Choose an area to see where it sits, and how high.")}</p>
         </div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[260px_minmax(0,1fr)]">
-          <div role="tablist" aria-label={t("Areas of Peru")} aria-orientation="vertical" onKeyDown={onKey} className="flex gap-1 overflow-x-auto border-b-2 border-stone-light [scrollbar-width:none] lg:flex-col lg:overflow-visible lg:border-b-0 lg:border-l-2">
+        <div className="mt-12 grid gap-10">
+          <div role="tablist" aria-label={t("Areas of Peru")} aria-orientation="horizontal" onKeyDown={onKey} className="flex gap-1 overflow-x-auto border-b-2 border-stone-light [scrollbar-width:none] lg:gap-4">
             {zones.map((zone, i) => (
               <button
                 key={zone.id}
@@ -50,9 +50,9 @@ export function DestinationTabs() {
                 aria-controls={`panel-${zone.id}`}
                 tabIndex={active === i ? 0 : -1}
                 onClick={() => setActive(i)}
-                className={`relative shrink-0 px-4 py-3 text-left font-display text-lg transition-colors lg:py-4 lg:pl-6 lg:text-2xl ${active === i ? "text-cochineal" : "text-indigo hover:text-cochineal"}`}
+                className={`relative shrink-0 px-4 py-3 text-left font-display text-lg transition-colors lg:text-2xl ${active === i ? "text-cochineal" : "text-indigo hover:text-cochineal"}`}
               >
-                {active === i && <span aria-hidden className="absolute inset-x-0 -bottom-[2px] h-1 bg-cochineal lg:inset-x-auto lg:-left-[2px] lg:bottom-0 lg:top-0 lg:h-auto lg:w-1" />}
+                {active === i && <span aria-hidden className="absolute inset-x-0 -bottom-[2px] h-1 bg-cochineal" />}
                 {zone.name}
               </button>
             ))}

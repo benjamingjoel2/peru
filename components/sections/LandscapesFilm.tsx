@@ -9,9 +9,9 @@ import { photo } from "@/data/photos";
 import { t, L } from "@/lib/i18n";
 
 const frames = L([
-  { src: "/photos/coast-cliffs.jpg", label: "The Coast", note: "Sea level" },
-  { src: "/photos/rainbow-mountain-wide.jpg", label: "The Andes", note: "Up to ~5,000 m" },
-  { src: "/photos/amazon-river.jpg", label: "The Amazon", note: "~200 m" },
+  { src: "/photos/coast-cliffs.jpg", label: "The Coast" },
+  { src: "/photos/rainbow-mountain-wide.jpg", label: "The Andes" },
+  { src: "/photos/amazon-river.jpg", label: "The Amazon" },
 ]);
 
 const tiles = [photo("huacachina"), photo("kuelap"), photo("llanganuco"), photo("weaving-hands")];
@@ -111,21 +111,21 @@ export function LandscapesFilm() {
         {t("From the Pacific to the peaks")} <em>{t("to the jungle")}</em>.
       </p>
       <div className="mt-5 flex flex-wrap items-center gap-3">
-        <ol className="flex flex-wrap gap-2" aria-label={t("Film chapters")}>
+        <ol className="flex flex-wrap gap-x-5 gap-y-2" aria-label={t("Film chapters")}>
           {frames.map((f, n) => (
             <li key={f.label}>
               <button
                 type="button"
                 onClick={() => go(n)}
                 aria-current={!media.filmSrc && i === n}
-                className={`rounded-sm px-3 py-1.5 text-xs font-bold uppercase tracking-wider ${!media.filmSrc && i === n ? "bg-mustard text-indigo" : "bg-cream/15 text-cream hover:bg-cream/25"}`}
+                className={`py-1.5 text-xs font-bold uppercase tracking-wider underline-offset-[0.4em] ${!media.filmSrc && i === n ? "text-mustard underline decoration-2" : "text-cream hover:underline"}`}
               >
-                {f.label} <span className="font-normal normal-case">{f.note}</span>
+                {f.label}
               </button>
             </li>
           ))}
         </ol>
-        <button type="button" onClick={() => setPlaying((p) => !p)} aria-pressed={!playing} className="rounded-full border-2 border-cream/70 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-cream hover:bg-cream hover:text-indigo">
+        <button type="button" onClick={() => setPlaying((p) => !p)} aria-pressed={!playing} className="ml-2 py-1.5 text-xs font-bold uppercase tracking-wider text-cream/85 underline underline-offset-[0.4em] hover:text-cream">
           {playing && !reduce ? t("Pause film") : t("Play film")}
         </button>
       </div>

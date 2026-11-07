@@ -21,11 +21,3 @@ export function Verify({ note, className = "" }: { note?: string; className?: st
     </abbr>
   );
 }
-
-export function Chip({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <span className={`inline-flex items-center gap-1 rounded-full border border-stone-light bg-cream px-3 py-1 text-xs font-semibold text-stone-dark ${className}`}>
-      {children}
-    </span>
-  );
-}

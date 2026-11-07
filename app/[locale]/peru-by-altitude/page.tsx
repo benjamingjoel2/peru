@@ -1,7 +1,6 @@
 import Link from "@/components/i18n/Link";
 import { PageHero } from "@/components/sections/PageHero";
 import { photo } from "@/data/photos";
-import { FoodMap } from "@/components/food/FoodMap";
 import { Heading, plain } from "@/components/ui/Heading";
 import { foodBands, foods } from "@/data/foods";
 import { journeyBySlug } from "@/data/journeys";
@@ -10,20 +9,17 @@ import { CtaBand } from "@/components/sections/HomeSections";
 import { JourneyCard } from "@/components/sections/Cards";
 import { t } from "@/lib/i18n";
 import { initLocale } from "@/lib/i18n/server";
-import { ClientStrings } from "@/lib/i18n/ClientStrings";
-import { destinations } from "@/data/destinations";
-import { experiences } from "@/data/experiences";
 
 export async function generateMetadata() {
   await initLocale();
   return pageMeta({
-    title: t("Peru by altitude: a food map"),
+    title: t("Peru by altitude: food from coast to jungle"),
     description: t("What Peru eats from the Pacific to the peaks to the jungle: ceviche on the coast, thousands of potatoes in the Andes, river fish and fruit in the Amazon, and the journeys that take you there."),
     path: "/peru-by-altitude",
   });
 }
 
-export default async function FoodMapPage() {
+export default async function PeruByAltitudePage() {
   await initLocale();
   const foodJourney = journeyBySlug("peru-for-food-lovers")!;
   return (
@@ -31,21 +27,13 @@ export default async function FoodMapPage() {
       <PageHero
         image={photo("market")}
         crumbs={[{ name: t("Peru by altitude"), path: "/peru-by-altitude" }]}
-        eyebrow={t("A food map")}
+        eyebrow={t("Food by altitude")}
         title={t("Peru by *altitude*")}
         intro={t("In Peru, the menu changes with the altitude. So does the view. Move from the Pacific up through Andean valleys to the high plains, then down the cloud forest into the Amazon, and see what's eaten at each level.")}
       />
-      <section aria-labelledby="map-title" className="container-x py-12">
-        <h2 id="map-title" className="sr-only">{t("Interactive food map")}</h2>
-        <p className="mb-4 text-sm text-stone-dark">{t("Use the markers (or the arrow keys once one is focused) to move between altitude zones. A full list follows the map.")}</p>
-        <ClientStrings data={[foods, foodBands, destinations.map((d) => ({ name: d.name })), experiences.map((e) => ({ name: e.name }))]}>
-          <FoodMap />
-        </ClientStrings>
-      </section>
-
       <section aria-labelledby="list-title" className="bg-cream-deep py-16">
         <div className="container-x">
-          <Heading id="list-title" eyebrow={t("Everything on the map")} text={t("From coast to *jungle*, as a list")} size="md" />
+          <Heading id="list-title" eyebrow={t("Food by altitude")} text={t("From coast to *jungle*")} size="md" />
           <div className="mt-8 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
             {foodBands.map((b) => (
               <section key={b.id} aria-labelledby={`band-${b.id}`}>

@@ -15,7 +15,7 @@ export function FoodStrip({ ids, title = t("What to *eat* here") }: { ids: strin
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <Heading id="eat-title" text={title} size="md" />
-          <Link href="/peru-by-altitude" className="text-sm font-bold uppercase tracking-[0.12em] text-cochineal underline underline-offset-4">{t("Open the food map")}</Link>
+          <Link href="/peru-by-altitude" className="text-sm font-bold uppercase tracking-[0.12em] text-cochineal underline underline-offset-4">{t("Peru by altitude")}</Link>
         </div>
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((f) => (

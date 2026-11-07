@@ -40,10 +40,10 @@ export function JourneyCarouselSection({ title = t("Journeys, *paced right*"), e
 export function ExperienceGroups() {
   const [g1, g2, g3] = experienceGroups;
   const chips = (id: (typeof experienceGroups)[number]["id"]) => (
-    <ul className="mt-5 flex flex-wrap gap-2">
+    <ul className="text-links mt-5 text-sm">
       {experiencesByGroup(id).map((e) => (
         <li key={e.slug}>
-          <Link href={`/experiences/${e.slug}`} className="inline-block rounded-full border-2 border-stone-light px-3 py-1 text-sm font-semibold text-indigo hover:border-cochineal hover:text-cochineal">
+          <Link href={`/experiences/${e.slug}`}>
             {e.name}
           </Link>
         </li>

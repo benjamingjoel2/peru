@@ -117,20 +117,10 @@ await check("Route builder: straight-to-Cusco preset warns", async (page) => {
   await page.getByText("This route climbs gradually").waitFor();
 });
 
-await check("Food map: keyboard moves between altitude zones", async (page) => {
-  await page.goto(base + "/peru-by-altitude", { waitUntil: "networkidle" });
-  await page.locator("#food-tab-pacific").focus();
-  await page.keyboard.press("ArrowRight");
-  await page.keyboard.press("ArrowRight");
-  await page.locator("#food-panel h3", { hasText: "Andean valleys" }).waitFor();
-  await page.locator("#food-panel").getByRole("button", { name: /Pachamanca/ }).click();
-  await page.locator("#food-panel").getByRole("link", { name: /Pisac/ }).waitFor();
-});
-
 await check("Destination tabs: arrow keys switch panels", async (page) => {
   await page.goto(base + "/", { waitUntil: "networkidle" });
   await page.locator("#tab-coast").focus();
-  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowRight");
   assert.equal(await page.locator("#tab-cusco-sacred-valley").getAttribute("aria-selected"), "true");
   await page.locator("#panel-cusco-sacred-valley").getByRole("link", { name: "Machu Picchu" }).first().waitFor();
 });
@@ -161,10 +151,9 @@ await check("Newsletter signup confirms", async (page) => {
   await page.getByText("You're on the list").waitFor();
 });
 
-await check("Reduced motion: hero does not auto-advance and film shows play", async (page) => {
+await check("Reduced motion: the landscapes film shows play", async (page) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(base + "/", { waitUntil: "networkidle" });
-  assert.equal(await page.getByRole("button", { name: "Pause" }).count(), 0);
   await page.getByRole("button", { name: "Play film" }).waitFor();
 });
 

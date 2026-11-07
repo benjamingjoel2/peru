@@ -32,9 +32,9 @@ export default async function ExperiencesPage() {
         title={t("What do you want to *feel* in Peru?")}
         intro={t("Three kinds of days make a great Peru trip: the icons, time with the people who live here, and the trails. Mix them however you like.")}
       >
-        <nav aria-label={t("Experience groups")} className="mt-6 flex flex-wrap gap-2">
+        <nav aria-label={t("Experience groups")} className="text-links mt-6 text-sm">
           {experienceGroups.map((g) => (
-            <a key={g.id} href={`#${g.id}`} className="rounded-full border-2 border-indigo px-4 py-1.5 text-sm font-semibold text-indigo hover:bg-indigo hover:text-cream">{g.name}</a>
+            <a key={g.id} href={`#${g.id}`}>{g.name}</a>
           ))}
         </nav>
       </PageHero>

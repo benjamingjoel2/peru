@@ -27,38 +27,25 @@ const rightLinks = L([
 
 /**
  * Centred logo with links split either side, an Enquire button and a Menu toggle that opens
- * the full-screen three-level menu. On the homepage it floats transparently over the hero.
+ * the full-screen three-level menu. Sticky on a cream ground on every page.
  */
 export function Header({ nav }: { nav: NavItem[] }) {
   const { path: pathname } = splitPath(usePathname() ?? "/");
-  const overlay = pathname === "/";
   const [menu, setMenu] = useState<{ open: boolean; initial?: string }>({ open: false });
-  const [scrolled, setScrolled] = useState(false);
   const [menuLoaded, setMenuLoaded] = useState(false);
   const { openEnquire } = useEnquire();
 
   // eslint-disable-next-line react-hooks/set-state-in-effect -- close the menu on navigation
   useEffect(() => setMenu({ open: false }), [pathname]);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
-  const transparent = overlay && !scrolled;
-  const linkCls = `relative py-2 text-[0.82rem] font-bold uppercase tracking-[0.16em] after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-current after:transition-transform hover:after:scale-x-100 aria-[current=page]:after:scale-x-100 ${
-    transparent ? "text-cream" : "text-indigo"
-  }`;
+  const linkCls = `relative py-2 text-[0.82rem] font-bold uppercase tracking-[0.16em] after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:bg-current after:transition-transform hover:after:scale-x-100 aria-[current=page]:after:scale-x-100 text-indigo`;
 
   return (
     <header
-      className={`${overlay ? "fixed inset-x-0 top-10" : "sticky top-0"} z-40 transition-[background-color,box-shadow,top] duration-300 ${
-        transparent ? "bg-gradient-to-b from-indigo-deep/60 to-transparent" : "bg-cream/95 shadow-[0_6px_24px_-12px_rgba(24,28,66,.35)] backdrop-blur"
-      } ${overlay && scrolled ? "!top-0" : ""}`}
+      className="sticky top-0 z-40 bg-cream/95 shadow-[0_6px_24px_-12px_rgba(24,28,66,.35)] backdrop-blur"
     >
-      <nav aria-label={t("Main")} className={`container-x grid h-[76px] grid-cols-[auto_1fr_auto] items-center gap-4 xl:grid-cols-[1fr_auto_1fr] ${transparent ? "on-dark" : ""}`}>
+      <nav aria-label={t("Main")} className={`container-x grid h-[76px] grid-cols-[auto_1fr_auto] items-center gap-4 xl:grid-cols-[1fr_auto_1fr]`}>
         <ul className="hidden items-center gap-7 xl:flex">
           {leftLinks.map((l) => (
             <li key={l.href}>
@@ -67,7 +54,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
           ))}
         </ul>
         <div className="xl:justify-self-center">
-          <Logo light={transparent} />
+          <Logo />
         </div>
         <div className="flex items-center justify-end gap-2 sm:gap-6">
           <ul className="hidden items-center gap-7 xl:flex">
@@ -90,7 +77,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
             aria-haspopup="dialog"
             aria-controls={menuLoaded ? "site-menu" : undefined}
             aria-expanded={menu.open}
-            className={`flex h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] ${transparent ? "text-cream" : "text-indigo"}`}
+            className={`flex h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-indigo`}
           >
             <span className="hidden sm:inline">{t("Menu")}</span>
             <svg aria-hidden viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
@@ -100,7 +87,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
           </button>
         </div>
       </nav>
-      {!transparent && <div className="woven-stripe-thin" aria-hidden />}
+      <div className="woven-stripe-thin" aria-hidden />
       {menuLoaded && <SiteMenu nav={nav} open={menu.open} initial={menu.initial} onClose={() => setMenu({ open: false })} />}
     </header>
   );

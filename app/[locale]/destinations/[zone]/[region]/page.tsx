@@ -96,9 +96,9 @@ export default async function RegionPage({ params }: { params: Promise<{ zone: s
           {regionExperiences.length > 0 && (
             <div>
               <h2 className="font-display text-xl text-indigo">{t("Experiences here")}</h2>
-              <ul className="mt-3 flex flex-wrap gap-2">
+              <ul className="text-links mt-3 text-sm">
                 {regionExperiences.map((e) => (
-                  <li key={e.slug}><Link href={`/experiences/${e.slug}`} className="inline-block rounded-full border-2 border-stone-light px-3 py-1 text-sm font-semibold text-indigo hover:border-cochineal hover:text-cochineal">{e.name}</Link></li>
+                  <li key={e.slug}><Link href={`/experiences/${e.slug}`}>{e.name}</Link></li>
                 ))}
               </ul>
             </div>

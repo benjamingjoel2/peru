@@ -3,7 +3,6 @@ import Link from "@/components/i18n/Link";
 import type { Destination, Journey, Stay } from "@/data/types";
 import { Emph, plain } from "@/components/ui/Heading";
 import { Price } from "@/components/ui/Price";
-import { AltitudeSparkline } from "@/components/altitude/Sparkline";
 import { stoneShapes } from "@/components/ui/StoneMask";
 import { destinationBySlug } from "@/data/destinations";
 import type { StoryMeta } from "@/lib/stories";
@@ -31,7 +30,6 @@ export function JourneyCard({ j, dark = false, priority }: { j: Journey; dark?: 
             <span className={dark ? "text-cream/70" : "text-stone-dark"}>{t("From")} </span>
             <Price usd={j.fromPriceUSD} className="font-bold" /> <span className={`text-xs ${dark ? "text-cream/70" : "text-stone-dark"}`}>{t("pp")}</span>
           </p>
-          <AltitudeSparkline days={j.itinerary} className={`h-9 w-28 ${dark ? "text-mustard-soft" : "text-indigo"}`} />
         </div>
       </div>
     </article>
@@ -56,7 +54,6 @@ export function JourneyOverlayCard({ j, priority }: { j: Journey; priority?: boo
             <span className="text-cream/75">{t("From")} </span>
             <Price usd={j.fromPriceUSD} className="font-bold" />
           </p>
-          <AltitudeSparkline days={j.itinerary} className="h-8 w-24 text-mustard-soft" />
         </div>
         <p className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-mustard">
           {t("Explore more")} <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
@@ -72,14 +69,9 @@ export function DestinationCard({ d, shape = 0 }: { d: Destination; shape?: numb
       <div className="relative aspect-[4/3] overflow-hidden" style={{ clipPath: stoneShapes[shape % stoneShapes.length] }}>
         <Image src={d.image.src} alt={d.image.alt} fill sizes="(min-width:1024px) 30vw, 80vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
       </div>
-      <div className="mt-3 flex items-start justify-between gap-3">
-        <h3 className="font-display text-xl text-indigo">
-          <Link href={`/destinations/${d.zone}/${d.slug}`} className="after:absolute after:inset-0">{d.name}</Link>
-        </h3>
-        <span className="shrink-0 rounded-sm bg-cream-deep px-2 py-0.5 text-xs font-bold text-stone-dark" title={t("Approximate elevation (verify)")}>
-          ~{d.elevationM.toLocaleString("en-GB")} m
-        </span>
-      </div>
+      <h3 className="mt-3 font-display text-xl text-indigo">
+        <Link href={`/destinations/${d.zone}/${d.slug}`} className="after:absolute after:inset-0">{d.name}</Link>
+      </h3>
       <p className="mt-1 text-sm text-stone-dark">{d.tagline}</p>
     </article>
   );

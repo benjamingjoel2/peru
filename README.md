@@ -18,7 +18,7 @@ Checks (run against a running server; `BASE` defaults to http://localhost:3000):
 npm run lint && npm run typecheck
 npm run lint:voice   # fails on "lost city", "mystical", "exotic", "once in a lifetime", "hidden gem"
 npm run test:smoke   # every sitemap route, mobile + desktop: status, console errors, overflow, axe (serious/critical)
-npm run test:e2e     # mega-menu, mobile drawer, enquire modal, gated PDF, altitude chart, route builder, food map, currency…
+npm run test:e2e     # mega-menu, mobile drawer, enquire modal, gated PDF, altitude chart, route builder, destination tabs, currency…
 ```
 
 

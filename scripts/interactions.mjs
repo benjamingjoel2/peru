@@ -151,9 +151,10 @@ await check("Newsletter signup confirms", async (page) => {
   await page.getByText("You're on the list").waitFor();
 });
 
-await check("Reduced motion: the landscapes film shows play", async (page) => {
+await check("Reduced motion: hero does not auto-advance and film shows play", async (page) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto(base + "/", { waitUntil: "networkidle" });
+  assert.equal(await page.getByRole("button", { name: "Pause" }).count(), 0);
   await page.getByRole("button", { name: "Play film" }).waitFor();
 });
 
